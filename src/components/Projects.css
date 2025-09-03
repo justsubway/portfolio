@@ -1,0 +1,353 @@
+.projects {
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  padding: 4rem 1rem;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.projects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255, 0, 0, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.projects-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #888;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+
+.filter-button {
+  padding: 0.3rem 1rem;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  background: rgba(255, 0, 0, 0.05);
+  color: #fff;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.filter-button:hover {
+  background: rgba(255, 0, 0, 0.1);
+  border-color: rgba(255, 0, 0, 0.3);
+}
+
+.filter-button.active {
+  background: rgba(255, 0, 0, 0.15);
+  border-color: rgba(255, 0, 0, 0.3);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem 1.5rem;
+  padding: 1rem 0;
+}
+
+.project-card {
+  height: 320px;
+  perspective: 1000px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.project-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.project-card:hover .project-card-inner {
+  transform: rotateY(180deg);
+}
+
+.project-card-front,
+.project-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 0, 0, 0.15);
+}
+
+.project-card-back {
+  transform: rotateY(180deg);
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  overflow-y: auto;
+}
+
+.project-card-back h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.1rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+.project-card-back p {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.2;
+  margin-bottom: 0.1rem;
+}
+
+.project-features h4,
+.project-tech-stack-full h4 {
+  font-size: 0.75rem;
+  color: #fff;
+  margin-bottom: 0.15rem;
+  font-weight: 500;
+}
+
+.project-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-features li {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.08rem;
+  padding-left: 0.5rem;
+  position: relative;
+}
+
+.project-features li::before {
+  content: "•";
+  color: rgba(255, 0, 0, 0.5);
+  position: absolute;
+  left: 0;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.tech-tag {
+  font-size: 0.5rem;
+  padding: 0.08rem 0.25rem;
+  background: rgba(255, 0, 0, 0.05);
+  border: 1px solid rgba(255, 0, 0, 0.1);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.live-demo-note {
+  text-align: center;
+  margin: 0.08rem 0;
+  font-size: 0.6rem;
+}
+
+.live-demo-note .has-demo {
+  color: rgba(255, 0, 0, 0.7);
+}
+
+.live-demo-note .no-demo {
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: auto;
+  padding-top: 0.3rem;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.15rem 0.4rem;
+  background: rgba(255, 0, 0, 0.05);
+  border: 1px solid rgba(255, 0, 0, 0.1);
+  border-radius: 6px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.65rem;
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  background: rgba(255, 0, 0, 0.1);
+  border-color: rgba(255, 0, 0, 0.2);
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7), transparent);
+  color: #fff;
+}
+
+.project-title {
+  font-size: 0.9rem;
+  margin-bottom: 0.15rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+.project-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+@media (max-width: 768px) {
+  .projects {
+    padding: 3rem 0.5rem;
+  }
+
+  .projects-content {
+    padding: 0 0.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .filter-buttons {
+    gap: 0.3rem;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .filter-button {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 0.5rem;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .project-card {
+    height: 300px;
+    max-width: 260px;
+  }
+
+  .project-card-inner {
+    transition: transform 0.4s;
+  }
+
+  /* Remove hover effect on mobile */
+  .project-card:hover .project-card-inner {
+    transform: none;
+  }
+
+  /* Add active class for mobile click */
+  .project-card.active .project-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .project-card-back {
+    padding: 0.6rem;
+  }
+
+  .project-card-back h3 {
+    font-size: 0.85rem;
+  }
+
+  /* Enable link clicks on mobile when card is flipped */
+  .project-card.active .project-link {
+    pointer-events: auto;
+  }
+
+  /* Prevent link clicks when card is not flipped */
+  .project-link {
+    pointer-events: none;
+  }
+
+  /* Add a visual indicator for clickable links */
+  .project-card.active .project-link {
+    background: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.2);
+  }
+
+  .project-card.active .project-link:hover {
+    background: rgba(255, 0, 0, 0.15);
+  }
+}
+
+/* Add touch-friendly styles */
+@media (hover: none) {
+  .project-card {
+    cursor: default;
+  }
+  
+  .project-link {
+    cursor: pointer;
+  }
+} 

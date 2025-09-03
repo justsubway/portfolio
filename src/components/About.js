@@ -1,0 +1,146 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaGithub, FaEnvelope } from 'react-icons/fa';
+import './About.css';
+
+const About = () => {
+  const techStack = {
+    languages: [
+      { name: 'Java', badge: 'https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white' },
+      { name: 'Python', badge: 'https://img.shields.io/badge/Python-3670A0?logo=python&logoColor=ffdd54' },
+      { name: 'JavaScript', badge: 'https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black' },
+      { name: 'React', badge: 'https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB' },
+      { name: 'Spring Boot', badge: 'https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=springboot&logoColor=white' }
+    ],
+    tools: [
+      { name: 'HTML5', badge: 'https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white' },
+      { name: 'CSS3', badge: 'https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white' },
+      { name: 'Firebase', badge: 'https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=black' },
+      { name: 'Git', badge: 'https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white' },
+      { name: 'GitHub', badge: 'https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white' }
+    ],
+    creative: [
+      { name: 'Photoshop', badge: 'https://img.shields.io/badge/Photoshop-31A8FF?logo=adobephotoshop&logoColor=white' },
+      { name: 'Premiere Pro', badge: 'https://img.shields.io/badge/Premiere%20Pro-9999FF?logo=adobepremierepro&logoColor=white' }
+    ]
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
+  return (
+    <div className="about" id="about">
+      <motion.div
+        className="about-content"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ amount: 0.3 }}
+      >
+        <motion.h2 className="section-title" variants={itemVariants}>About Me</motion.h2>
+        
+        <div className="about-grid">
+          <motion.div className="about-image" variants={itemVariants}>
+            <div className="profile-image">
+              <img src="https://avatars.githubusercontent.com/u/128174770?s=400&u=34bafd7dd032e46127cca7a9203a72f631fcfdf9&v=4" alt="Subway" />
+            </div>
+            <div className="status-badge">
+              <span className="status-dot"></span>
+              Available for opportunities
+            </div>
+          </motion.div>
+
+          <motion.div className="about-text" variants={itemVariants}>
+            <p>
+              I'm an 18-year-old developer with a strong passion for building impactful software. My main focus is Java and Python development, and I enjoy creating full-stack applications that solve real-world problems with clean, efficient code.
+            </p>
+            <p>
+              Currently, I'm working on full-stack projects and preparing to contribute to open-source communities. I'm always eager to explore new technologies and deepen my understanding of modern software development practices.
+            </p>
+            <p>Since the age of 13 I have been part of the coding community and contributed to tens of projects. I have also contributed as a moderator in large communities (totaling over <b>150.000+</b> members). During that time, I have also developed large amounts of code for most of these communities, with a special contribution to the <b>Minecraft World</b> where I have created multiple plugins and content for Minecraft Servers.</p>
+            <a 
+              href="https://beacons.ai/subwayy" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="detailed-experience-link"
+            >
+              View Detailed Experience →
+            </a>
+            <div className="tech-stack">
+              <div className="tech-category">
+                <h3>Languages & Frameworks</h3>
+                <div className="tech-badges">
+                  {techStack.languages.map(tech => (
+                    <img 
+                      key={tech.name}
+                      src={tech.badge}
+                      alt={tech.name}
+                      className="tech-badge"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="tech-category">
+                <h3>Web & Tools</h3>
+                <div className="tech-badges">
+                  {techStack.tools.map(tech => (
+                    <img 
+                      key={tech.name}
+                      src={tech.badge}
+                      alt={tech.name}
+                      className="tech-badge"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="tech-category">
+                <h3>Creative Tools</h3>
+                <div className="tech-badges">
+                  {techStack.creative.map(tech => (
+                    <img 
+                      key={tech.name}
+                      src={tech.badge}
+                      alt={tech.name}
+                      className="tech-badge"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="about-links">
+              <a href="https://github.com/justsubway" target="_blank" rel="noopener noreferrer" title="GitHub">
+                <FaGithub />
+              </a>
+              <a href="mailto:ritualhere2@gmail.com" title="Email">
+                <FaEnvelope />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+export default About; 
