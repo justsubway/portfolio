@@ -1,11 +1,8 @@
 import React from 'react';
-import Hero from './components/Hero';
-import About from './components/About';
+import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
-import AssessmentsSection from './components/AssessmentsSection';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
-// import Background3D from './components/Background3D';
 import './App.css';
 
 function App() {
@@ -40,10 +37,6 @@ function App() {
     }
   };
 
-  const scrollToProjects = () => {
-    smoothScrollTo('projects');
-  };
-
   const handleNavigate = (sectionId) => {
     smoothScrollTo(sectionId);
   };
@@ -51,10 +44,8 @@ function App() {
   return (
     <div className="App">
       <Navbar onNavigate={handleNavigate} />
-      <Hero onScrollToProjects={scrollToProjects} />
-      <About />
+      <AboutMe />
       <Projects />
-      <AssessmentsSection lang="en" />
       <Contact />
     </div>
   );

@@ -15,17 +15,15 @@ const Navbar = ({ onNavigate }) => {
   }, []);
 
   const navItems = [
-    { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
-    { id: 'assessments', label: 'Assessments' },
     { id: 'contact', label: 'Contact' }
   ];
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        <div className="navbar-logo" onClick={() => onNavigate('hero')}>
+        <div className="navbar-logo" onClick={() => onNavigate('about')}>
           <span className="logo-text">GEO</span>
         </div>
 
