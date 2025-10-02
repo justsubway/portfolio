@@ -9,7 +9,7 @@ const CONFIG = {
   PARTICLE_DENSITY: 1, // Controls how densely particles are distributed (0.1 to 2.0)
   MODEL_SCALE: 2,
   MODEL_TYPE: 'custom', // 'sphere', 'torus', or 'custom'
-  CUSTOM_MODEL_PATH: '/octocatfinal.glb', // Path to your custom model
+  CUSTOM_MODEL_PATH: './octocatfinal.glb', // Path to your custom model
   
   // Rotation settings
   ROTATION: {

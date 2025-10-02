@@ -62,7 +62,7 @@ const About = () => {
           <motion.div className="profile-hero" variants={itemVariants}>
             <div className="profile-container">
               <div className="profile-image-wrapper">
-                <img src="/professional_pfp.jpg" alt="George Arampatzis" className="profile-image" />
+                <img src="./professional_pfp.jpg" alt="George Arampatzis" className="profile-image" />
                 <div className="profile-glow"></div>
               </div>
               <div className="profile-info">
