@@ -14,7 +14,13 @@
   z-index: 1;
 }
 
-.section-title {
+.projects-content {
+  position: relative;
+  z-index: 1;
+}
+
+.section-title,
+.projects-title {
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 700;
@@ -38,13 +44,28 @@
 }
 
 .project-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
-.project-title {
+.external-link-icon {
+  font-size: 0.8em;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.project-link:hover .external-link-icon {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.project-title,
+.project-title-item {
   display: block;
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -54,9 +75,12 @@
   letter-spacing: -0.02em;
   transition: all 0.3s ease;
   position: relative;
+  margin: 0;
+  padding: 0;
 }
 
-.project-title:hover {
+.project-title:hover,
+.project-title-item:hover {
   color: #00B8D9;
   transform: translateX(20px);
 }
@@ -199,11 +223,13 @@
     margin-bottom: 60px;
   }
 
-  .project-title {
+  .project-title,
+  .project-title-item {
     font-size: clamp(2rem, 8vw, 3rem);
   }
 
-  .project-title:hover {
+  .project-title:hover,
+  .project-title-item:hover {
     transform: translateX(10px);
   }
 
@@ -236,7 +262,8 @@
     margin-bottom: 40px;
   }
 
-  .project-title {
+  .project-title,
+  .project-title-item {
     font-size: clamp(1.8rem, 10vw, 2.5rem);
   }
 
