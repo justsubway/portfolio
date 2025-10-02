@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaEnvelope, FaLinkedin, FaDownload, FaChevronDown, FaChevronUp, FaCode, FaRocket, FaBrain, FaHeart, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
+import { FaGithub, FaEnvelope, FaLinkedin, FaDownload, FaChevronDown, FaCode, FaRocket, FaBrain, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
 import './AboutMe.css';
 
 const AboutMe = () => {
