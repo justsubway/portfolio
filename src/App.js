@@ -5,7 +5,7 @@ import Projects from './components/Projects';
 import AssessmentsSection from './components/AssessmentsSection';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
-import Background3D from './components/Background3D';
+// import Background3D from './components/Background3D';
 import './App.css';
 
 function App() {
@@ -50,7 +50,6 @@ function App() {
 
   return (
     <div className="App">
-      <Background3D />
       <Navbar onNavigate={handleNavigate} />
       <Hero onScrollToProjects={scrollToProjects} />
       <About />
