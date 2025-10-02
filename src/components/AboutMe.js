@@ -117,19 +117,19 @@ const AboutMe = () => {
     
     // Creative Tools
     { 
-      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/shopify/shopify-original.svg', 
+      icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/shopify.svg', 
       name: 'Shopify', 
       description: 'E-commerce platform',
       category: 'Creative Tools'
     },
     { 
-      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg', 
+      icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/adobephotoshop.svg', 
       name: 'Photoshop', 
       description: 'Image editing',
       category: 'Creative Tools'
     },
     { 
-      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg', 
+      icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/adobepremierepro.svg', 
       name: 'Premiere Pro', 
       description: 'Video editing',
       category: 'Creative Tools'
