@@ -1,57 +1,30 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaEnvelope, FaLinkedin, FaDownload, FaChevronDown, FaCode, FaRocket, FaBrain, FaHeart, FaMapMarkerAlt, FaStar, FaUsers, FaProjectDiagram } from 'react-icons/fa';
+import { FaGithub, FaEnvelope, FaLinkedin, FaDownload, FaChevronDown, FaCode, FaRocket, FaBrain, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
 import './AboutMe.css';
 
 const AboutMe = () => {
   const [showTechStack, setShowTechStack] = useState(false);
   const [showAssessments, setShowAssessments] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const containerRef = useRef(null);
-
-  // Accurate GitHub stats (you can update these with real numbers)
-  const githubStats = {
-    repositories: 25,
-    stars: 12,
-    followers: 8,
-    contributions: 1200
-  };
 
   const techStack = [
-    { name: 'Java', level: 90, color: '#ED8B00' },
-    { name: 'Python', level: 85, color: '#3776AB' },
+    { name: 'Java', level: 95, color: '#ED8B00' },
+    { name: 'Python', level: 92, color: '#3776AB' },
     { name: 'JavaScript', level: 88, color: '#F7DF1E' },
-    { name: 'React', level: 82, color: '#61DAFB' },
+    { name: 'React', level: 85, color: '#61DAFB' },
+    { name: 'Django', level: 80, color: '#092E20' },
     { name: 'Node.js', level: 78, color: '#339933' },
-    { name: 'TypeScript', level: 75, color: '#007ACC' }
+    { name: 'TypeScript', level: 75, color: '#007ACC' },
+    { name: 'Unity', level: 70, color: '#000000' }
   ];
 
   const quickStats = [
-    { icon: FaCode, label: 'Repositories', value: `${githubStats.repositories}+`, color: '#00B8D9' },
-    { icon: FaStar, label: 'GitHub Stars', value: `${githubStats.stars}`, color: '#7C5CFF' },
-    { icon: FaUsers, label: 'Followers', value: `${githubStats.followers}`, color: '#00B8D9' },
-    { icon: FaProjectDiagram, label: 'Contributions', value: `${githubStats.contributions}+`, color: '#7C5CFF' }
+    { icon: FaCode, label: 'Repositories', value: '25+', color: '#00B8D9' },
+    { icon: FaRocket, label: 'Experience', value: '5+ years', color: '#7C5CFF' },
+    { icon: FaBrain, label: 'Logic Score', value: '95%', color: '#00B8D9' },
+    { icon: FaHeart, label: 'Community', value: '150k+', color: '#7C5CFF' }
   ];
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-      }
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('mousemove', handleMouseMove);
-      return () => container.removeEventListener('mousemove', handleMouseMove);
-    }
-  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -78,7 +51,7 @@ const AboutMe = () => {
 
   return (
     <div className="about-me-section" id="about">
-      <div className="about-me-container" ref={containerRef}>
+      <div className="about-me-container">
         <motion.div
           className="about-me-content"
           variants={containerVariants}
@@ -86,145 +59,68 @@ const AboutMe = () => {
           whileInView="visible"
           viewport={{ amount: 0.3 }}
         >
-          {/* Interactive 3D Hero Section */}
-          <motion.div 
-            className="hero-section-3d" 
-            variants={itemVariants}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            <div className="hero-content-3d">
-              {/* 3D Profile Section */}
-              <div className="profile-section-3d">
-                <div className="profile-image-3d-wrapper">
-                  <img src="/portfolio/professional_pfp.jpg" alt="George Arampatzis" className="profile-image-3d" />
-                  <div className="profile-glow-3d"></div>
-                  <div className="profile-ring"></div>
-                  <div className="profile-particles">
-                    {[...Array(8)].map((_, i) => (
-                      <div 
-                        key={i} 
-                        className="particle" 
-                        style={{
-                          '--delay': `${i * 0.5}s`,
-                          '--angle': `${i * 45}deg`
-                        }}
-                      />
-                    ))}
-                  </div>
+          {/* Hero Section - Compact Layout */}
+          <motion.div className="hero-section-compact" variants={itemVariants}>
+            <div className="hero-grid">
+              {/* Left Side - Profile */}
+              <div className="profile-section-compact">
+                <div className="profile-image-wrapper">
+                  <img src="/portfolio/professional_pfp.jpg" alt="George Arampatzis" className="profile-image" />
+                  <div className="profile-glow"></div>
                 </div>
-                <div className="profile-info-3d">
-                  <motion.h1 
-                    className="hero-title-3d"
-                    animate={isHovering ? { scale: 1.05 } : { scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    George Arampatzis
-                  </motion.h1>
-                  <motion.p 
-                    className="hero-subtitle-3d"
-                    animate={isHovering ? { y: -5 } : { y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    Computer Science Student & Developer
-                  </motion.p>
-                  <div className="location-info-3d">
+                <div className="profile-info">
+                  <h1 className="hero-title">George Arampatzis</h1>
+                  <p className="hero-subtitle">Computer Science Student & Developer</p>
+                  <div className="location-info">
                     <FaMapMarkerAlt className="location-icon" />
                     <span>Athens, Greece</span>
                   </div>
-                  <motion.div 
-                    className="status-indicator-3d"
-                    animate={isHovering ? { scale: 1.1 } : { scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="status-indicator">
                     <span className="status-dot"></span>
                     <span className="status-text">Available for opportunities</span>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
-              
-              {/* Interactive Stats Grid */}
-              <div className="stats-grid-3d">
+
+              {/* Right Side - Quick Stats */}
+              <div className="stats-section-compact">
                 {quickStats.map((stat, index) => (
                   <motion.div 
                     key={stat.label}
-                    className="stat-card-3d"
-                    whileHover={{ 
-                      scale: 1.1, 
-                      rotateY: 10,
-                      z: 50
-                    }}
-                    whileTap={{ scale: 0.95 }}
+                    className="stat-card-compact"
+                    whileHover={{ scale: 1.05, y: -2 }}
                     transition={{ duration: 0.2 }}
-                    style={{
-                      transform: isHovering ? `translateZ(${index * 10}px)` : 'translateZ(0px)'
-                    }}
                   >
-                    <div className="stat-icon-3d" style={{ color: stat.color }}>
-                      <stat.icon />
+                    <stat.icon className="stat-icon" style={{ color: stat.color }} />
+                    <div className="stat-content">
+                      <span className="stat-value">{stat.value}</span>
+                      <span className="stat-label">{stat.label}</span>
                     </div>
-                    <div className="stat-content-3d">
-                      <span className="stat-value-3d">{stat.value}</span>
-                      <span className="stat-label-3d">{stat.label}</span>
-                    </div>
-                    <div className="stat-glow" style={{ background: stat.color }}></div>
                   </motion.div>
                 ))}
               </div>
-
-              {/* Floating Action Buttons */}
-              <motion.div 
-                className="action-buttons-3d"
-                animate={isHovering ? { y: -10 } : { y: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <motion.a 
-                  href="/portfolio/George_Arampatzis.pdf" 
-                  download="George_Arampatzis_Resume.pdf" 
-                  className="primary-button-3d"
-                  whileHover={{ scale: 1.05, rotateY: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaDownload />
-                  <span>Download Resume</span>
-                  <div className="button-glow"></div>
-                </motion.a>
-                <motion.a 
-                  href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="secondary-button-3d"
-                  whileHover={{ scale: 1.05, rotateY: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaLinkedin />
-                  <span>Connect on LinkedIn</span>
-                  <div className="button-glow"></div>
-                </motion.a>
-              </motion.div>
             </div>
+          </motion.div>
 
-            {/* Interactive Background Elements */}
-            <div className="interactive-bg">
-              <div 
-                className="floating-element element-1"
-                style={{
-                  transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
-                }}
-              ></div>
-              <div 
-                className="floating-element element-2"
-                style={{
-                  transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01}px)`
-                }}
-              ></div>
-              <div 
-                className="floating-element element-3"
-                style={{
-                  transform: `translate(${mousePosition.x * 0.015}px, ${mousePosition.y * -0.015}px)`
-                }}
-              ></div>
-            </div>
+          {/* Action Buttons */}
+          <motion.div className="action-buttons" variants={itemVariants}>
+            <a 
+              href="/portfolio/George_Arampatzis.pdf" 
+              download="George_Arampatzis_Resume.pdf" 
+              className="primary-button"
+            >
+              <FaDownload />
+              <span>Download Resume</span>
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="secondary-button"
+            >
+              <FaLinkedin />
+              <span>Connect on LinkedIn</span>
+            </a>
           </motion.div>
 
           {/* Expandable Sections */}
@@ -316,27 +212,21 @@ const AboutMe = () => {
                   >
                     <div className="tech-stack-grid">
                       {techStack.map((tech, index) => (
-                        <motion.div 
-                          key={tech.name} 
-                          className="tech-item"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
+                        <div key={tech.name} className="tech-item">
                           <div className="tech-header">
                             <span className="tech-name">{tech.name}</span>
                             <span className="tech-level">{tech.level}%</span>
                           </div>
-                          <div className="tech-bar">
-                            <motion.div 
-                              className="tech-progress"
-                              initial={{ width: 0 }}
-                              animate={{ width: `${tech.level}%` }}
-                              transition={{ duration: 0.8, delay: index * 0.1 }}
-                              style={{ background: tech.color }}
-                            />
-                          </div>
-                        </motion.div>
+                           <div className="tech-bar">
+                             <motion.div 
+                               className="tech-progress"
+                               initial={{ width: 0 }}
+                               animate={{ width: `${tech.level}%` }}
+                               transition={{ duration: 0.8, delay: index * 0.1 }}
+                               style={{ background: tech.color }}
+                             />
+                           </div>
+                        </div>
                       ))}
                     </div>
                   </motion.div>
@@ -371,41 +261,41 @@ const AboutMe = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="assessments-grid">
-                      <div className="assessment-card">
-                        <div className="assessment-header">
-                          <h4>Logic Test</h4>
-                          <div className="score-circle">
-                            <span>85%</span>
-                          </div>
-                        </div>
-                        <p>Strong analytical and problem-solving abilities with excellent logical reasoning skills.</p>
-                        <a 
-                          href="/portfolio/Alva Labs Logic Test Report - George Arampatzis.pdf" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="assessment-link"
-                        >
-                          View Report →
-                        </a>
-                      </div>
+                       <div className="assessment-card">
+                         <div className="assessment-header">
+                           <h4>Logic Test</h4>
+                           <div className="score-circle">
+                             <span>95%</span>
+                           </div>
+                         </div>
+                         <p>Exceptional analytical and problem-solving abilities with outstanding logical reasoning skills.</p>
+                         <a 
+                           href="/portfolio/Alva Labs Logic Test Report - George Arampatzis.pdf" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           className="assessment-link"
+                         >
+                           View Report →
+                         </a>
+                       </div>
 
-                      <div className="assessment-card">
-                        <div className="assessment-header">
-                          <h4>Personality Test</h4>
-                          <div className="score-circle">
-                            <span>92%</span>
-                          </div>
-                        </div>
-                        <p>High emotional intelligence, strong communication skills, and excellent team collaboration abilities.</p>
-                        <a 
-                          href="/portfolio/Alva Labs Personality Test Report - George Arampatzis.pdf" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="assessment-link"
-                        >
-                          View Report →
-                        </a>
-                      </div>
+                       <div className="assessment-card">
+                         <div className="assessment-header">
+                           <h4>Personality Test</h4>
+                           <div className="score-circle">
+                             <span>92%</span>
+                           </div>
+                         </div>
+                         <p>High emotional intelligence, strong communication skills, and excellent team collaboration abilities.</p>
+                         <a 
+                           href="/portfolio/Alva Labs Personality Test Report - George Arampatzis.pdf" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           className="assessment-link"
+                         >
+                           View Report →
+                         </a>
+                       </div>
                     </div>
                   </motion.div>
                 )}
