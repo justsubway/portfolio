@@ -1,233 +1,106 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaMapMarkerAlt, FaDownload, FaLinkedin } from 'react-icons/fa';
 import './Intro.css';
 
 const Intro = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
+  const quickStats = [
+    { label: 'Repositories', value: '20+' },
+    { label: 'Experience', value: '5+ years' },
+    { label: 'Logic Score', value: '95%' },
+    { label: 'Community', value: '150k+' }
+  ];
 
-  // 3D Transform values based on scroll
-  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 15]);
-  const rotateY = useTransform(scrollYProgress, [0, 1], [0, 5]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 0.8]);
-  const translateZ = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  
-  // Color transitions
-  const backgroundColor = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1],
-    [
-      'radial-gradient(circle at 20% 50%, rgba(0, 184, 217, 0.15) 0%, rgba(124, 92, 255, 0.1) 50%, #0B1220 100%)',
-      'radial-gradient(circle at 50% 30%, rgba(124, 92, 255, 0.2) 0%, rgba(0, 184, 217, 0.15) 50%, #0B1220 100%)',
-      'radial-gradient(circle at 80% 70%, rgba(0, 184, 217, 0.25) 0%, rgba(124, 92, 255, 0.2) 50%, #0B1220 100%)',
-      'radial-gradient(circle at 30% 80%, rgba(124, 92, 255, 0.3) 0%, rgba(0, 184, 217, 0.25) 50%, #0B1220 100%)'
-    ]
-  );
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
 
-  // Text animations
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [1, 1, 0.8, 0]);
-  
-  // Floating elements transforms
-  const floatingX1 = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const floatingY1 = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const floatingX2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const floatingY2 = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const floatingX3 = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const floatingY3 = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const floatingX4 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const floatingY4 = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const floatingX5 = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const floatingY5 = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const floatingX6 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const floatingY6 = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  
-  const floatingRotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
-  const floatingScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.5]);
-  const floatingOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.6, 0.8, 0.4, 0]);
-  
-  // Grid transforms
-  const gridRotateX = useTransform(scrollYProgress, [0, 1], [0, 10]);
-  const gridRotateY = useTransform(scrollYProgress, [0, 1], [0, -5]);
-  const gridCellOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.3, 0.05]);
-  const gridCellScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 0.8]);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
-    <div className="intro-section" id="intro" ref={containerRef}>
-      {/* Dynamic Background */}
-      <motion.div 
-        className="intro-background"
-        style={{ background: backgroundColor }}
-      />
-      
-      {/* 3D Container */}
-      <motion.div 
-        className="intro-3d-container"
-        style={{
-          rotateX,
-          rotateY,
-          scale,
-          translateZ,
-          transformStyle: "preserve-3d"
-        }}
-      >
-        {/* Main Content */}
-        <motion.div 
+    <div className="intro-section" id="intro">
+      <div className="intro-container">
+        <motion.div
           className="intro-content"
-          style={{
-            y: textY,
-            opacity: textOpacity
-          }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ amount: 0.3 }}
         >
-          <motion.h1 
-            className="intro-title"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            Building the Future
-          </motion.h1>
-          
-          <motion.p 
-            className="intro-subtitle"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8 }}
-          >
-            One line of code at a time
-          </motion.p>
-          
-          <motion.div 
-            className="intro-description"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.1 }}
-          >
-            <p>
-              Welcome to my digital universe, where creativity meets technology 
-              and innovation drives every solution. I'm George, a passionate 
-              developer crafting experiences that matter.
-            </p>
+          {/* Profile Section */}
+          <motion.div className="profile-section" variants={itemVariants}>
+            <div className="profile-image-wrapper">
+              <img src="/portfolio/professional_pfp.jpg" alt="George Arampatzis" className="profile-image" />
+              <div className="profile-glow"></div>
+            </div>
+            <div className="profile-info">
+              <h1 className="intro-title">George Arampatzis</h1>
+              <p className="intro-subtitle">Computer Science Student & Developer</p>
+              <div className="location-info">
+                <FaMapMarkerAlt className="location-icon" />
+                <span>Athens, Greece</span>
+              </div>
+              <div className="status-indicator">
+                <span className="status-dot"></span>
+                <span className="status-text">Available for opportunities</span>
+              </div>
+            </div>
           </motion.div>
 
-          <motion.div 
-            className="intro-cta"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
-          >
-            <motion.div 
-              className="scroll-indicator"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
+          {/* Stats Grid */}
+          <motion.div className="stats-grid" variants={itemVariants}>
+            {quickStats.map((stat, index) => (
+              <motion.div 
+                key={stat.label}
+                className="stat-card"
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ duration: 0.2 }}
+              >
+                <span className="stat-value">{stat.value}</span>
+                <span className="stat-label">{stat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Action Buttons */}
+          <motion.div className="action-buttons" variants={itemVariants}>
+            <a 
+              href="/portfolio/George_Arampatzis.pdf" 
+              download="George_Arampatzis_Resume.pdf" 
+              className="primary-button"
             >
-              <div className="scroll-arrow"></div>
-              <span>Scroll to explore</span>
-            </motion.div>
+              <FaDownload />
+              <span>Download Resume</span>
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="secondary-button"
+            >
+              <FaLinkedin />
+              <span>Connect on LinkedIn</span>
+            </a>
           </motion.div>
         </motion.div>
-
-        {/* Floating Elements */}
-        <motion.div
-          className="floating-element element-1"
-          style={{
-            x: floatingX1,
-            y: floatingY1,
-            rotate: floatingRotate,
-            scale: floatingScale,
-            opacity: floatingOpacity
-          }}
-        />
-        <motion.div
-          className="floating-element element-2"
-          style={{
-            x: floatingX2,
-            y: floatingY2,
-            rotate: floatingRotate,
-            scale: floatingScale,
-            opacity: floatingOpacity
-          }}
-        />
-        <motion.div
-          className="floating-element element-3"
-          style={{
-            x: floatingX3,
-            y: floatingY3,
-            rotate: floatingRotate,
-            scale: floatingScale,
-            opacity: floatingOpacity
-          }}
-        />
-        <motion.div
-          className="floating-element element-4"
-          style={{
-            x: floatingX4,
-            y: floatingY4,
-            rotate: floatingRotate,
-            scale: floatingScale,
-            opacity: floatingOpacity
-          }}
-        />
-        <motion.div
-          className="floating-element element-5"
-          style={{
-            x: floatingX5,
-            y: floatingY5,
-            rotate: floatingRotate,
-            scale: floatingScale,
-            opacity: floatingOpacity
-          }}
-        />
-        <motion.div
-          className="floating-element element-6"
-          style={{
-            x: floatingX6,
-            y: floatingY6,
-            rotate: floatingRotate,
-            scale: floatingScale,
-            opacity: floatingOpacity
-          }}
-        />
-
-        {/* 3D Grid */}
-        <motion.div 
-          className="intro-grid"
-          style={{
-            rotateX: gridRotateX,
-            rotateY: gridRotateY
-          }}
-        >
-          {Array.from({ length: 9 }, (_, i) => (
-            <motion.div
-              key={i}
-              className="grid-cell"
-              style={{
-                opacity: gridCellOpacity,
-                scale: gridCellScale
-              }}
-            />
-          ))}
-        </motion.div>
-      </motion.div>
-
-      {/* Parallax Layers */}
-      <motion.div 
-        className="parallax-layer layer-1"
-        style={{
-          y: useTransform(scrollYProgress, [0, 1], [0, -50]),
-          opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 0.6, 0.1])
-        }}
-      />
-      <motion.div 
-        className="parallax-layer layer-2"
-        style={{
-          y: useTransform(scrollYProgress, [0, 1], [0, -100]),
-          opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.2, 0.4, 0.05])
-        }}
-      />
+      </div>
     </div>
   );
 };

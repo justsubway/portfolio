@@ -100,27 +100,6 @@ const AboutMe = () => {
             </div>
           </motion.div>
 
-          {/* Action Buttons */}
-          <motion.div className="action-buttons" variants={itemVariants}>
-            <a 
-              href="/portfolio/George_Arampatzis.pdf" 
-              download="George_Arampatzis_Resume.pdf" 
-              className="primary-button"
-            >
-              <FaDownload />
-              <span>Download Resume</span>
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="secondary-button"
-            >
-              <FaLinkedin />
-              <span>Connect on LinkedIn</span>
-            </a>
-          </motion.div>
-
           {/* Expandable Sections */}
           <motion.div className="expandable-sections" variants={itemVariants}>
             {/* About Section */}
@@ -299,6 +278,27 @@ const AboutMe = () => {
                 )}
               </AnimatePresence>
             </div>
+          </motion.div>
+
+          {/* Action Buttons */}
+          <motion.div className="action-buttons" variants={itemVariants}>
+            <a 
+              href="/portfolio/George_Arampatzis.pdf" 
+              download="George_Arampatzis_Resume.pdf" 
+              className="primary-button"
+            >
+              <FaDownload />
+              <span>Download Resume</span>
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="secondary-button"
+            >
+              <FaLinkedin />
+              <span>Connect on LinkedIn</span>
+            </a>
           </motion.div>
 
         </motion.div>
