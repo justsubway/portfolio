@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 import './Projects.css';
 
 const Projects = () => {
@@ -128,10 +127,12 @@ const Projects = () => {
 
   const handleProjectHover = (project, index) => {
     if (!isMobile) {
-      const currentIndex = getCurrentProjectIndex();
+      // Get current index before updating hoveredProject
+      const currentIndex = hoveredProject ? projects.findIndex(p => p.title === hoveredProject.title) : -1;
       setPreviousProjectIndex(currentIndex);
       setHoveredProject(project);
       setIsHovering(true);
+      console.log('Hovering project:', project.title, 'isHovering:', true);
     }
   };
 
@@ -211,7 +212,6 @@ const Projects = () => {
                   className="project-link"
                 >
                   {project.title}
-                  <FaExternalLinkAlt className="external-link-icon" />
                 </a>
               </motion.h3>
             ))}
