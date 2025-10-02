@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import './Projects.css';
 
 const Projects = () => {
@@ -8,21 +8,7 @@ const Projects = () => {
   const [showAll, setShowAll] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [previousProjectIndex, setPreviousProjectIndex] = useState(null);
-  
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const previewX = useSpring(mouseX, { 
-    stiffness: 200, 
-    damping: 25, 
-    mass: 0.8,
-    restDelta: 0.001 
-  });
-  const previewY = useSpring(mouseY, { 
-    stiffness: 200, 
-    damping: 25, 
-    mass: 0.8,
-    restDelta: 0.001 
-  });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   const previewRef = useRef(null);
 
@@ -106,14 +92,13 @@ const Projects = () => {
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      // Use clientX/Y directly - Lenis handles scroll internally
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      console.log('Mouse position:', e.clientX, e.clientY);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -237,13 +222,14 @@ const Projects = () => {
               ref={previewRef}
               className="project-preview-container"
               style={{
-                x: previewX,
-                y: previewY,
+                left: mousePosition.x,
+                top: mousePosition.y,
               }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
+              onAnimationStart={() => console.log('Preview animating in')}
             >
               <div className="project-preview-content">
                 <motion.div
