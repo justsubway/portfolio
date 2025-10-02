@@ -12,6 +12,7 @@ const Background3D = () => {
   const rendererRef = useRef(null);
   const particlesRef = useRef(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!containerRef.current) return;
 
