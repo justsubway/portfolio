@@ -9,18 +9,16 @@ const AboutMe = () => {
   const [showAbout, setShowAbout] = useState(false);
 
   const techStack = [
-    { name: 'Java', level: 95, color: '#ED8B00' },
-    { name: 'Python', level: 92, color: '#3776AB' },
-    { name: 'JavaScript', level: 88, color: '#F7DF1E' },
-    { name: 'React', level: 85, color: '#61DAFB' },
-    { name: 'Django', level: 80, color: '#092E20' },
-    { name: 'Node.js', level: 78, color: '#339933' },
-    { name: 'TypeScript', level: 75, color: '#007ACC' },
-    { name: 'Unity', level: 70, color: '#000000' }
+    { name: 'JavaScript', level: 73, color: '#F7DF1E' },
+    { name: 'TypeScript', level: 18, color: '#007ACC' },
+    { name: 'CSS', level: 5, color: '#1572B6' },
+    { name: 'HTML', level: 3, color: '#E34F26' },
+    { name: 'Java', level: 1, color: '#ED8B00' },
+    { name: 'Python', level: 1, color: '#3776AB' }
   ];
 
   const quickStats = [
-    { icon: FaCode, label: 'Repositories', value: '25+', color: '#00B8D9' },
+    { icon: FaCode, label: 'Repositories', value: '20+', color: '#00B8D9' },
     { icon: FaRocket, label: 'Experience', value: '5+ years', color: '#7C5CFF' },
     { icon: FaBrain, label: 'Logic Score', value: '95%', color: '#00B8D9' },
     { icon: FaHeart, label: 'Community', value: '150k+', color: '#7C5CFF' }
@@ -303,23 +301,6 @@ const AboutMe = () => {
             </div>
           </motion.div>
 
-          {/* Contact Links */}
-          <motion.div className="contact-section" variants={itemVariants}>
-            <div className="contact-links">
-              <a href="https://github.com/justsubway" target="_blank" rel="noopener noreferrer" className="contact-link" title="GitHub">
-                <FaGithub />
-                <span>GitHub</span>
-              </a>
-              <a href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" target="_blank" rel="noopener noreferrer" className="contact-link" title="LinkedIn">
-                <FaLinkedin />
-                <span>LinkedIn</span>
-              </a>
-              <a href="mailto:ritualhere2@gmail.com" className="contact-link" title="Email">
-                <FaEnvelope />
-                <span>Email</span>
-              </a>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </div>

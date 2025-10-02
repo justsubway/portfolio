@@ -1,4 +1,5 @@
 import React from 'react';
+import Intro from './components/Intro';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -44,8 +45,9 @@ function App() {
   return (
     <div className="App">
       <Navbar onNavigate={handleNavigate} />
-      <AboutMe />
+      <Intro />
       <Projects />
+      <AboutMe />
       <Contact />
     </div>
   );
