@@ -105,7 +105,7 @@ const Projects = () => {
 
   const displayedProjects = showAll ? projects : projects.slice(0, 6);
 
-  const { scrollY } = useLenisScroll();
+  // const { scrollY } = useLenisScroll(); // Available for future scroll-based animations
 
   useEffect(() => {
     const handleMouseMove = (e) => {
