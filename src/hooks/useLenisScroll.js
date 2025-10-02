@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useMotionValue, useSpring } from 'framer-motion';
 
 export const useLenisScroll = () => {
   const [lenis, setLenis] = useState(null);
