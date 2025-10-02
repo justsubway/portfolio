@@ -116,7 +116,9 @@ const Background3D = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
-      containerRef.current?.removeChild(renderer.domElement);
+      if (containerRef.current) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
       scene.remove(particlesMesh);
       particlesGeometry.dispose();
       particlesMaterial.dispose();

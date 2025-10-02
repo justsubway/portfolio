@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaArrowRight } from 'react-icons/fa';
+import { FaGithub, FaEnvelope, FaArrowRight } from 'react-icons/fa';
 import './Hero.css';
 
 const overviewData = [

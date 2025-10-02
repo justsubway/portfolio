@@ -5,7 +5,7 @@ import ParticleLoader from './ParticleLoader';
 import './Contact.css';
 
 const Contact = () => {
-  const [showForm, setShowForm] = useState(false);
+  const [showForm] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -17,16 +17,16 @@ const Contact = () => {
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
+  // const itemVariants = {
+  //   hidden: { opacity: 0, y: 20 },
+  //   visible: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       duration: 0.5
+  //     }
+  //   }
+  // };
 
   const slideVariants = {
     initial: { x: 0 },

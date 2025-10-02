@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
@@ -90,8 +90,8 @@ function InteractiveParticles() {
     }
 
     const temp = [];
-    let vertexCount = 0;
-    let positions = null;
+    // let vertexCount = 0;
+    // let positions = null;
     let boundingBox = new THREE.Box3();
 
     try {
