@@ -21,7 +21,7 @@ const Projects = () => {
     },
     {
       title: 'Georythm',
-      image: 'https://i.imgur.com/georythm-preview.png',
+      image: 'https://camo.githubusercontent.com/18ea1ccb9cb4eab34da9099fbaeff0139b7f4f094ac12bcff78f94afd1f169c9/68747470733a2f2f692e696d6775722e636f6d2f54577361494e4a2e706e67',
       link: 'https://github.com/justsubway/georythm',
       description: 'Music visualization app'
     },
@@ -39,13 +39,13 @@ const Projects = () => {
     },
     {
       title: 'Thewria.com',
-      image: 'https://i.imgur.com/thewria-preview.png',
+      image: 'https://camo.githubusercontent.com/d80e3286e94d36874f8d51a97dd1208d152b8184154b8e4b1cdec3867c526603/68747470733a2f2f692e696d6775722e636f6d2f6f3178644b51522e706e67',
       link: 'https://github.com/justsubway/thewria',
       description: 'Educational platform'
     },
     {
       title: 'Forthelocals',
-      image: 'https://i.imgur.com/forthelocals-preview.png',
+      image: 'https://i.imgur.com/VXHDsiP.png',
       link: 'https://github.com/justsubway/forthelocals',
       description: 'Local business platform'
     },
