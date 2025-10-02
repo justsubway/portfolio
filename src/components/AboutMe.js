@@ -1,28 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaEnvelope, FaLinkedin, FaDownload, FaChevronDown, FaCode, FaRocket, FaBrain, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaGithub, FaEnvelope, FaLinkedin, FaDownload, FaChevronDown, FaCode, FaRocket, FaBrain, FaHeart, FaMapMarkerAlt, FaStar, FaUsers, FaProjectDiagram } from 'react-icons/fa';
 import './AboutMe.css';
 
 const AboutMe = () => {
   const [showTechStack, setShowTechStack] = useState(false);
   const [showAssessments, setShowAssessments] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const containerRef = useRef(null);
+
+  // Accurate GitHub stats (you can update these with real numbers)
+  const githubStats = {
+    repositories: 25,
+    stars: 12,
+    followers: 8,
+    contributions: 1200
+  };
 
   const techStack = [
-    { name: 'Java', level: 95 },
-    { name: 'Python', level: 90 },
-    { name: 'JavaScript', level: 88 },
-    { name: 'React', level: 85 },
-    { name: 'Node.js', level: 80 },
-    { name: 'TypeScript', level: 75 }
+    { name: 'Java', level: 90, color: '#ED8B00' },
+    { name: 'Python', level: 85, color: '#3776AB' },
+    { name: 'JavaScript', level: 88, color: '#F7DF1E' },
+    { name: 'React', level: 82, color: '#61DAFB' },
+    { name: 'Node.js', level: 78, color: '#339933' },
+    { name: 'TypeScript', level: 75, color: '#007ACC' }
   ];
 
   const quickStats = [
-    { icon: FaCode, label: 'Projects', value: '15+', color: '#00B8D9' },
-    { icon: FaRocket, label: 'Experience', value: '5+ years', color: '#7C5CFF' },
-    { icon: FaBrain, label: 'Logic Score', value: '85%', color: '#00B8D9' },
-    { icon: FaHeart, label: 'Community', value: '150k+', color: '#7C5CFF' }
+    { icon: FaCode, label: 'Repositories', value: `${githubStats.repositories}+`, color: '#00B8D9' },
+    { icon: FaStar, label: 'GitHub Stars', value: `${githubStats.stars}`, color: '#7C5CFF' },
+    { icon: FaUsers, label: 'Followers', value: `${githubStats.followers}`, color: '#00B8D9' },
+    { icon: FaProjectDiagram, label: 'Contributions', value: `${githubStats.contributions}+`, color: '#7C5CFF' }
   ];
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        });
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('mousemove', handleMouseMove);
+      return () => container.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -49,7 +78,7 @@ const AboutMe = () => {
 
   return (
     <div className="about-me-section" id="about">
-      <div className="about-me-container">
+      <div className="about-me-container" ref={containerRef}>
         <motion.div
           className="about-me-content"
           variants={containerVariants}
@@ -57,66 +86,145 @@ const AboutMe = () => {
           whileInView="visible"
           viewport={{ amount: 0.3 }}
         >
-          {/* Hero Section */}
-          <motion.div className="hero-section" variants={itemVariants}>
-            <div className="hero-content">
-              <div className="profile-section">
-                <div className="profile-image-wrapper">
-                  <img src="/portfolio/professional_pfp.jpg" alt="George Arampatzis" className="profile-image" />
-                  <div className="profile-glow"></div>
+          {/* Interactive 3D Hero Section */}
+          <motion.div 
+            className="hero-section-3d" 
+            variants={itemVariants}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            <div className="hero-content-3d">
+              {/* 3D Profile Section */}
+              <div className="profile-section-3d">
+                <div className="profile-image-3d-wrapper">
+                  <img src="/portfolio/professional_pfp.jpg" alt="George Arampatzis" className="profile-image-3d" />
+                  <div className="profile-glow-3d"></div>
+                  <div className="profile-ring"></div>
+                  <div className="profile-particles">
+                    {[...Array(8)].map((_, i) => (
+                      <div 
+                        key={i} 
+                        className="particle" 
+                        style={{
+                          '--delay': `${i * 0.5}s`,
+                          '--angle': `${i * 45}deg`
+                        }}
+                      />
+                    ))}
+                  </div>
                 </div>
-                <div className="profile-info">
-                  <h1 className="hero-title">George Arampatzis</h1>
-                  <p className="hero-subtitle">Computer Science Student & Developer</p>
-                  <div className="location-info">
+                <div className="profile-info-3d">
+                  <motion.h1 
+                    className="hero-title-3d"
+                    animate={isHovering ? { scale: 1.05 } : { scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    George Arampatzis
+                  </motion.h1>
+                  <motion.p 
+                    className="hero-subtitle-3d"
+                    animate={isHovering ? { y: -5 } : { y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    Computer Science Student & Developer
+                  </motion.p>
+                  <div className="location-info-3d">
                     <FaMapMarkerAlt className="location-icon" />
                     <span>Athens, Greece</span>
                   </div>
-                  <div className="status-indicator">
+                  <motion.div 
+                    className="status-indicator-3d"
+                    animate={isHovering ? { scale: 1.1 } : { scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <span className="status-dot"></span>
                     <span className="status-text">Available for opportunities</span>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
               
-              <div className="quick-stats">
+              {/* Interactive Stats Grid */}
+              <div className="stats-grid-3d">
                 {quickStats.map((stat, index) => (
                   <motion.div 
                     key={stat.label}
-                    className="stat-card"
-                    whileHover={{ scale: 1.05 }}
+                    className="stat-card-3d"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      rotateY: 10,
+                      z: 50
+                    }}
+                    whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2 }}
+                    style={{
+                      transform: isHovering ? `translateZ(${index * 10}px)` : 'translateZ(0px)'
+                    }}
                   >
-                    <stat.icon className="stat-icon" style={{ color: stat.color }} />
-                    <div className="stat-content">
-                      <span className="stat-value">{stat.value}</span>
-                      <span className="stat-label">{stat.label}</span>
+                    <div className="stat-icon-3d" style={{ color: stat.color }}>
+                      <stat.icon />
                     </div>
+                    <div className="stat-content-3d">
+                      <span className="stat-value-3d">{stat.value}</span>
+                      <span className="stat-label-3d">{stat.label}</span>
+                    </div>
+                    <div className="stat-glow" style={{ background: stat.color }}></div>
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </motion.div>
 
-          {/* Action Buttons */}
-          <motion.div className="action-buttons" variants={itemVariants}>
-            <a 
-              href="/portfolio/George_Arampatzis.pdf" 
-              download="George_Arampatzis_Resume.pdf" 
-              className="primary-button"
-            >
-              <FaDownload />
-              <span>Download Resume</span>
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="secondary-button"
-            >
-              <FaLinkedin />
-              <span>Connect on LinkedIn</span>
-            </a>
+              {/* Floating Action Buttons */}
+              <motion.div 
+                className="action-buttons-3d"
+                animate={isHovering ? { y: -10 } : { y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.a 
+                  href="/portfolio/George_Arampatzis.pdf" 
+                  download="George_Arampatzis_Resume.pdf" 
+                  className="primary-button-3d"
+                  whileHover={{ scale: 1.05, rotateY: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FaDownload />
+                  <span>Download Resume</span>
+                  <div className="button-glow"></div>
+                </motion.a>
+                <motion.a 
+                  href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="secondary-button-3d"
+                  whileHover={{ scale: 1.05, rotateY: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FaLinkedin />
+                  <span>Connect on LinkedIn</span>
+                  <div className="button-glow"></div>
+                </motion.a>
+              </motion.div>
+            </div>
+
+            {/* Interactive Background Elements */}
+            <div className="interactive-bg">
+              <div 
+                className="floating-element element-1"
+                style={{
+                  transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
+                }}
+              ></div>
+              <div 
+                className="floating-element element-2"
+                style={{
+                  transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01}px)`
+                }}
+              ></div>
+              <div 
+                className="floating-element element-3"
+                style={{
+                  transform: `translate(${mousePosition.x * 0.015}px, ${mousePosition.y * -0.015}px)`
+                }}
+              ></div>
+            </div>
           </motion.div>
 
           {/* Expandable Sections */}
@@ -208,7 +316,13 @@ const AboutMe = () => {
                   >
                     <div className="tech-stack-grid">
                       {techStack.map((tech, index) => (
-                        <div key={tech.name} className="tech-item">
+                        <motion.div 
+                          key={tech.name} 
+                          className="tech-item"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
                           <div className="tech-header">
                             <span className="tech-name">{tech.name}</span>
                             <span className="tech-level">{tech.level}%</span>
@@ -219,9 +333,10 @@ const AboutMe = () => {
                               initial={{ width: 0 }}
                               animate={{ width: `${tech.level}%` }}
                               transition={{ duration: 0.8, delay: index * 0.1 }}
+                              style={{ background: tech.color }}
                             />
                           </div>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </motion.div>
