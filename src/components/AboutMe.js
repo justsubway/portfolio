@@ -1,40 +1,36 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaEnvelope, FaLinkedin, FaDownload } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaGithub, FaEnvelope, FaLinkedin, FaDownload, FaChevronDown, FaChevronUp, FaCode, FaRocket, FaBrain, FaHeart, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 import './AboutMe.css';
 
 const AboutMe = () => {
-  const techStack = {
-    languages: [
-      { name: 'Java', badge: 'https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white' },
-      { name: 'Python', badge: 'https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white' },
-      { name: 'JavaScript', badge: 'https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black' },
-      { name: 'TypeScript', badge: 'https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white' },
-      { name: 'React', badge: 'https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB' },
-      { name: 'Node.js', badge: 'https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white' }
-    ],
-    tools: [
-      { name: 'Git', badge: 'https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white' },
-      { name: 'Docker', badge: 'https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white' },
-      { name: 'MongoDB', badge: 'https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white' },
-      { name: 'MySQL', badge: 'https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white' },
-      { name: 'Firebase', badge: 'https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white' },
-      { name: 'AWS', badge: 'https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white' }
-    ],
-    creative: [
-      { name: 'Figma', badge: 'https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white' },
-      { name: 'Photoshop', badge: 'https://img.shields.io/badge/Adobe%20Photoshop-31A8FF?style=for-the-badge&logo=Adobe%20Photoshop&logoColor=white' },
-      { name: 'Premiere Pro', badge: 'https://img.shields.io/badge/Adobe%20Premiere%20Pro-9999FF?style=for-the-badge&logo=Adobe%20Premiere%20Pro&logoColor=white' }
-    ]
-  };
+  const [showTechStack, setShowTechStack] = useState(false);
+  const [showAssessments, setShowAssessments] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+
+  const techStack = [
+    { name: 'Java', level: 95 },
+    { name: 'Python', level: 90 },
+    { name: 'JavaScript', level: 88 },
+    { name: 'React', level: 85 },
+    { name: 'Node.js', level: 80 },
+    { name: 'TypeScript', level: 75 }
+  ];
+
+  const quickStats = [
+    { icon: FaCode, label: 'Projects', value: '15+', color: '#00B8D9' },
+    { icon: FaRocket, label: 'Experience', value: '5+ years', color: '#7C5CFF' },
+    { icon: FaBrain, label: 'Logic Score', value: '85%', color: '#00B8D9' },
+    { icon: FaHeart, label: 'Community', value: '150k+', color: '#7C5CFF' }
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
+        staggerChildren: 0.1,
+        delayChildren: 0.2
       }
     }
   };
@@ -72,6 +68,10 @@ const AboutMe = () => {
                 <div className="profile-info">
                   <h1 className="hero-title">George Arampatzis</h1>
                   <p className="hero-subtitle">Computer Science Student & Developer</p>
+                  <div className="location-info">
+                    <FaMapMarkerAlt className="location-icon" />
+                    <span>Athens, Greece</span>
+                  </div>
                   <div className="status-indicator">
                     <span className="status-dot"></span>
                     <span className="status-text">Available for opportunities</span>
@@ -79,156 +79,240 @@ const AboutMe = () => {
                 </div>
               </div>
               
-              <div className="overview-cards">
-                <div className="overview-card">
-                  <h3>Skills</h3>
-                  <p>Java, Python, JavaScript, React, Spring Boot</p>
-                </div>
-                <div className="overview-card">
-                  <h3>Experience</h3>
-                  <p>Full-stack apps, APIs, UI/UX, Web systems</p>
-                </div>
-                <div className="overview-card">
-                  <h3>Based In</h3>
-                  <p>Athens, Greece</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* About Content */}
-          <motion.div className="about-content" variants={itemVariants}>
-            <div className="content-grid">
-              <div className="main-content">
-                <div className="content-card">
-                  <h3>About Me</h3>
-                  <p>
-                    I'm an 18-year-old Computer Science student with a strong passion for building impactful software. 
-                    My main focus is Java & Python development, and I enjoy creating full-stack applications that solve 
-                    real-world problems with clean, efficient code.
-                  </p>
-                  <p>
-                    Currently, I'm working on exciting projects like <strong>SuperChat</strong> (Discord clone), 
-                    <strong> Georythm</strong> (music visualization), <strong>Chomp</strong> (food app), and 
-                    <strong> Resumind</strong> (AI resume analyzer). I'm always eager to explore new technologies 
-                    and deepen my understanding of modern software development practices.
-                  </p>
-                </div>
-
-                <div className="content-card">
-                  <h3>Community Impact</h3>
-                  <p>
-                    Since the age of 13 I have been part of the coding community and contributed to tens of projects. 
-                    I have also contributed as a moderator in large communities (totaling over <strong>150.000+</strong> members). 
-                    During that time, I have also developed large amounts of code for most of these communities, with a 
-                    special contribution to the <strong>Minecraft World</strong> where I have created multiple plugins 
-                    and content for Minecraft Servers.
-                  </p>
-                  <a 
-                    href="https://beacons.ai/subwayy" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="experience-link"
+              <div className="quick-stats">
+                {quickStats.map((stat, index) => (
+                  <motion.div 
+                    key={stat.label}
+                    className="stat-card"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    View Detailed Experience →
-                  </a>
-                </div>
-              </div>
-
-              <div className="sidebar-content">
-                <div className="tech-stack">
-                  <h4>Languages & Frameworks</h4>
-                  <div className="tech-badges">
-                    {techStack.languages.map(tech => (
-                      <img 
-                        key={tech.name}
-                        src={tech.badge}
-                        alt={tech.name}
-                        className="tech-badge"
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="tech-stack">
-                  <h4>Tools & Databases</h4>
-                  <div className="tech-badges">
-                    {techStack.tools.map(tech => (
-                      <img 
-                        key={tech.name}
-                        src={tech.badge}
-                        alt={tech.name}
-                        className="tech-badge"
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="contact-links">
-                  <a href="https://github.com/justsubway" target="_blank" rel="noopener noreferrer" className="contact-link" title="GitHub">
-                    <FaGithub />
-                    <span>GitHub</span>
-                  </a>
-                  <a href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" target="_blank" rel="noopener noreferrer" className="contact-link" title="LinkedIn">
-                    <FaLinkedin />
-                    <span>LinkedIn</span>
-                  </a>
-                  <a href="mailto:ritualhere2@gmail.com" className="contact-link" title="Email">
-                    <FaEnvelope />
-                    <span>Email</span>
-                  </a>
-                  <a href="/portfolio/George_Arampatzis.pdf" download="George_Arampatzis_Resume.pdf" className="contact-link" title="Download Resume">
-                    <FaDownload />
-                    <span>Resume</span>
-                  </a>
-                </div>
+                    <stat.icon className="stat-icon" style={{ color: stat.color }} />
+                    <div className="stat-content">
+                      <span className="stat-value">{stat.value}</span>
+                      <span className="stat-label">{stat.label}</span>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Assessments Section */}
-          <motion.div className="assessments-section" variants={itemVariants}>
-            <h3 className="assessments-title">Cognitive & Personality Assessments</h3>
-            <div className="assessments-grid">
-              <div className="assessment-card">
-                <h4>Alva Labs Logic Test</h4>
-                <div className="assessment-score">
-                  <div className="score-circle">
-                    <span className="score-number">85%</span>
-                  </div>
-                </div>
-                <p className="assessment-description">
-                  Strong analytical and problem-solving abilities with excellent logical reasoning skills.
-                </p>
-                <a 
-                  href="/portfolio/Alva Labs Logic Test Report - George Arampatzis.pdf" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="assessment-link"
-                >
-                  View Report →
-                </a>
-              </div>
+          {/* Action Buttons */}
+          <motion.div className="action-buttons" variants={itemVariants}>
+            <a 
+              href="/portfolio/George_Arampatzis.pdf" 
+              download="George_Arampatzis_Resume.pdf" 
+              className="primary-button"
+            >
+              <FaDownload />
+              <span>Download Resume</span>
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="secondary-button"
+            >
+              <FaLinkedin />
+              <span>Connect on LinkedIn</span>
+            </a>
+          </motion.div>
 
-              <div className="assessment-card">
-                <h4>Alva Labs Personality Test</h4>
-                <div className="assessment-score">
-                  <div className="score-circle">
-                    <span className="score-number">92%</span>
-                  </div>
+          {/* Expandable Sections */}
+          <motion.div className="expandable-sections" variants={itemVariants}>
+            {/* About Section */}
+            <div className="expandable-card">
+              <button 
+                className="expandable-header"
+                onClick={() => setShowAbout(!showAbout)}
+              >
+                <div className="header-content">
+                  <h3>About Me</h3>
+                  <p>My story, passion, and journey in tech</p>
                 </div>
-                <p className="assessment-description">
-                  High emotional intelligence, strong communication skills, and excellent team collaboration abilities.
-                </p>
-                <a 
-                  href="/portfolio/Alva Labs Personality Test Report - George Arampatzis.pdf" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="assessment-link"
+                <motion.div
+                  animate={{ rotate: showAbout ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  View Report →
-                </a>
-              </div>
+                  <FaChevronDown />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {showAbout && (
+                  <motion.div
+                    className="expandable-content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="content-text">
+                      <p>
+                        I'm an 18-year-old Computer Science student with a strong passion for building impactful software. 
+                        My main focus is Java & Python development, and I enjoy creating full-stack applications that solve 
+                        real-world problems with clean, efficient code.
+                      </p>
+                      <p>
+                        Currently, I'm working on exciting projects like <strong>SuperChat</strong> (Discord clone), 
+                        <strong> Georythm</strong> (music visualization), <strong>Chomp</strong> (food app), and 
+                        <strong> Resumind</strong> (AI resume analyzer). I'm always eager to explore new technologies 
+                        and deepen my understanding of modern software development practices.
+                      </p>
+                      <p>
+                        Since the age of 13 I have been part of the coding community and contributed to tens of projects. 
+                        I have also contributed as a moderator in large communities (totaling over <strong>150.000+</strong> members). 
+                        During that time, I have also developed large amounts of code for most of these communities, with a 
+                        special contribution to the <strong>Minecraft World</strong> where I have created multiple plugins 
+                        and content for Minecraft Servers.
+                      </p>
+                      <a 
+                        href="https://beacons.ai/subwayy" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="experience-link"
+                      >
+                        View Detailed Experience →
+                      </a>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Tech Stack Section */}
+            <div className="expandable-card">
+              <button 
+                className="expandable-header"
+                onClick={() => setShowTechStack(!showTechStack)}
+              >
+                <div className="header-content">
+                  <h3>Tech Stack</h3>
+                  <p>Languages, frameworks, and tools I work with</p>
+                </div>
+                <motion.div
+                  animate={{ rotate: showTechStack ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <FaChevronDown />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {showTechStack && (
+                  <motion.div
+                    className="expandable-content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="tech-stack-grid">
+                      {techStack.map((tech, index) => (
+                        <div key={tech.name} className="tech-item">
+                          <div className="tech-header">
+                            <span className="tech-name">{tech.name}</span>
+                            <span className="tech-level">{tech.level}%</span>
+                          </div>
+                          <div className="tech-bar">
+                            <motion.div 
+                              className="tech-progress"
+                              initial={{ width: 0 }}
+                              animate={{ width: `${tech.level}%` }}
+                              transition={{ duration: 0.8, delay: index * 0.1 }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Assessments Section */}
+            <div className="expandable-card">
+              <button 
+                className="expandable-header"
+                onClick={() => setShowAssessments(!showAssessments)}
+              >
+                <div className="header-content">
+                  <h3>Assessments</h3>
+                  <p>Cognitive and personality test results</p>
+                </div>
+                <motion.div
+                  animate={{ rotate: showAssessments ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <FaChevronDown />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {showAssessments && (
+                  <motion.div
+                    className="expandable-content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="assessments-grid">
+                      <div className="assessment-card">
+                        <div className="assessment-header">
+                          <h4>Logic Test</h4>
+                          <div className="score-circle">
+                            <span>85%</span>
+                          </div>
+                        </div>
+                        <p>Strong analytical and problem-solving abilities with excellent logical reasoning skills.</p>
+                        <a 
+                          href="/portfolio/Alva Labs Logic Test Report - George Arampatzis.pdf" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="assessment-link"
+                        >
+                          View Report →
+                        </a>
+                      </div>
+
+                      <div className="assessment-card">
+                        <div className="assessment-header">
+                          <h4>Personality Test</h4>
+                          <div className="score-circle">
+                            <span>92%</span>
+                          </div>
+                        </div>
+                        <p>High emotional intelligence, strong communication skills, and excellent team collaboration abilities.</p>
+                        <a 
+                          href="/portfolio/Alva Labs Personality Test Report - George Arampatzis.pdf" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="assessment-link"
+                        >
+                          View Report →
+                        </a>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+
+          {/* Contact Links */}
+          <motion.div className="contact-section" variants={itemVariants}>
+            <div className="contact-links">
+              <a href="https://github.com/justsubway" target="_blank" rel="noopener noreferrer" className="contact-link" title="GitHub">
+                <FaGithub />
+                <span>GitHub</span>
+              </a>
+              <a href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" target="_blank" rel="noopener noreferrer" className="contact-link" title="LinkedIn">
+                <FaLinkedin />
+                <span>LinkedIn</span>
+              </a>
+              <a href="mailto:ritualhere2@gmail.com" className="contact-link" title="Email">
+                <FaEnvelope />
+                <span>Email</span>
+              </a>
             </div>
           </motion.div>
         </motion.div>
