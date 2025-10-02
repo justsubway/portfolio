@@ -21,7 +21,7 @@ const Projects = () => {
     },
     {
       title: 'Georythm',
-      image: 'https://i.imgur.com/9jHtQDp.png',
+      image: 'https://i.imgur.com/georythm-preview.png',
       link: 'https://github.com/justsubway/georythm',
       description: 'Music visualization app'
     },
@@ -39,13 +39,13 @@ const Projects = () => {
     },
     {
       title: 'Thewria.com',
-      image: 'https://i.imgur.com/9jHtQDp.png',
+      image: 'https://i.imgur.com/thewria-preview.png',
       link: 'https://github.com/justsubway/thewria',
       description: 'Educational platform'
     },
     {
       title: 'Forthelocals',
-      image: 'https://i.imgur.com/9jHtQDp.png',
+      image: 'https://i.imgur.com/forthelocals-preview.png',
       link: 'https://github.com/justsubway/forthelocals',
       description: 'Local business platform'
     },
