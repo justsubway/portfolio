@@ -1,11 +1,12 @@
 import React from 'react';
-import './App.css';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
+import AssessmentsSection from './components/AssessmentsSection';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import Background3D from './components/Background3D';
+import './App.css';
 
 function App() {
   const smoothScrollTo = (sectionId) => {
@@ -54,6 +55,7 @@ function App() {
       <Hero onScrollToProjects={scrollToProjects} />
       <About />
       <Projects />
+      <AssessmentsSection lang="en" />
       <Contact />
     </div>
   );

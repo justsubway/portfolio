@@ -18,6 +18,7 @@ const Navbar = ({ onNavigate }) => {
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
+    { id: 'assessments', label: 'Assessments' },
     { id: 'contact', label: 'Contact' }
   ];
 

@@ -45,7 +45,7 @@ const Hero = ({ onScrollToProjects }) => {
         </motion.h1>
 
         <motion.p className="hero-subtitle" variants={itemVariants} custom={1}>
-          17 y/o developer building web experiences with React & code that clicks
+          18 y/o developer building web experiences with React & code that clicks
         </motion.p>
 
         <motion.button
@@ -82,7 +82,8 @@ const Hero = ({ onScrollToProjects }) => {
                 <FaGithub />
               </a>
               <a
-                href="mailto:your.email@example.com"
+                href="mailto:geoara07@gmail.com
+                "
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Email"

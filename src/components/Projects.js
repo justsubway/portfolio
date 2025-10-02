@@ -21,6 +21,26 @@ const Projects = () => {
 
   const projects = [
     {
+      title: 'SuperChat',
+      description: 'A modern, real-time chat application built with React and Firebase, featuring a Discord-inspired interface with advanced guest user support. Complete Discord clone with three-panel layout, real-time messaging, and unique guest authentication system.',
+      image: 'https://i.imgur.com/VgZfwTI.png',
+      tags: ['Web App'],
+      techStack: ['React', 'Firebase', 'Firestore', 'Authentication', 'CSS3', 'Real-time Messaging'],
+      liveLink: null,
+      githubLink: 'https://github.com/justsubway/discord-clone',
+      features: ['Discord-inspired UI', 'Real-time messaging', 'Guest user system', 'Google authentication', 'Channel management', 'Custom avatars']
+    },
+    {
+      title: 'Chomp',
+      description: 'A comprehensive food delivery and restaurant discovery app with modern UI/UX design. Features include restaurant browsing, menu viewing, order tracking, and user reviews.',
+      image: 'https://i.imgur.com/9jHtQDp.png',
+      tags: ['Web App'],
+      techStack: ['React', 'JavaScript', 'CSS3', 'API Integration', 'Responsive Design'],
+      liveLink: null,
+      githubLink: 'https://github.com/justsubway/food-app',
+      features: ['Restaurant discovery', 'Menu browsing', 'Order tracking', 'User reviews', 'Responsive design', 'Modern interface']
+    },
+    {
       title: 'Georythm',
       description: 'An interactive music visualization platform that creates unique visual patterns based on your music. Features real-time audio analysis and dynamic 3D visualizations.',
       image: 'https://camo.githubusercontent.com/18ea1ccb9cb4eab34da9099fbaeff0139b7f4f094ac12bcff78f94afd1f169c9/68747470733a2f2f692e696d6775722e636f6d2f54577361494e4a2e706e67',
@@ -31,24 +51,14 @@ const Projects = () => {
       features: ['Real-time audio analysis', 'Dynamic 3D visualizations', 'Interactive controls', 'Responsive design']
     },
     {
-      title: 'Chat App',
-      description: 'A real-time chat application with user authentication and message persistence. Features include real-time messaging, user profiles, and message history.',
-      image: 'https://i.imgur.com/4SmvSQw.png',
+      title: 'Resumind',
+      description: 'An AI-powered resume analyzer that provides ATS scores and custom feedback for job applications. Features easy authentication, resume upload & storage, and intelligent matching against job listings.',
+      image: 'https://i.imgur.com/nI1HcQJ.png',
       tags: ['Web App'],
-      techStack: ['React', 'Firebase', 'Tailwind CSS', 'Firestore', 'Authentication', 'Cloud Functions'],
-      liveLink: 'https://chat-app-dc6f4.web.app',
-      githubLink: 'https://github.com/justsubway/chat-app',
-      features: ['Real-time messaging', 'User authentication', 'Message history']
-    },
-    {
-      title: 'Thewria.com',
-      description: 'A modern web platform for studying and helping Greek Students with their Panhellenic Exams. It acts like TikTok with scrolling abilities but displays proper study content.',
-      image: 'https://camo.githubusercontent.com/d80e3286e94d36874f8d51a97dd1208d152b8184154b8e4b1cdec3867c526603/68747470733a2f2f692e696d6775722e636f6d2f6f3178644b51522e706e67',
-      tags: ['Web App'],
-      techStack: ['HTML5', 'Node.js', 'JavaScript', 'CSS3'],
-      liveLink: 'https://thewria.com',
-      githubLink: null,
-      features: ['Responsive design', 'Scrolling Animations', 'Content management', 'Multiple Subjects']
+      techStack: ['React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Puter.js', 'AI Integration'],
+      liveLink: null,
+      githubLink: 'https://github.com/justsubway/ai-resume-analyser',
+      features: ['AI resume analysis', 'ATS scoring', 'Job matching', 'Resume storage', 'Modern UI/UX', 'Cross-device compatibility']
     },
     {
       title: 'Forhtelocals',
@@ -61,14 +71,24 @@ const Projects = () => {
       features: ['Product management', 'Shopping cart', 'Secure checkout', 'Order tracking']
     },
     {
-      title: 'InNeed',
-      description: 'A platform created to supply the elderly with assistants (to help with groceries, or any other need they have, hence InNeed). The app was created under a Entrepreneurship Contest',
-      image: 'https://i.imgur.com/X8NZtMa.png',
+      title: 'Thewria.com',
+      description: 'A modern web platform for studying and helping Greek Students with their Panhellenic Exams. It acts like TikTok with scrolling abilities but displays proper study content.',
+      image: 'https://camo.githubusercontent.com/d80e3286e94d36874f8d51a97dd1208d152b8184154b8e4b1cdec3867c526603/68747470733a2f2f692e696d6775722e636f6d2f6f3178644b51522e706e67',
       tags: ['Web App'],
-      techStack: ['HTML5', 'CSS3'],
-      liveLink: null,
+      techStack: ['HTML5', 'Node.js', 'JavaScript', 'CSS3'],
+      liveLink: 'https://thewria.com',
       githubLink: null,
-      features: ['Responsive design', 'User authentication', 'Content management', 'API integration']
+      features: ['Responsive design', 'Scrolling Animations', 'Content management', 'Multiple Subjects']
+    },
+    {
+      title: 'Weather App',
+      description: 'A weather application that provides real-time weather information and forecasts. Features include location-based weather and a search for specific locations using API.',
+      image: 'https://raw.githubusercontent.com/justsubway/weather-app/refs/heads/main/src/assets/demo.png',
+      tags: ['App'],
+      techStack: ['Java', 'OpenWeather API', 'Geolocation API', 'Context API'],
+      liveLink: null,
+      githubLink: 'https://github.com/justsubway/weather-app',
+      features: ['Real-time weather', 'Location-based', 'Search Bar']
     },
     {
       title: 'Hub Greece',
@@ -81,14 +101,44 @@ const Projects = () => {
       features: ['Reservations/Bookings', 'Search by location', 'Location Tracker', 'Algorithm for suggestions']
     },
     {
-      title: 'Weather App',
-      description: 'A weather application that provides real-time weather information and forecasts. Features include location-based weather and a search for specific locations using API.',
-      image: 'https://raw.githubusercontent.com/justsubway/weather-app/refs/heads/main/src/assets/demo.png',
-      tags: ['App'],
-      techStack: ['Java', 'OpenWeather API', 'Geolocation API', 'Context API'],
+      title: 'InNeed',
+      description: 'A platform created to supply the elderly with assistants (to help with groceries, or any other need they have, hence InNeed). The app was created under a Entrepreneurship Contest',
+      image: 'https://i.imgur.com/X8NZtMa.png',
+      tags: ['Web App'],
+      techStack: ['HTML5', 'CSS3'],
       liveLink: null,
-      githubLink: 'https://github.com/justsubway/weather-app',
-      features: ['Real-time weather', 'Location-based', 'Search Bar']
+      githubLink: null,
+      features: ['Responsive design', 'User authentication', 'Content management', 'API integration']
+    },
+    {
+      title: 'Chat App',
+      description: 'A real-time chat application with user authentication and message persistence. Features include real-time messaging, user profiles, and message history.',
+      image: 'https://i.imgur.com/4SmvSQw.png',
+      tags: ['Web App'],
+      techStack: ['React', 'Firebase', 'Tailwind CSS', 'Firestore', 'Authentication', 'Cloud Functions'],
+      liveLink: 'https://chat-app-dc6f4.web.app',
+      githubLink: 'https://github.com/justsubway/chat-app',
+      features: ['Real-time messaging', 'User authentication', 'Message history']
+    },
+    {
+      title: 'Server Mall',
+      description: 'A comprehensive Minecraft server management plugin built with Java and Spigot API. Features include server shop systems, economy management, and advanced player interactions.',
+      image: 'https://i.imgur.com/DNwAuUt.jpeg',
+      tags: ['Plugin'],
+      techStack: ['Java', 'Spigot API', 'MySQL', 'Economy System'],
+      liveLink: null,
+      githubLink: null,
+      features: ['Server shop system', 'Economy management', 'Player interactions', 'Database integration', 'Custom commands', 'Admin tools']
+    },
+    {
+      title: 'Elo PvP',
+      description: 'An advanced PvP ranking system plugin for Minecraft servers. Implements ELO rating system for competitive player rankings, tournaments, and skill-based matchmaking.',
+      image: 'https://i.imgur.com/c22Fm0G.jpeg',
+      tags: ['Plugin'],
+      techStack: ['Java', 'Spigot API', 'MySQL', 'ELO Algorithm'],
+      liveLink: null,
+      githubLink: null,
+      features: ['ELO rating system', 'Tournament support', 'Skill-based matchmaking', 'Leaderboards', 'Statistics tracking', 'Competitive gameplay']
     },
     {
       title: 'ChatGames',

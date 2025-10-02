@@ -1,3 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ensure Tailwind utilities take precedence */
+@layer utilities {
+  .tw-bg-red-500 {
+    background-color: #ef4444 !important;
+  }
+  .tw-text-white {
+    color: #ffffff !important;
+  }
+  .tw-p-4 {
+    padding: 1rem !important;
+  }
+  .tw-m-4 {
+    margin: 1rem !important;
+  }
+  .tw-rounded-lg {
+    border-radius: 0.5rem !important;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

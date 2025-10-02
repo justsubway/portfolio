@@ -1,7 +1,7 @@
 .contact {
   width: 100%;
   min-height: 100vh;
-  background-color: #000;
+  background-color: #0B1220;
   overflow: hidden;
   position: relative;
 }
@@ -31,12 +31,12 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  color: #fff;
+  color: #E6EEF3;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.1rem;
   margin-top: 1.5rem;
   padding: 0 1rem;
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  text-shadow: 0 0 10px rgba(0, 184, 217, 0.3);
   max-width: 280px;
 }
 
@@ -45,10 +45,10 @@
   z-index: 2;
   margin-top: 400px;
   padding: 0.8rem 1.5rem;
-  background: rgba(255, 0, 0, 0.1);
-  border: 1px solid #ff0000;
+  background: rgba(0, 184, 217, 0.1);
+  border: 1px solid #00B8D9;
   border-radius: 30px;
-  color: #fff;
+  color: #E6EEF3;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   cursor: pointer;
@@ -65,9 +65,9 @@
 }
 
 .github-button:hover {
-  background: rgba(255, 0, 0, 0.2);
+  background: rgba(0, 184, 217, 0.2);
   transform: translateZ(30px);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 184, 217, 0.3);
 }
 
 .github-button .arrow {
@@ -124,7 +124,7 @@
 .section-title {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 2.5rem;
-  color: #fff;
+  color: #E6EEF3;
   text-align: center;
   margin-bottom: 3rem;
   position: relative;
@@ -138,11 +138,11 @@
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: #ff0000;
+  background: linear-gradient(135deg, #00B8D9 0%, #7C5CFF 100%);
 }
 
 .contact-subtitle {
-  color: #888;
+  color: #9AA7B2;
   font-size: 1.2rem;
   max-width: 600px;
   margin: 0 auto;
@@ -172,18 +172,18 @@
 .contact-button.email {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: #E6EEF3;
 }
 
 .contact-button.github {
-  background: rgba(255, 0, 0, 0.1);
-  border: 1px solid #ff0000;
-  color: #ff0000;
+  background: rgba(0, 184, 217, 0.1);
+  border: 1px solid #00B8D9;
+  color: #00B8D9;
 }
 
 .contact-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 184, 217, 0.1);
 }
 
 .contact-button .arrow-icon {
@@ -197,10 +197,11 @@
 .contact-form {
   max-width: 600px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0D1626;
+  border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 15px;
   padding: 2rem;
+  box-shadow: 0 8px 24px rgba(3, 6, 12, 0.6);
 }
 
 .form-group {
@@ -214,7 +215,7 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  color: #fff;
+  color: #E6EEF3;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -223,8 +224,8 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #ff0000;
-  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1);
+  border-color: #00B8D9;
+  box-shadow: 0 0 0 2px rgba(0, 184, 217, 0.1);
 }
 
 .form-group textarea {
@@ -235,10 +236,10 @@
 .submit-button {
   width: 100%;
   padding: 1rem;
-  background: rgba(255, 0, 0, 0.1);
-  border: 1px solid #ff0000;
+  background: #00B8D9;
+  border: 1px solid #00B8D9;
   border-radius: 10px;
-  color: #ff0000;
+  color: #FFFFFF;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.1rem;
   cursor: pointer;
@@ -250,7 +251,7 @@
 }
 
 .submit-button:hover {
-  background: rgba(255, 0, 0, 0.2);
+  background: #00A2C0;
   transform: translateY(-2px);
 }
 
@@ -270,7 +271,7 @@
 }
 
 .form-success {
-  color: #ff0000;
+  color: #00B8D9;
   margin-bottom: 1rem;
   font-size: 0.9rem;
   text-align: center;
@@ -283,13 +284,13 @@
 }
 
 .social-link {
-  color: #888;
+  color: #9AA7B2;
   font-size: 1.5rem;
   transition: all 0.3s ease;
 }
 
 .social-link:hover {
-  color: #ff0000;
+  color: #00B8D9;
   transform: translateY(-3px);
 }
 

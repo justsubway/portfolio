@@ -1,7 +1,7 @@
 .hero {
   width: 100%;
   min-height: 100vh;
-  background: transparent;
+  background: #0B1220;
   position: relative;
   display: flex;
   align-items: center;
@@ -18,7 +18,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, rgba(255, 0, 0, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(0, 184, 217, 0.06) 0%, rgba(124, 92, 255, 0.04) 70%, transparent 100%);
   pointer-events: none;
   z-index: -1;
 }
@@ -40,7 +40,7 @@
 .hero-title {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 3.5rem;
-  color: #fff;
+  color: #E6EEF3;
   margin: 0;
   line-height: 1.2;
   max-width: 800px;
@@ -48,15 +48,15 @@
 
 .hero-subtitle {
   font-size: 1.3rem;
-  color: #888;
+  color: #9AA7B2;
   margin: 0;
   max-width: 600px;
 }
 
 .cta-button {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: #00B8D9;
+  border: 1px solid #00B8D9;
+  color: #FFFFFF;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   border-radius: 30px;
@@ -70,9 +70,9 @@
 }
 
 .cta-button:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: #00A2C0;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 184, 217, 0.3);
 }
 
 .quick-overview {
@@ -84,13 +84,14 @@
 }
 
 .overview-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0D1626;
+  border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 15px;
   padding: 2rem;
   backdrop-filter: blur(10px);
   transform: translateY(0);
   transition: transform 0.3s ease;
+  box-shadow: 0 8px 24px rgba(3, 6, 12, 0.6);
 }
 
 .overview-card:hover {
@@ -98,7 +99,7 @@
 }
 
 .overview-card h3 {
-  color: #fff;
+  color: #E6EEF3;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.3rem;
   margin: 0 0 1rem 0;
@@ -113,14 +114,14 @@
 }
 
 .overview-section h4 {
-  color: #ff0000;
+  color: #00B8D9;
   font-size: 1rem;
   margin: 0 0 0.5rem 0;
   font-family: 'Space Grotesk', sans-serif;
 }
 
 .overview-section p {
-  color: #888;
+  color: #9AA7B2;
   font-size: 0.9rem;
   margin: 0;
   line-height: 1.4;
@@ -136,14 +137,14 @@
 }
 
 .overview-links a {
-  color: #888;
+  color: #9AA7B2;
   font-size: 1.5rem;
   transition: all 0.3s ease;
   position: relative;
 }
 
 .overview-links a:hover {
-  color: #ff0000;
+  color: #00B8D9;
   transform: translateY(-2px);
 }
 

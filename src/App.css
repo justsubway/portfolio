@@ -5,8 +5,8 @@ html {
 .App {
   text-align: center;
   min-height: 100vh;
-  background: #000000;
-  color: #ffffff;
+  background: #0B1220;
+  color: #E6EEF3;
   overflow-x: hidden;
   width: 100%;
   position: relative;
@@ -32,7 +32,7 @@ main {
 .projects-section {
   min-height: 100vh;
   padding: 80px 20px;
-  background: #000000;
+  background: #0B1220;
   width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -42,7 +42,7 @@ main {
   font-family: 'Orbitron', sans-serif;
   font-size: 2.5rem;
   margin-bottom: 40px;
-  background: linear-gradient(45deg, #ffffff, #888888);
+  background: linear-gradient(135deg, #00B8D9 0%, #7C5CFF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   width: 100%;
