@@ -383,68 +383,101 @@
   box-shadow: 0 4px 12px rgba(0, 184, 217, 0.2);
 }
 
-/* Tech Stack */
-.tech-stack-grid {
+/* Tech Stack Cards */
+.tech-stack-cards {
   padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
+}
+
+.tech-category {
+  margin-bottom: 2rem;
+}
+
+.tech-category:last-child {
+  margin-bottom: 0;
+}
+
+.tech-category-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00B8D9;
+  margin-bottom: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.tech-category-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #00B8D9, #7C5CFF);
+  border-radius: 1px;
+}
+
+.tech-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1rem;
 }
 
-.tech-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.tech-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.tech-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  color: #E6EEF3;
-  font-size: 0.9rem;
-}
-
-.tech-level {
-  color: #00B8D9;
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-
-.tech-bar {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.tech-progress {
-  height: 100%;
-  border-radius: 3px;
-  box-shadow: 0 0 10px rgba(0, 184, 217, 0.3);
+.tech-card {
+  background: rgba(15, 23, 36, 0.6);
+  border: 1px solid rgba(0, 184, 217, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 
-.tech-progress::after {
+.tech-card::before {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: shimmer 2s infinite;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00B8D9, #7C5CFF);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
 }
 
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+.tech-card:hover::before {
+  transform: scaleX(1);
+}
+
+.tech-card:hover {
+  border-color: rgba(0, 184, 217, 0.4);
+  background: rgba(15, 23, 36, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 184, 217, 0.15);
+}
+
+.tech-card-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.tech-card-content {
+  text-align: center;
+}
+
+.tech-card-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #E6EEF3;
+  margin-bottom: 0.5rem;
+}
+
+.tech-card-description {
+  font-size: 0.9rem;
+  color: #9AA7B2;
+  line-height: 1.4;
+  margin: 0;
 }
 
 /* Assessments */
@@ -669,8 +702,29 @@
   }
 
   .content-text,
-  .tech-stack-grid,
+  .tech-stack-cards,
   .assessments-grid {
     padding: 1rem;
+  }
+
+  .tech-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .tech-card {
+    padding: 1rem;
+  }
+
+  .tech-card-icon {
+    font-size: 1.5rem;
+  }
+
+  .tech-card-name {
+    font-size: 1rem;
+  }
+
+  .tech-card-description {
+    font-size: 0.85rem;
   }
 }

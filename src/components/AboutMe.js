@@ -9,12 +9,131 @@ const AboutMe = () => {
   const [showAbout, setShowAbout] = useState(false);
 
   const techStack = [
-    { name: 'JavaScript', level: 73, color: '#F7DF1E' },
-    { name: 'TypeScript', level: 18, color: '#007ACC' },
-    { name: 'CSS', level: 5, color: '#1572B6' },
-    { name: 'HTML', level: 3, color: '#E34F26' },
-    { name: 'Java', level: 1, color: '#ED8B00' },
-    { name: 'Python', level: 1, color: '#3776AB' }
+    // Languages & Frameworks
+    { 
+      icon: '☕', 
+      name: 'Java', 
+      description: 'Enterprise-grade backend development',
+      category: 'Languages & Frameworks'
+    },
+    { 
+      icon: '🐍', 
+      name: 'Python', 
+      description: 'Data science and automation',
+      category: 'Languages & Frameworks'
+    },
+    { 
+      icon: '⚡', 
+      name: 'JavaScript', 
+      description: 'The language that powers the web',
+      category: 'Languages & Frameworks'
+    },
+    { 
+      icon: '⚛️', 
+      name: 'React', 
+      description: 'Building dynamic user interfaces',
+      category: 'Languages & Frameworks'
+    },
+    { 
+      icon: '🚀', 
+      name: 'Spring Boot', 
+      description: 'Rapid Java application development',
+      category: 'Languages & Frameworks'
+    },
+    { 
+      icon: '📱', 
+      name: 'React Native', 
+      description: 'Cross-platform mobile development',
+      category: 'Languages & Frameworks'
+    },
+    { 
+      icon: '🟢', 
+      name: 'Node.js', 
+      description: 'JavaScript on the server side',
+      category: 'Languages & Frameworks'
+    },
+    { 
+      icon: '🎨', 
+      name: 'Three.js', 
+      description: '3D graphics in the browser',
+      category: 'Languages & Frameworks'
+    },
+    { 
+      icon: '🔷', 
+      name: 'TypeScript', 
+      description: 'JavaScript but better',
+      category: 'Languages & Frameworks'
+    },
+    
+    // Web & Tools
+    { 
+      icon: '🌐', 
+      name: 'HTML5', 
+      description: 'The foundation of the web',
+      category: 'Web & Tools'
+    },
+    { 
+      icon: '🎨', 
+      name: 'CSS3', 
+      description: 'Making websites beautiful',
+      category: 'Web & Tools'
+    },
+    { 
+      icon: '🔥', 
+      name: 'Firebase', 
+      description: 'Backend-as-a-Service platform',
+      category: 'Web & Tools'
+    },
+    { 
+      icon: '📦', 
+      name: 'Tailwind CSS', 
+      description: 'Utility-first CSS framework',
+      category: 'Web & Tools'
+    },
+    { 
+      icon: '🗄️', 
+      name: 'MySQL', 
+      description: 'Relational database management',
+      category: 'Web & Tools'
+    },
+    { 
+      icon: '🍃', 
+      name: 'MongoDB', 
+      description: 'NoSQL document database',
+      category: 'Web & Tools'
+    },
+    { 
+      icon: '🔧', 
+      name: 'Git', 
+      description: 'Version control made simple',
+      category: 'Web & Tools'
+    },
+    { 
+      icon: '🐙', 
+      name: 'GitHub', 
+      description: 'Code collaboration platform',
+      category: 'Web & Tools'
+    },
+    
+    // Creative Tools
+    { 
+      icon: '🛍️', 
+      name: 'Shopify', 
+      description: 'E-commerce platform development',
+      category: 'Creative Tools'
+    },
+    { 
+      icon: '🎨', 
+      name: 'Photoshop', 
+      description: 'Digital image editing mastery',
+      category: 'Creative Tools'
+    },
+    { 
+      icon: '🎬', 
+      name: 'Premiere Pro', 
+      description: 'Professional video editing',
+      category: 'Creative Tools'
+    }
   ];
 
   const containerVariants = {
@@ -131,33 +250,41 @@ const AboutMe = () => {
               </button>
               <AnimatePresence>
                 {showTechStack && (
-                  <motion.div
-                    className="expandable-content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="tech-stack-grid">
-                      {techStack.map((tech, index) => (
-                        <div key={tech.name} className="tech-item">
-                          <div className="tech-header">
-                            <span className="tech-name">{tech.name}</span>
-                            <span className="tech-level">{tech.level}%</span>
-                          </div>
-                           <div className="tech-bar">
-                             <motion.div 
-                               className="tech-progress"
-                               initial={{ width: 0 }}
-                               animate={{ width: `${tech.level}%` }}
-                               transition={{ duration: 0.8, delay: index * 0.1 }}
-                               style={{ background: tech.color }}
-                             />
+                         <motion.div
+                           className="expandable-content"
+                           initial={{ height: 0, opacity: 0 }}
+                           animate={{ height: "auto", opacity: 1 }}
+                           exit={{ height: 0, opacity: 0 }}
+                           transition={{ duration: 0.3 }}
+                         >
+                           <div className="tech-stack-cards">
+                             {['Languages & Frameworks', 'Web & Tools', 'Creative Tools'].map((category) => (
+                               <div key={category} className="tech-category">
+                                 <h4 className="tech-category-title">{category}</h4>
+                                 <div className="tech-cards-grid">
+                                   {techStack
+                                     .filter(tech => tech.category === category)
+                                     .map((tech, index) => (
+                                       <motion.div
+                                         key={tech.name}
+                                         className="tech-card"
+                                         initial={{ opacity: 0, y: 20 }}
+                                         animate={{ opacity: 1, y: 0 }}
+                                         transition={{ duration: 0.4, delay: index * 0.1 }}
+                                         whileHover={{ scale: 1.05, y: -5 }}
+                                       >
+                                         <div className="tech-card-icon">{tech.icon}</div>
+                                         <div className="tech-card-content">
+                                           <h5 className="tech-card-name">{tech.name}</h5>
+                                           <p className="tech-card-description">{tech.description}</p>
+                                         </div>
+                                       </motion.div>
+                                     ))}
+                                 </div>
+                               </div>
+                             ))}
                            </div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
+                         </motion.div>
                 )}
               </AnimatePresence>
             </div>
