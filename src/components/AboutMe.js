@@ -11,127 +11,127 @@ const AboutMe = () => {
   const techStack = [
     // Languages & Frameworks
     { 
-      icon: '☕', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg', 
       name: 'Java', 
-      description: 'Enterprise-grade backend development',
+      description: 'Enterprise backend',
       category: 'Languages & Frameworks'
     },
     { 
-      icon: '🐍', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', 
       name: 'Python', 
-      description: 'Data science and automation',
+      description: 'Data science & automation',
       category: 'Languages & Frameworks'
     },
     { 
-      icon: '⚡', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', 
       name: 'JavaScript', 
-      description: 'The language that powers the web',
+      description: 'Web development',
       category: 'Languages & Frameworks'
     },
     { 
-      icon: '⚛️', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', 
       name: 'React', 
-      description: 'Building dynamic user interfaces',
+      description: 'UI framework',
       category: 'Languages & Frameworks'
     },
     { 
-      icon: '🚀', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg', 
       name: 'Spring Boot', 
-      description: 'Rapid Java application development',
+      description: 'Java framework',
       category: 'Languages & Frameworks'
     },
     { 
-      icon: '📱', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', 
       name: 'React Native', 
-      description: 'Cross-platform mobile development',
+      description: 'Mobile development',
       category: 'Languages & Frameworks'
     },
     { 
-      icon: '🟢', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', 
       name: 'Node.js', 
-      description: 'JavaScript on the server side',
+      description: 'Server-side JS',
       category: 'Languages & Frameworks'
     },
     { 
-      icon: '🎨', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg', 
       name: 'Three.js', 
-      description: '3D graphics in the browser',
+      description: '3D graphics',
       category: 'Languages & Frameworks'
     },
     { 
-      icon: '🔷', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', 
       name: 'TypeScript', 
-      description: 'JavaScript but better',
+      description: 'JS with types',
       category: 'Languages & Frameworks'
     },
     
     // Web & Tools
     { 
-      icon: '🌐', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', 
       name: 'HTML5', 
-      description: 'The foundation of the web',
+      description: 'Web markup',
       category: 'Web & Tools'
     },
     { 
-      icon: '🎨', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', 
       name: 'CSS3', 
-      description: 'Making websites beautiful',
+      description: 'Web styling',
       category: 'Web & Tools'
     },
     { 
-      icon: '🔥', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg', 
       name: 'Firebase', 
-      description: 'Backend-as-a-Service platform',
+      description: 'Backend platform',
       category: 'Web & Tools'
     },
     { 
-      icon: '📦', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg', 
       name: 'Tailwind CSS', 
-      description: 'Utility-first CSS framework',
+      description: 'Utility CSS',
       category: 'Web & Tools'
     },
     { 
-      icon: '🗄️', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg', 
       name: 'MySQL', 
-      description: 'Relational database management',
+      description: 'SQL database',
       category: 'Web & Tools'
     },
     { 
-      icon: '🍃', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', 
       name: 'MongoDB', 
-      description: 'NoSQL document database',
+      description: 'NoSQL database',
       category: 'Web & Tools'
     },
     { 
-      icon: '🔧', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', 
       name: 'Git', 
-      description: 'Version control made simple',
+      description: 'Version control',
       category: 'Web & Tools'
     },
     { 
-      icon: '🐙', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', 
       name: 'GitHub', 
-      description: 'Code collaboration platform',
+      description: 'Code platform',
       category: 'Web & Tools'
     },
     
     // Creative Tools
     { 
-      icon: '🛍️', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/shopify/shopify-original.svg', 
       name: 'Shopify', 
-      description: 'E-commerce platform development',
+      description: 'E-commerce platform',
       category: 'Creative Tools'
     },
     { 
-      icon: '🎨', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg', 
       name: 'Photoshop', 
-      description: 'Digital image editing mastery',
+      description: 'Image editing',
       category: 'Creative Tools'
     },
     { 
-      icon: '🎬', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg', 
       name: 'Premiere Pro', 
-      description: 'Professional video editing',
+      description: 'Video editing',
       category: 'Creative Tools'
     }
   ];
@@ -273,7 +273,9 @@ const AboutMe = () => {
                                          transition={{ duration: 0.4, delay: index * 0.1 }}
                                          whileHover={{ scale: 1.05, y: -5 }}
                                        >
-                                         <div className="tech-card-icon">{tech.icon}</div>
+                                         <div className="tech-card-icon">
+                                           <img src={tech.icon} alt={tech.name} />
+                                         </div>
                                          <div className="tech-card-content">
                                            <h5 className="tech-card-name">{tech.name}</h5>
                                            <p className="tech-card-description">{tech.description}</p>
