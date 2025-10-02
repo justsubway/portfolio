@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaEnvelope, FaArrowRight } from 'react-icons/fa';
+import { FaGithub, FaEnvelope, FaArrowRight, FaLinkedin, FaDownload } from 'react-icons/fa';
 import './Hero.css';
 
 const overviewData = [
@@ -90,6 +90,23 @@ const Hero = ({ onScrollToProjects }) => {
                 aria-label="Email"
               >
                 <FaEnvelope />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="LinkedIn"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href="/portfolio/George_Arampatzis.pdf"
+                download="George_Arampatzis_Resume.pdf"
+                title="Download Resume"
+                aria-label="Download Resume"
+              >
+                <FaDownload />
               </a>
             </div>
           </div>
