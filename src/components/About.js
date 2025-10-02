@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaEnvelope, FaLinkedin, FaDownload } from 'react-icons/fa';
 import './About.css';
 
 const About = () => {
@@ -159,9 +159,17 @@ const About = () => {
                   <FaGithub />
                   <span>GitHub</span>
                 </a>
+                <a href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331" target="_blank" rel="noopener noreferrer" className="contact-link" title="LinkedIn">
+                  <FaLinkedin />
+                  <span>LinkedIn</span>
+                </a>
                 <a href="mailto:ritualhere2@gmail.com" className="contact-link" title="Email">
                   <FaEnvelope />
                   <span>Email</span>
+                </a>
+                <a href="/portfolio/George_Arampatzis.pdf" download="George_Arampatzis_Resume.pdf" className="contact-link" title="Download Resume">
+                  <FaDownload />
+                  <span>Resume</span>
                 </a>
               </div>
             </motion.div>
