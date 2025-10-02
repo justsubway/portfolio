@@ -1,13 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { useLenisScroll } from '../hooks/useLenisScroll';
 import './Projects.css';
 
 const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [previousProjectIndex, setPreviousProjectIndex] = useState(null);
+  
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const previewX = useSpring(mouseX, { 
+    stiffness: 200, 
+    damping: 25, 
+    mass: 0.8,
+    restDelta: 0.001 
+  });
+  const previewY = useSpring(mouseY, { 
+    stiffness: 200, 
+    damping: 25, 
+    mass: 0.8,
+    restDelta: 0.001 
+  });
+  
+  const previewRef = useRef(null);
 
   const projects = [
     {
@@ -18,9 +37,9 @@ const Projects = () => {
     },
     {
       title: 'Georythm',
-      image: 'https://camo.githubusercontent.com/18ea1ccb9cb4eab34da9099fbaeff0139b7f4f094ac12bcff78f94afd1f169c9/68747470733a2f2f692e696d6775722e636f6d2f54577361494e4a2e706e67',
-      link: 'https://justsubway.github.io/GeoRythm/',
-      description: 'Music visualization platform'
+      image: 'https://i.imgur.com/9jHtQDp.png',
+      link: 'https://github.com/justsubway/georythm',
+      description: 'Music visualization app'
     },
     {
       title: 'Chomp',
@@ -36,15 +55,51 @@ const Projects = () => {
     },
     {
       title: 'Thewria.com',
-      image: 'https://camo.githubusercontent.com/d80e3286e94d36874f8d51a97dd1208d152b8184154b8e4b1cdec3867c526603/68747470733a2f2f692e696d6775722e636f6d2f6f3178644b51522e706e67',
-      link: 'https://thewria.com',
-      description: 'Study platform for Greek students'
+      image: 'https://i.imgur.com/9jHtQDp.png',
+      link: 'https://github.com/justsubway/thewria',
+      description: 'Educational platform'
     },
     {
       title: 'Forthelocals',
-      image: 'https://i.imgur.com/VXHDsiP.png',
-      link: 'https://forthelocalsclth.com',
-      description: 'E-commerce platform'
+      image: 'https://i.imgur.com/9jHtQDp.png',
+      link: 'https://github.com/justsubway/forthelocals',
+      description: 'Local business platform'
+    },
+    {
+      title: 'Weather App',
+      image: 'https://i.imgur.com/9jHtQDp.png',
+      link: 'https://github.com/justsubway/weather-app',
+      description: 'Weather forecasting app'
+    },
+    {
+      title: 'Hub Greece',
+      image: 'https://i.imgur.com/9jHtQDp.png',
+      link: 'https://github.com/justsubway/hub-greece',
+      description: 'Greek tech community hub'
+    },
+    {
+      title: 'InNeed',
+      image: 'https://i.imgur.com/9jHtQDp.png',
+      link: 'https://github.com/justsubway/inneed',
+      description: 'Community help platform'
+    },
+    {
+      title: 'Chat App',
+      image: 'https://i.imgur.com/9jHtQDp.png',
+      link: 'https://github.com/justsubway/chat-app',
+      description: 'Real-time chat application'
+    },
+    {
+      title: 'ServerMall',
+      image: 'https://i.imgur.com/DNwAuUt.jpeg',
+      link: 'https://github.com/justsubway/servermall',
+      description: 'Minecraft server marketplace'
+    },
+    {
+      title: 'EloPvP',
+      image: 'https://i.imgur.com/c22Fm0G.jpeg',
+      link: 'https://github.com/justsubway/elopvp',
+      description: 'Minecraft PvP ranking system'
     }
   ];
 
@@ -54,17 +109,55 @@ const Projects = () => {
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      // Account for Lenis scroll offset for more accurate positioning
-      const scrollOffset = scrollY.get();
-      setMousePosition({ 
-        x: e.clientX, 
-        y: e.clientY + scrollOffset 
-      });
+      // Use clientX/Y directly - Lenis handles scroll internally
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [scrollY]);
+  }, [mouseX, mouseY]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleProjectHover = (project, index) => {
+    if (!isMobile) {
+      const currentIndex = getCurrentProjectIndex();
+      setPreviousProjectIndex(currentIndex);
+      setHoveredProject(project);
+      setIsHovering(true);
+    }
+  };
+
+  const handleProjectLeave = () => {
+    if (!isMobile) {
+      setIsHovering(false);
+      // Delay clearing hoveredProject to allow smooth transition
+      setTimeout(() => {
+        setHoveredProject(null);
+        setPreviousProjectIndex(null);
+      }, 200);
+    }
+  };
+
+  const getCurrentProjectIndex = () => {
+    if (!hoveredProject) return -1;
+    return projects.findIndex(p => p.title === hoveredProject.title);
+  };
+
+  const getSlideDirection = () => {
+    const currentIndex = getCurrentProjectIndex();
+    if (previousProjectIndex === null || currentIndex === -1 || previousProjectIndex === -1) return 0;
+    return currentIndex > previousProjectIndex ? 1 : -1;
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -92,94 +185,108 @@ const Projects = () => {
   return (
     <div className="projects-section" id="projects">
       <div className="projects-container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-        >
-          Projects
-        </motion.h2>
-
-        <motion.div 
-          className="projects-list"
+        <motion.div
+          className="projects-content"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ amount: 0.3 }}
         >
-          {displayedProjects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              className="project-item"
-              variants={itemVariants}
-              onMouseEnter={() => setHoveredProject(project)}
-              onMouseLeave={() => setHoveredProject(null)}
-            >
-              <a 
-                href={project.link} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="project-link"
+          <motion.h2 className="projects-title" variants={itemVariants}>
+            Featured Projects
+          </motion.h2>
+          
+          <motion.div className="projects-list" variants={itemVariants}>
+            {displayedProjects.map((project, index) => (
+              <motion.h3
+                key={project.title}
+                className="project-title-item"
+                onMouseEnter={() => handleProjectHover(project, index)}
+                onMouseLeave={handleProjectLeave}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
               >
-                <span className="project-title">{project.title}</span>
-                <span className="project-description">{project.description}</span>
-              </a>
-            </motion.div>
-          ))}
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-link"
+                >
+                  {project.title}
+                  <FaExternalLinkAlt className="external-link-icon" />
+                </a>
+              </motion.h3>
+            ))}
+          </motion.div>
+
+          {!showAll && (
+            <motion.button
+              className="show-all-button"
+              onClick={() => setShowAll(true)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              variants={itemVariants}
+            >
+              Show All Projects
+            </motion.button>
+          )}
         </motion.div>
 
-        {!showAll && (
-          <motion.button
-            className="show-all-button"
-            onClick={() => setShowAll(true)}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Show All Projects
-          </motion.button>
-        )}
-
+        {/* Persistent Preview Container */}
         <AnimatePresence>
-          {hoveredProject && (
+          {isHovering && hoveredProject && !isMobile && (
             <motion.div
-              className="project-preview"
+              ref={previewRef}
+              className="project-preview-container"
+              style={{
+                x: previewX,
+                y: previewY,
+              }}
               initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ 
-                opacity: 1, 
-                scale: 1,
-                x: mousePosition.x - 200,
-                y: mousePosition.y - 150
-              }}
+              animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ 
-                duration: 0.3,
-                ease: "easeOut"
-              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <img 
-                src={hoveredProject.image} 
-                alt={hoveredProject.title}
-                className="preview-image"
-              />
-              <div className="preview-overlay">
-                <h3 className="preview-title">{hoveredProject.title}</h3>
-                <p className="preview-description">{hoveredProject.description}</p>
-                <div className="preview-links">
-                  <a 
-                    href={hoveredProject.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="preview-link"
-                  >
-                    <FaExternalLinkAlt />
-                  </a>
-                </div>
+              <div className="project-preview-content">
+                <motion.div
+                  className="project-preview-image-container"
+                  key={hoveredProject.title}
+                  initial={{ 
+                    y: getSlideDirection() * 100,
+                    opacity: 0 
+                  }}
+                  animate={{ 
+                    y: 0,
+                    opacity: 1 
+                  }}
+                  exit={{ 
+                    y: getSlideDirection() * -100,
+                    opacity: 0 
+                  }}
+                  transition={{ 
+                    duration: 0.4,
+                    ease: "easeOut"
+                  }}
+                  onAnimationComplete={() => {
+                    setPreviousProjectIndex(getCurrentProjectIndex());
+                  }}
+                >
+                  <img
+                    src={hoveredProject.image}
+                    alt={hoveredProject.title}
+                    className="project-preview-image"
+                  />
+                </motion.div>
+                
+                <motion.div
+                  className="project-preview-info"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.3 }}
+                >
+                  <h4 className="project-preview-title">{hoveredProject.title}</h4>
+                  <p className="project-preview-description">{hoveredProject.description}</p>
+                </motion.div>
               </div>
             </motion.div>
           )}
