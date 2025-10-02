@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import { useLenisScroll } from '../hooks/useLenisScroll';
 import './Projects.css';
 
 const Projects = () => {
@@ -105,7 +104,6 @@ const Projects = () => {
 
   const displayedProjects = showAll ? projects : projects.slice(0, 6);
 
-  // const { scrollY } = useLenisScroll(); // Available for future scroll-based animations
 
   useEffect(() => {
     const handleMouseMove = (e) => {
