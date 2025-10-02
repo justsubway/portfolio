@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Intro.css';
 
@@ -31,15 +31,29 @@ const Intro = () => {
   const textY = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [1, 1, 0.8, 0]);
   
-  // Floating elements
-  const floatingElements = Array.from({ length: 6 }, (_, i) => ({
-    id: i,
-    x: useTransform(scrollYProgress, [0, 1], [0, (i % 2 === 0 ? 1 : -1) * 100]),
-    y: useTransform(scrollYProgress, [0, 1], [0, (i % 3 === 0 ? 1 : -1) * 80]),
-    rotate: useTransform(scrollYProgress, [0, 1], [0, 360]),
-    scale: useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.5]),
-    opacity: useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.6, 0.8, 0.4, 0])
-  }));
+  // Floating elements transforms
+  const floatingX1 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const floatingY1 = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const floatingX2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const floatingY2 = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const floatingX3 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const floatingY3 = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const floatingX4 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const floatingY4 = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const floatingX5 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const floatingY5 = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const floatingX6 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const floatingY6 = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  
+  const floatingRotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
+  const floatingScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.5]);
+  const floatingOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.6, 0.8, 0.4, 0]);
+  
+  // Grid transforms
+  const gridRotateX = useTransform(scrollYProgress, [0, 1], [0, 10]);
+  const gridRotateY = useTransform(scrollYProgress, [0, 1], [0, -5]);
+  const gridCellOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.3, 0.05]);
+  const gridCellScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 0.8]);
 
   return (
     <div className="intro-section" id="intro" ref={containerRef}>
@@ -117,26 +131,73 @@ const Intro = () => {
         </motion.div>
 
         {/* Floating Elements */}
-        {floatingElements.map((element) => (
-          <motion.div
-            key={element.id}
-            className={`floating-element element-${element.id + 1}`}
-            style={{
-              x: element.x,
-              y: element.y,
-              rotate: element.rotate,
-              scale: element.scale,
-              opacity: element.opacity
-            }}
-          />
-        ))}
+        <motion.div
+          className="floating-element element-1"
+          style={{
+            x: floatingX1,
+            y: floatingY1,
+            rotate: floatingRotate,
+            scale: floatingScale,
+            opacity: floatingOpacity
+          }}
+        />
+        <motion.div
+          className="floating-element element-2"
+          style={{
+            x: floatingX2,
+            y: floatingY2,
+            rotate: floatingRotate,
+            scale: floatingScale,
+            opacity: floatingOpacity
+          }}
+        />
+        <motion.div
+          className="floating-element element-3"
+          style={{
+            x: floatingX3,
+            y: floatingY3,
+            rotate: floatingRotate,
+            scale: floatingScale,
+            opacity: floatingOpacity
+          }}
+        />
+        <motion.div
+          className="floating-element element-4"
+          style={{
+            x: floatingX4,
+            y: floatingY4,
+            rotate: floatingRotate,
+            scale: floatingScale,
+            opacity: floatingOpacity
+          }}
+        />
+        <motion.div
+          className="floating-element element-5"
+          style={{
+            x: floatingX5,
+            y: floatingY5,
+            rotate: floatingRotate,
+            scale: floatingScale,
+            opacity: floatingOpacity
+          }}
+        />
+        <motion.div
+          className="floating-element element-6"
+          style={{
+            x: floatingX6,
+            y: floatingY6,
+            rotate: floatingRotate,
+            scale: floatingScale,
+            opacity: floatingOpacity
+          }}
+        />
 
         {/* 3D Grid */}
         <motion.div 
           className="intro-grid"
           style={{
-            rotateX: useTransform(scrollYProgress, [0, 1], [0, 10]),
-            rotateY: useTransform(scrollYProgress, [0, 1], [0, -5])
+            rotateX: gridRotateX,
+            rotateY: gridRotateY
           }}
         >
           {Array.from({ length: 9 }, (_, i) => (
@@ -144,8 +205,8 @@ const Intro = () => {
               key={i}
               className="grid-cell"
               style={{
-                opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.3, 0.05]),
-                scale: useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 0.8])
+                opacity: gridCellOpacity,
+                scale: gridCellScale
               }}
             />
           ))}
