@@ -123,12 +123,16 @@ const Projects = () => {
 
   const handleProjectLeave = () => {
     if (!isMobile) {
-      setIsHovering(false);
-      // Delay clearing hoveredProject to allow smooth transition
+      // Use a longer delay to allow for smooth transitions between projects
       setTimeout(() => {
-        setHoveredProject(null);
-        setPreviousProjectIndex(null);
-      }, 200);
+        // Only clear if we're not hovering over any project
+        const hoveredElement = document.querySelector('.project-title-item:hover');
+        if (!hoveredElement) {
+          setIsHovering(false);
+          setHoveredProject(null);
+          setPreviousProjectIndex(null);
+        }
+      }, 100);
     }
   };
 
@@ -180,7 +184,18 @@ const Projects = () => {
             Featured Projects
           </motion.h2>
           
-          <motion.div className="projects-list" variants={itemVariants}>
+          <motion.div 
+            className="projects-list" 
+            variants={itemVariants}
+            onMouseLeave={() => {
+              // Only clear when leaving the entire projects list
+              setTimeout(() => {
+                setIsHovering(false);
+                setHoveredProject(null);
+                setPreviousProjectIndex(null);
+              }, 200);
+            }}
+          >
             {displayedProjects.map((project, index) => (
               <motion.h3
                 key={project.title}
