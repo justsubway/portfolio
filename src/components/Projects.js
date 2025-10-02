@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { useLenisScroll } from '../hooks/useLenisScroll';
 import './Projects.css';
 
 const Projects = () => {
@@ -49,14 +50,21 @@ const Projects = () => {
 
   const displayedProjects = showAll ? projects : projects.slice(0, 6);
 
+  const { scrollY } = useLenisScroll();
+
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      // Account for Lenis scroll offset for more accurate positioning
+      const scrollOffset = scrollY.get();
+      setMousePosition({ 
+        x: e.clientX, 
+        y: e.clientY + scrollOffset 
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [scrollY]);
 
   const containerVariants = {
     hidden: { opacity: 0 },

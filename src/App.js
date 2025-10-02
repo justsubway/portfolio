@@ -1,4 +1,5 @@
 import React from 'react';
+import LenisProvider from './components/LenisProvider';
 import Intro from './components/Intro';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
@@ -10,31 +11,21 @@ function App() {
   const smoothScrollTo = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      const currentPosition = window.pageYOffset;
-      const targetPosition = section.offsetTop;
-      const distance = targetPosition - currentPosition;
-      const duration = 800;
-      const startTime = performance.now();
-
-      const easeInOutCubic = (t) => {
-        return t < 0.5
-          ? 4 * t * t * t
-          : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      };
-
-      const animateScroll = (currentTime) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = easeInOutCubic(progress);
-        
-        window.scrollTo(0, currentPosition + distance * easedProgress);
-
-        if (progress < 1) {
-          requestAnimationFrame(animateScroll);
-        }
-      };
-
-      requestAnimationFrame(animateScroll);
+      // Use Lenis for smooth scrolling
+      const lenis = window.lenis;
+      if (lenis) {
+        lenis.scrollTo(section, {
+          offset: -80, // Account for navbar height
+          duration: 1.5, // Slower, more buttery scroll
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing
+        });
+      } else {
+        // Fallback to native smooth scroll
+        section.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
   };
 
@@ -43,13 +34,15 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Navbar onNavigate={handleNavigate} />
-      <Intro />
-      <Projects />
-      <AboutMe />
-      <Contact />
-    </div>
+    <LenisProvider>
+      <div className="App">
+        <Navbar onNavigate={handleNavigate} />
+        <Intro />
+        <Projects />
+        <AboutMe />
+        <Contact />
+      </div>
+    </LenisProvider>
   );
 }
 

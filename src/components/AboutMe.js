@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaLinkedin, FaDownload, FaChevronDown, FaCode, FaRocket, FaBrain, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaLinkedin, FaDownload, FaChevronDown } from 'react-icons/fa';
 import './AboutMe.css';
 
 const AboutMe = () => {
@@ -15,13 +15,6 @@ const AboutMe = () => {
     { name: 'HTML', level: 3, color: '#E34F26' },
     { name: 'Java', level: 1, color: '#ED8B00' },
     { name: 'Python', level: 1, color: '#3776AB' }
-  ];
-
-  const quickStats = [
-    { icon: FaCode, label: 'Repositories', value: '20+', color: '#00B8D9' },
-    { icon: FaRocket, label: 'Experience', value: '5+ years', color: '#7C5CFF' },
-    { icon: FaBrain, label: 'Logic Score', value: '95%', color: '#00B8D9' },
-    { icon: FaHeart, label: 'Community', value: '150k+', color: '#7C5CFF' }
   ];
 
   const containerVariants = {
@@ -57,48 +50,6 @@ const AboutMe = () => {
           whileInView="visible"
           viewport={{ amount: 0.3 }}
         >
-          {/* Hero Section - Compact Layout */}
-          <motion.div className="hero-section-compact" variants={itemVariants}>
-            <div className="hero-grid">
-              {/* Left Side - Profile */}
-              <div className="profile-section-compact">
-                <div className="profile-image-wrapper">
-                  <img src="/portfolio/professional_pfp.jpg" alt="George Arampatzis" className="profile-image" />
-                  <div className="profile-glow"></div>
-                </div>
-                <div className="profile-info">
-                  <h1 className="hero-title">George Arampatzis</h1>
-                  <p className="hero-subtitle">Computer Science Student & Developer</p>
-                  <div className="location-info">
-                    <FaMapMarkerAlt className="location-icon" />
-                    <span>Athens, Greece</span>
-                  </div>
-                  <div className="status-indicator">
-                    <span className="status-dot"></span>
-                    <span className="status-text">Available for opportunities</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Side - Quick Stats */}
-              <div className="stats-section-compact">
-                {quickStats.map((stat, index) => (
-                  <motion.div 
-                    key={stat.label}
-                    className="stat-card-compact"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <stat.icon className="stat-icon" style={{ color: stat.color }} />
-                    <div className="stat-content">
-                      <span className="stat-value">{stat.value}</span>
-                      <span className="stat-label">{stat.label}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
 
           {/* Expandable Sections */}
           <motion.div className="expandable-sections" variants={itemVariants}>
