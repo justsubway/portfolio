@@ -66,13 +66,13 @@ export default function GreetingOverlay({ onDone }) {
       transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
       <div className="greeting-center">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <motion.span
             key={greetings[index]}
             className="greeting-text"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: 6, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -6, filter: 'blur(6px)' }}
             transition={{ duration: durationMs / 1000, ease: 'easeInOut' }}
           >
             {greetings[index]}
