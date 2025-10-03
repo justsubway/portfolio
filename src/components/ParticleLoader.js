@@ -43,7 +43,7 @@ const CONFIG = {
   WAVE_FREQUENCY: 2
 };
 
-function InteractiveParticles({ mousePosition: externalMousePosition }) {
+function InteractiveParticles() {
   const points = useRef();
   const group = useRef(); // Add ref for the group
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -56,7 +56,7 @@ function InteractiveParticles({ mousePosition: externalMousePosition }) {
   const [isMobile, setIsMobile] = useState(false);
   const [isInteracting, setIsInteracting] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const rectRef = useRef({ left: 0, right: 0, top: 0, bottom: 0 });
 
   // Load the model with error handling
   const { scene } = useGLTF(CONFIG.CUSTOM_MODEL_PATH, undefined, 
@@ -224,35 +224,15 @@ function InteractiveParticles({ mousePosition: externalMousePosition }) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Use external mouse position if provided (for mobile touch)
-  useEffect(() => {
-    if (externalMousePosition) {
-      setMousePosition(externalMousePosition);
-    }
-  }, [externalMousePosition]);
-
-  // Handle touch events for mobile interaction
+  // Handle touch events for mobile interaction (inside canvas)
   useEffect(() => {
     if (!isMobile) return;
 
     const handleTouchStart = (event) => {
-      console.log('Touch start detected');
       const touch = event.touches[0];
-      const rect = event.target.getBoundingClientRect();
-      const x = (touch.clientX - rect.left) / rect.width;
-      const y = (touch.clientY - rect.top) / rect.height;
-      
-      console.log('Touch position:', { x, y, clientX: touch.clientX, clientY: touch.clientY });
-      
-      // Check if touch is within the octocat area (center 50% of screen)
-      const centerX = 0.5;
-      const centerY = 0.5;
-      const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
-      
-      console.log('Distance from center:', distance);
-      
-      if (distance < 0.4) { // Within 40% radius of center
-        console.log('Starting interaction');
+      const { left, right, top, bottom } = rectRef.current;
+      // Only start interaction if touch falls within projected octocat bounds
+      if (touch.clientX >= left && touch.clientX <= right && touch.clientY >= top && touch.clientY <= bottom) {
         setIsInteracting(true);
         setTouchStart({ x: touch.clientX, y: touch.clientY });
         event.preventDefault();
@@ -264,10 +244,6 @@ function InteractiveParticles({ mousePosition: externalMousePosition }) {
       if (!isInteracting || !touchStart) return;
       
       const touch = event.touches[0];
-      const deltaX = touch.clientX - touchStart.x;
-      const deltaY = touch.clientY - touchStart.y;
-      
-      console.log('Touch move:', { deltaX, deltaY });
       
       // Always prevent scroll when interacting
       event.preventDefault();
@@ -282,12 +258,10 @@ function InteractiveParticles({ mousePosition: externalMousePosition }) {
       const webglX = x * 2 - 1;
       const webglY = -(y * 2 - 1);
       
-      console.log('Setting mouse position:', { webglX, webglY });
       setMousePosition({ x: webglX, y: webglY });
     };
 
     const handleTouchEnd = (event) => {
-      console.log('Touch end');
       if (isInteracting) {
         setIsInteracting(false);
         setTouchStart(null);
@@ -494,6 +468,47 @@ function InteractiveParticles({ mousePosition: externalMousePosition }) {
       points.current.geometry.attributes.position.needsUpdate = true;
       points.current.geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     }
+
+    // Update projected screen-space bounding box for precise touch detection
+    if (points.current && group.current) {
+      const geometry = points.current.geometry;
+      geometry.computeBoundingBox();
+      const box = geometry.boundingBox.clone();
+      // Transform to world space
+      box.applyMatrix4(group.current.matrixWorld);
+
+      // Project 8 corners to screen space
+      const corners = [
+        new THREE.Vector3(box.min.x, box.min.y, box.min.z),
+        new THREE.Vector3(box.min.x, box.min.y, box.max.z),
+        new THREE.Vector3(box.min.x, box.max.y, box.min.z),
+        new THREE.Vector3(box.min.x, box.max.y, box.max.z),
+        new THREE.Vector3(box.max.x, box.min.y, box.min.z),
+        new THREE.Vector3(box.max.x, box.min.y, box.max.z),
+        new THREE.Vector3(box.max.x, box.max.y, box.min.z),
+        new THREE.Vector3(box.max.x, box.max.y, box.max.z)
+      ];
+
+      let minSX = Infinity, minSY = Infinity, maxSX = -Infinity, maxSY = -Infinity;
+      corners.forEach((v) => {
+        const projected = v.clone().project(state.camera);
+        const sx = (projected.x + 1) / 2 * window.innerWidth;
+        const sy = (1 - (projected.y + 1) / 2) * window.innerHeight;
+        minSX = Math.min(minSX, sx);
+        minSY = Math.min(minSY, sy);
+        maxSX = Math.max(maxSX, sx);
+        maxSY = Math.max(maxSY, sy);
+      });
+
+      // Add small padding for finger accuracy
+      const padding = 12;
+      rectRef.current = {
+        left: minSX - padding,
+        right: maxSX + padding,
+        top: minSY - padding,
+        bottom: maxSY + padding
+      };
+    }
   });
 
   return (
@@ -525,10 +540,6 @@ function InteractiveParticles({ mousePosition: externalMousePosition }) {
 
 export default function ParticleLoader() {
   const [isMobile, setIsMobile] = useState(false);
-  const [showMobileHint, setShowMobileHint] = useState(false);
-  const [isInteracting, setIsInteracting] = useState(false);
-  const [touchStart, setTouchStart] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const checkMobile = () => {
@@ -546,79 +557,6 @@ export default function ParticleLoader() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Fallback touch handling on the container
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const handleTouchStart = (event) => {
-      console.log('Container touch start');
-      const touch = event.touches[0];
-      const rect = event.currentTarget.getBoundingClientRect();
-      const x = (touch.clientX - rect.left) / rect.width;
-      const y = (touch.clientY - rect.top) / rect.height;
-      
-      console.log('Container touch position:', { x, y });
-      
-      // Check if touch is within the octocat area (center 50% of screen)
-      const centerX = 0.5;
-      const centerY = 0.5;
-      const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
-      
-      if (distance < 0.4) {
-        console.log('Starting container interaction');
-        setIsInteracting(true);
-        setTouchStart({ x: touch.clientX, y: touch.clientY });
-        event.preventDefault();
-        event.stopPropagation();
-      }
-    };
-
-    const handleTouchMove = (event) => {
-      if (!isInteracting || !touchStart) return;
-      
-      const touch = event.touches[0];
-      
-      event.preventDefault();
-      event.stopPropagation();
-      
-      // Convert touch position to normalized coordinates
-      const rect = event.currentTarget.getBoundingClientRect();
-      const x = (touch.clientX - rect.left) / rect.width;
-      const y = (touch.clientY - rect.top) / rect.height;
-      
-      // Convert to WebGL coordinates
-      const webglX = x * 2 - 1;
-      const webglY = -(y * 2 - 1);
-      
-      console.log('Container setting mouse position:', { webglX, webglY });
-      setMousePosition({ x: webglX, y: webglY });
-    };
-
-    const handleTouchEnd = (event) => {
-      console.log('Container touch end');
-      if (isInteracting) {
-        setIsInteracting(false);
-        setTouchStart(null);
-      }
-    };
-
-    const container = document.querySelector('.particle-container');
-    if (container) {
-      console.log('Adding container touch listeners');
-      container.addEventListener('touchstart', handleTouchStart, { passive: false });
-      container.addEventListener('touchmove', handleTouchMove, { passive: false });
-      container.addEventListener('touchend', handleTouchEnd, { passive: false });
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener('touchstart', handleTouchStart);
-        container.removeEventListener('touchmove', handleTouchMove);
-        container.removeEventListener('touchend', handleTouchEnd);
-      }
-    };
-  }, [isMobile, isInteracting, touchStart]);
-
   return (
     <div 
       className="particle-container"
@@ -628,43 +566,12 @@ export default function ParticleLoader() {
         position: 'absolute',
         top: 0,
         left: 0,
-        zIndex: 0,
-        touchAction: isMobile ? 'none' : 'auto'
+        zIndex: 0
       }}
     >
       <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
-        <InteractiveParticles mousePosition={mousePosition} />
+        <InteractiveParticles />
       </Canvas>
-      
-      {/* Mobile interaction hint */}
-      {isMobile && showMobileHint && (
-        <div style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          background: 'rgba(0, 184, 217, 0.9)',
-          color: '#E6EEF3',
-          padding: '12px 20px',
-          borderRadius: '25px',
-          fontSize: '14px',
-          fontWeight: '500',
-          zIndex: 1000,
-          animation: 'pulse 2s infinite',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          boxShadow: '0 8px 24px rgba(0, 184, 217, 0.3)'
-        }}>
-          👆 Swipe to interact with the octocat
-        </div>
-      )}
-      
-      <style jsx>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
-          50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
-        }
-      `}</style>
     </div>
   );
 } 
