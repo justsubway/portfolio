@@ -43,7 +43,7 @@ const CONFIG = {
   WAVE_FREQUENCY: 2
 };
 
-function InteractiveParticles() {
+function InteractiveParticles({ mousePosition: externalMousePosition }) {
   const points = useRef();
   const group = useRef(); // Add ref for the group
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -224,25 +224,39 @@ function InteractiveParticles() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Use external mouse position if provided (for mobile touch)
+  useEffect(() => {
+    if (externalMousePosition) {
+      setMousePosition(externalMousePosition);
+    }
+  }, [externalMousePosition]);
+
   // Handle touch events for mobile interaction
   useEffect(() => {
     if (!isMobile) return;
 
     const handleTouchStart = (event) => {
+      console.log('Touch start detected');
       const touch = event.touches[0];
       const rect = event.target.getBoundingClientRect();
       const x = (touch.clientX - rect.left) / rect.width;
       const y = (touch.clientY - rect.top) / rect.height;
       
-      // Check if touch is within the octocat area (center 40% of screen)
+      console.log('Touch position:', { x, y, clientX: touch.clientX, clientY: touch.clientY });
+      
+      // Check if touch is within the octocat area (center 50% of screen)
       const centerX = 0.5;
       const centerY = 0.5;
       const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
       
-      if (distance < 0.3) { // Within 30% radius of center
+      console.log('Distance from center:', distance);
+      
+      if (distance < 0.4) { // Within 40% radius of center
+        console.log('Starting interaction');
         setIsInteracting(true);
         setTouchStart({ x: touch.clientX, y: touch.clientY });
         event.preventDefault();
+        event.stopPropagation();
       }
     };
 
@@ -253,44 +267,61 @@ function InteractiveParticles() {
       const deltaX = touch.clientX - touchStart.x;
       const deltaY = touch.clientY - touchStart.y;
       
-      // If movement is significant, prevent scroll
-      if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
-        event.preventDefault();
-        setIsScrolling(false);
-        
-        // Convert touch position to normalized coordinates
-        const rect = event.target.getBoundingClientRect();
-        const x = (touch.clientX - rect.left) / rect.width;
-        const y = (touch.clientY - rect.top) / rect.height;
-        
-        // Convert to WebGL coordinates
-        const webglX = x * 2 - 1;
-        const webglY = -(y * 2 - 1);
-        
-        setMousePosition({ x: webglX, y: webglY });
-      }
+      console.log('Touch move:', { deltaX, deltaY });
+      
+      // Always prevent scroll when interacting
+      event.preventDefault();
+      event.stopPropagation();
+      
+      // Convert touch position to normalized coordinates
+      const rect = event.target.getBoundingClientRect();
+      const x = (touch.clientX - rect.left) / rect.width;
+      const y = (touch.clientY - rect.top) / rect.height;
+      
+      // Convert to WebGL coordinates
+      const webglX = x * 2 - 1;
+      const webglY = -(y * 2 - 1);
+      
+      console.log('Setting mouse position:', { webglX, webglY });
+      setMousePosition({ x: webglX, y: webglY });
     };
 
     const handleTouchEnd = (event) => {
+      console.log('Touch end');
       if (isInteracting) {
         setIsInteracting(false);
         setTouchStart(null);
-        setIsScrolling(true);
       }
     };
 
-    const handleWheel = (event) => {
-      if (isInteracting) {
-        event.preventDefault();
+    // Add a delay to ensure canvas is rendered
+    const addListeners = () => {
+      const canvas = document.querySelector('canvas');
+      if (canvas) {
+        console.log('Adding touch listeners to canvas');
+        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+        return canvas;
       }
+      return null;
     };
 
-    const canvas = document.querySelector('canvas');
-    if (canvas) {
-      canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-      canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-      canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
-      canvas.addEventListener('wheel', handleWheel, { passive: false });
+    // Try immediately and with a delay
+    let canvas = addListeners();
+    if (!canvas) {
+      const timer = setTimeout(() => {
+        canvas = addListeners();
+      }, 1000);
+      
+      return () => {
+        clearTimeout(timer);
+        if (canvas) {
+          canvas.removeEventListener('touchstart', handleTouchStart);
+          canvas.removeEventListener('touchmove', handleTouchMove);
+          canvas.removeEventListener('touchend', handleTouchEnd);
+        }
+      };
     }
 
     return () => {
@@ -298,7 +329,6 @@ function InteractiveParticles() {
         canvas.removeEventListener('touchstart', handleTouchStart);
         canvas.removeEventListener('touchmove', handleTouchMove);
         canvas.removeEventListener('touchend', handleTouchEnd);
-        canvas.removeEventListener('wheel', handleWheel);
       }
     };
   }, [isMobile, isInteracting, touchStart]);
@@ -496,6 +526,9 @@ function InteractiveParticles() {
 export default function ParticleLoader() {
   const [isMobile, setIsMobile] = useState(false);
   const [showMobileHint, setShowMobileHint] = useState(false);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const checkMobile = () => {
@@ -513,17 +546,94 @@ export default function ParticleLoader() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Fallback touch handling on the container
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleTouchStart = (event) => {
+      console.log('Container touch start');
+      const touch = event.touches[0];
+      const rect = event.currentTarget.getBoundingClientRect();
+      const x = (touch.clientX - rect.left) / rect.width;
+      const y = (touch.clientY - rect.top) / rect.height;
+      
+      console.log('Container touch position:', { x, y });
+      
+      // Check if touch is within the octocat area (center 50% of screen)
+      const centerX = 0.5;
+      const centerY = 0.5;
+      const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+      
+      if (distance < 0.4) {
+        console.log('Starting container interaction');
+        setIsInteracting(true);
+        setTouchStart({ x: touch.clientX, y: touch.clientY });
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    };
+
+    const handleTouchMove = (event) => {
+      if (!isInteracting || !touchStart) return;
+      
+      const touch = event.touches[0];
+      
+      event.preventDefault();
+      event.stopPropagation();
+      
+      // Convert touch position to normalized coordinates
+      const rect = event.currentTarget.getBoundingClientRect();
+      const x = (touch.clientX - rect.left) / rect.width;
+      const y = (touch.clientY - rect.top) / rect.height;
+      
+      // Convert to WebGL coordinates
+      const webglX = x * 2 - 1;
+      const webglY = -(y * 2 - 1);
+      
+      console.log('Container setting mouse position:', { webglX, webglY });
+      setMousePosition({ x: webglX, y: webglY });
+    };
+
+    const handleTouchEnd = (event) => {
+      console.log('Container touch end');
+      if (isInteracting) {
+        setIsInteracting(false);
+        setTouchStart(null);
+      }
+    };
+
+    const container = document.querySelector('.particle-container');
+    if (container) {
+      console.log('Adding container touch listeners');
+      container.addEventListener('touchstart', handleTouchStart, { passive: false });
+      container.addEventListener('touchmove', handleTouchMove, { passive: false });
+      container.addEventListener('touchend', handleTouchEnd, { passive: false });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('touchstart', handleTouchStart);
+        container.removeEventListener('touchmove', handleTouchMove);
+        container.removeEventListener('touchend', handleTouchEnd);
+      }
+    };
+  }, [isMobile, isInteracting, touchStart]);
+
   return (
-    <div style={{ 
-      width: '100%', 
-      height: '100%', 
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      zIndex: 0
-    }}>
+    <div 
+      className="particle-container"
+      style={{ 
+        width: '100%', 
+        height: '100%', 
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        zIndex: 0,
+        touchAction: isMobile ? 'none' : 'auto'
+      }}
+    >
       <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
-        <InteractiveParticles />
+        <InteractiveParticles mousePosition={mousePosition} />
       </Canvas>
       
       {/* Mobile interaction hint */}
