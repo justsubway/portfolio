@@ -219,6 +219,20 @@ const AboutMe = () => {
                       </p>
                       <a 
                         href="https://beacons.ai/subwayy" 
+                      <a 
+                        href="https://beacons.ai/subwayy" 
+                      <a 
+                        href="https://beacons.ai/subwayy" 
+                      <a 
+                        href="https://beacons.ai/subwayy" 
+                      <a 
+                        href="https://beacons.ai/subwayy" 
+                      <a 
+                        href="https://beacons.ai/subwayy" 
+                      <a 
+                        href="https://beacons.ai/subwayy" 
+                      <a 
+                        href="https://beacons.ai/subwayy" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="experience-link"
@@ -326,8 +340,8 @@ const AboutMe = () => {
                            </div>
                          </div>
                          <p>Exceptional analytical and problem-solving abilities with outstanding logical reasoning skills.</p>
-                         <a 
-                           href="/portfolio/Alva Labs Logic Test Report - George Arampatzis.pdf" 
+                      <a 
+                        href={process.env.PUBLIC_URL + "/Alva Labs Logic Test Report - George Arampatzis.pdf"} 
                            target="_blank" 
                            rel="noopener noreferrer"
                            className="assessment-link"
@@ -344,8 +358,8 @@ const AboutMe = () => {
                            </div>
                          </div>
                          <p>High emotional intelligence, strong communication skills, and excellent team collaboration abilities.</p>
-                         <a 
-                           href="/portfolio/Alva Labs Personality Test Report - George Arampatzis.pdf" 
+                      <a 
+                        href={process.env.PUBLIC_URL + "/Alva Labs Personality Test Report - George Arampatzis.pdf"} 
                            target="_blank" 
                            rel="noopener noreferrer"
                            className="assessment-link"
@@ -363,7 +377,7 @@ const AboutMe = () => {
           {/* Action Buttons */}
           <motion.div className="action-buttons" variants={itemVariants}>
             <a 
-              href="/portfolio/George_Arampatzis.pdf" 
+              href={process.env.PUBLIC_URL + "/George_Arampatzis.pdf"} 
               download="George_Arampatzis_Resume.pdf" 
               className="primary-button"
             >

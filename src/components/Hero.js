@@ -101,7 +101,7 @@ const Hero = ({ onScrollToProjects }) => {
                 <FaLinkedin />
               </a>
               <a
-                href="/portfolio/George_Arampatzis.pdf"
+                href={process.env.PUBLIC_URL + "/George_Arampatzis.pdf"}
                 download="George_Arampatzis_Resume.pdf"
                 title="Download Resume"
                 aria-label="Download Resume"

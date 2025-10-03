@@ -62,7 +62,7 @@ const About = () => {
           <motion.div className="profile-hero" variants={itemVariants}>
             <div className="profile-container">
               <div className="profile-image-wrapper">
-                <img src="/portfolio/professional_pfp.jpg" alt="George Arampatzis" className="profile-image" />
+                <img src={process.env.PUBLIC_URL + "/professional_pfp.jpg"} alt="George Arampatzis" className="profile-image" />
                 <div className="profile-glow"></div>
               </div>
               <div className="profile-info">
@@ -167,7 +167,7 @@ const About = () => {
                   <FaEnvelope />
                   <span>Email</span>
                 </a>
-                <a href="/portfolio/George_Arampatzis.pdf" download="George_Arampatzis_Resume.pdf" className="contact-link" title="Download Resume">
+                <a href={process.env.PUBLIC_URL + "/George_Arampatzis.pdf"} download="George_Arampatzis_Resume.pdf" className="contact-link" title="Download Resume">
                   <FaDownload />
                   <span>Resume</span>
                 </a>

@@ -47,7 +47,7 @@ const Intro = () => {
           {/* Profile Section */}
           <motion.div className="profile-section" variants={itemVariants}>
             <div className="profile-image-wrapper">
-              <img src="/portfolio/professional_pfp.jpg" alt="George Arampatzis" className="profile-image" />
+              <img src={process.env.PUBLIC_URL + "/professional_pfp.jpg"} alt="George Arampatzis" className="profile-image" />
               <div className="profile-glow"></div>
             </div>
             <div className="profile-info">
@@ -82,7 +82,7 @@ const Intro = () => {
           {/* Action Buttons */}
           <motion.div className="action-buttons" variants={itemVariants}>
             <a 
-              href="/portfolio/George_Arampatzis.pdf" 
+              href={process.env.PUBLIC_URL + "/George_Arampatzis.pdf"} 
               download="George_Arampatzis_Resume.pdf" 
               className="primary-button"
             >
