@@ -9,6 +9,7 @@ const Projects = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [previousProjectIndex, setPreviousProjectIndex] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [selectedProject, setSelectedProject] = useState(null);
   
   const previewRef = useRef(null);
 
@@ -136,6 +137,12 @@ const Projects = () => {
     }
   };
 
+  const handleProjectTap = (project) => {
+    if (isMobile) {
+      setSelectedProject(selectedProject?.title === project.title ? null : project);
+    }
+  };
+
   const getCurrentProjectIndex = () => {
     if (!hoveredProject) return -1;
     return projects.findIndex(p => p.title === hoveredProject.title);
@@ -173,7 +180,7 @@ const Projects = () => {
   return (
     <div className="projects-section" id="projects">
       <div className="projects-container">
-        <motion.div
+        <motion.div 
           className="projects-content"
           variants={containerVariants}
           initial="hidden"
@@ -185,7 +192,7 @@ const Projects = () => {
           </motion.h2>
           
           <motion.div 
-            className="projects-list" 
+            className={`projects-list ${isMobile ? 'mobile-layout' : ''}`}
             variants={itemVariants}
             onMouseLeave={() => {
               // Only clear when leaving the entire projects list
@@ -197,28 +204,73 @@ const Projects = () => {
             }}
           >
             {displayedProjects.map((project, index) => (
-              <motion.h3
+              <motion.div
                 key={project.title}
-                className="project-title-item"
+                className={`project-item ${isMobile ? 'mobile-project-item' : 'project-title-item'} ${selectedProject?.title === project.title ? 'selected' : ''}`}
                 onMouseEnter={() => handleProjectHover(project, index)}
                 onMouseLeave={handleProjectLeave}
-                whileHover={{ scale: 1.02 }}
+                onClick={() => handleProjectTap(project)}
+                whileHover={!isMobile ? { scale: 1.02 } : {}}
+                whileTap={isMobile ? { scale: 0.98 } : {}}
                 transition={{ duration: 0.2 }}
               >
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-link"
-                >
-                  {project.title}
-                </a>
-              </motion.h3>
+                {isMobile ? (
+                  <div className="mobile-project-content">
+                    <div className="mobile-project-header">
+                      <h3 className="project-title">{project.title}</h3>
+                      <div className="mobile-project-arrow">
+                        {selectedProject?.title === project.title ? '−' : '+'}
+                      </div>
+                    </div>
+                    <AnimatePresence>
+                      {selectedProject?.title === project.title && (
+                        <motion.div
+                          className="mobile-project-details"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                        >
+                          <div className="mobile-project-image">
+                            <img
+                              src={project.image}
+                              alt={project.title}
+                              className="project-image"
+                            />
+                          </div>
+                          <div className="mobile-project-info">
+                            <p className="project-description">{project.description}</p>
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="project-link-button"
+                            >
+                              View Project →
+                            </a>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <h3 className="project-title">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link"
+                    >
+                      {project.title}
+                    </a>
+                  </h3>
+                )}
+              </motion.div>
             ))}
           </motion.div>
 
           {!showAll && (
-            <motion.button
+          <motion.button 
               className="show-all-button"
               onClick={() => setShowAll(true)}
               whileHover={{ scale: 1.05 }}
@@ -226,7 +278,7 @@ const Projects = () => {
               variants={itemVariants}
             >
               Show All Projects
-            </motion.button>
+          </motion.button>
           )}
         </motion.div>
 
@@ -295,4 +347,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Projects; 

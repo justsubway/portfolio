@@ -219,20 +219,6 @@ const AboutMe = () => {
                       </p>
                       <a 
                         href="https://beacons.ai/subwayy" 
-                      <a 
-                        href="https://beacons.ai/subwayy" 
-                      <a 
-                        href="https://beacons.ai/subwayy" 
-                      <a 
-                        href="https://beacons.ai/subwayy" 
-                      <a 
-                        href="https://beacons.ai/subwayy" 
-                      <a 
-                        href="https://beacons.ai/subwayy" 
-                      <a 
-                        href="https://beacons.ai/subwayy" 
-                      <a 
-                        href="https://beacons.ai/subwayy" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="experience-link"
