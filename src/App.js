@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import LenisProvider from './components/LenisProvider';
 import Intro from './components/Intro';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
+import GreetingOverlay from './components/GreetingOverlay';
 import './App.css';
 
 function App() {
+  const [overlayDone, setOverlayDone] = useState(false);
+  const handleOverlayDone = useCallback(() => setOverlayDone(true), []);
   const smoothScrollTo = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -36,6 +39,7 @@ function App() {
   return (
     <LenisProvider>
       <div className="App">
+        <GreetingOverlay onDone={handleOverlayDone} />
         <Navbar onNavigate={handleNavigate} />
         <Intro />
         <Projects />

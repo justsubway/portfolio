@@ -57,6 +57,7 @@ function InteractiveParticles() {
   const [isInteracting, setIsInteracting] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const rectRef = useRef({ left: 0, right: 0, top: 0, bottom: 0 });
+  const canvasRef = useRef(null);
 
   // Load the model with error handling
   const { scene } = useGLTF(CONFIG.CUSTOM_MODEL_PATH, undefined, 
@@ -272,7 +273,7 @@ function InteractiveParticles() {
     const addListeners = () => {
       const canvas = document.querySelector('canvas');
       if (canvas) {
-        console.log('Adding touch listeners to canvas');
+        canvasRef.current = canvas;
         canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
         canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
         canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
@@ -470,7 +471,7 @@ function InteractiveParticles() {
     }
 
     // Update projected screen-space bounding box for precise touch detection
-    if (points.current && group.current) {
+    if (points.current && group.current && canvasRef.current) {
       const geometry = points.current.geometry;
       geometry.computeBoundingBox();
       const box = geometry.boundingBox.clone();
@@ -489,11 +490,12 @@ function InteractiveParticles() {
         new THREE.Vector3(box.max.x, box.max.y, box.max.z)
       ];
 
+      const rect = canvasRef.current.getBoundingClientRect();
       let minSX = Infinity, minSY = Infinity, maxSX = -Infinity, maxSY = -Infinity;
       corners.forEach((v) => {
         const projected = v.clone().project(state.camera);
-        const sx = (projected.x + 1) / 2 * window.innerWidth;
-        const sy = (1 - (projected.y + 1) / 2) * window.innerHeight;
+        const sx = rect.left + ((projected.x + 1) / 2) * rect.width;
+        const sy = rect.top + ((1 - (projected.y + 1) / 2) * rect.height);
         minSX = Math.min(minSX, sx);
         minSY = Math.min(minSY, sy);
         maxSX = Math.max(maxSX, sx);
@@ -545,11 +547,6 @@ export default function ParticleLoader() {
     const checkMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
-      if (mobile) {
-        // Show hint after 3 seconds
-        const timer = setTimeout(() => setShowMobileHint(true), 3000);
-        return () => clearTimeout(timer);
-      }
     };
     
     checkMobile();
