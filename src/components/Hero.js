@@ -107,59 +107,6 @@ const Hero = ({ onScrollToProjects }) => {
         >
           View My Work <FaArrowRight style={{ marginLeft: '8px' }} />
         </motion.button>
-
-        <motion.div className="quick-overview" variants={itemVariants} custom={4}>
-          <div className="overview-card">
-            <h3>Quick Overview</h3>
-            <div className="overview-content">
-              {overviewData.map((item, i) => (
-                <div className="overview-section" key={i}>
-                  <h4>{item.title}</h4>
-                  <p>{item.content}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="overview-links">
-              <a
-                href="https://github.com/justsubway"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="GitHub"
-                aria-label="GitHub"
-              >
-                <FaGithub />
-              </a>
-              <a
-                href="mailto:geoara07@gmail.com
-                "
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Email"
-                aria-label="Email"
-              >
-                <FaEnvelope />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/γιώργος-αραμπατζής-80a32b331"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="LinkedIn"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin />
-              </a>
-              <a
-                href={process.env.PUBLIC_URL + "/George_Arampatzis.pdf"}
-                download="George_Arampatzis_Resume.pdf"
-                title="Download Resume"
-                aria-label="Download Resume"
-              >
-                <FaDownload />
-              </a>
-            </div>
-          </div>
-        </motion.div>
       </motion.div>
     </div>
   );
