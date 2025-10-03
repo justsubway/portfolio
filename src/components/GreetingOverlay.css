@@ -10,9 +10,6 @@
 
 .greeting-center {
 	text-align: center;
-	overflow: hidden;
-	height: 1em;
-	line-height: 1em;
 }
 
 .greeting-text {
@@ -22,7 +19,6 @@
 	color: #E6EEF3;
 	font-size: clamp(2rem, 8vw, 5rem);
 	display: inline-block;
-	will-change: transform, opacity;
 }
 
 
