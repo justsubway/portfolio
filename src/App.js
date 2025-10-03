@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import LenisProvider from './components/LenisProvider';
 import Intro from './components/Intro';
+import Hero from './components/Hero';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -41,6 +42,7 @@ function App() {
       <div className="App">
         <GreetingOverlay onDone={handleOverlayDone} />
         <Navbar onNavigate={handleNavigate} />
+        <Hero onScrollToProjects={() => handleNavigate('projects')} />
         <Intro />
         <Projects />
         <AboutMe />

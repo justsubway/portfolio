@@ -15,7 +15,7 @@ const Navbar = ({ onNavigate }) => {
   }, []);
 
   const navItems = [
-    { id: 'intro', label: 'Home' },
+    { id: 'hero', label: 'Home' },
     { id: 'projects', label: 'Projects' },
     { id: 'about', label: 'About' },
     { id: 'contact', label: 'Contact' }
@@ -24,7 +24,7 @@ const Navbar = ({ onNavigate }) => {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        <div className="navbar-logo" onClick={() => onNavigate('intro')}>
+        <div className="navbar-logo" onClick={() => onNavigate('hero')}>
           <span className="logo-text">GEO</span>
         </div>
 
