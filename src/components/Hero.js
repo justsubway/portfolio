@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaEnvelope, FaArrowRight, FaLinkedin, FaDownload } from 'react-icons/fa';
 import './Hero.css';
@@ -10,6 +10,8 @@ const overviewData = [
 ];
 
 const Hero = ({ onScrollToProjects }) => {
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -32,7 +34,12 @@ const Hero = ({ onScrollToProjects }) => {
   };
 
   return (
-    <div className="hero" id="hero">
+    <div className="hero" id="hero" onMouseMove={(e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      setMouse({ x, y });
+    }}>
       <motion.div
         className="hero-content"
         variants={containerVariants}
@@ -40,26 +47,68 @@ const Hero = ({ onScrollToProjects }) => {
         whileInView="visible"
         viewport={{ amount: 0.3 }}
       >
-        <motion.h1 className="hero-title" variants={itemVariants} custom={0}>
-          Hey, I'm George
+        {/* Profile intro with avatar and greeting tag */}
+        <motion.div className="hero-profile" variants={itemVariants} custom={0}>
+          <div className="avatar-wrapper">
+            <span className="greeting-pill">Hello, I’m George</span>
+            <img
+              src={process.env.PUBLIC_URL + "/professional_pfp.jpg"}
+              alt="George Arampatzis"
+              className="avatar-image"
+            />
+            <div className="avatar-glow" />
+          </div>
+        </motion.div>
+
+        {/* Bold, colorful typography */}
+        <motion.h1 className="mega-title" variants={itemVariants} custom={1}>
+          <span className="word word-purple">Computer</span>
+          <span className="word word-teal">Science</span>
+          <span className="word word-orange">Student</span>
+          <span className="word word-pink">&</span>
+          <span className="word word-lime">Developer</span>
         </motion.h1>
 
-        <motion.p className="hero-subtitle" variants={itemVariants} custom={1}>
-          18 y/o developer building web experiences with React & code that clicks
+        <motion.p className="hero-tagline" variants={itemVariants} custom={2}>
+          I craft modern experiences with Java, Python, and React — from UI to systems.
         </motion.p>
+
+        {/* Floating labels / tags with light parallax */}
+        <div className="floating-labels">
+          {[
+            { text: 'Available for opportunities', cls: 'pill-pink', dx: 30, dy: -10 },
+            { text: 'CS Student', cls: 'pill-blue', dx: -40, dy: -20 },
+            { text: 'Athens, Greece', cls: 'pill-green', dx: 50, dy: 15 },
+            { text: '@justsubway', cls: 'pill-orange', dx: -55, dy: 25 },
+          ].map((pill, i) => (
+            <motion.span
+              key={pill.text}
+              className={`floating-pill ${pill.cls}`}
+              style={{
+                transform: `translate(${pill.dx + mouse.x * 12}px, ${pill.dy + mouse.y * 12}px)`
+              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + i * 0.08, duration: 0.4 }}
+              whileHover={{ scale: 1.06, y: -2 }}
+            >
+              {pill.text}
+            </motion.span>
+          ))}
+        </div>
 
         <motion.button
           className="cta-button"
           onClick={onScrollToProjects}
           variants={itemVariants}
-          custom={2}
+          custom={3}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           View My Work <FaArrowRight style={{ marginLeft: '8px' }} />
         </motion.button>
 
-        <motion.div className="quick-overview" variants={itemVariants} custom={3}>
+        <motion.div className="quick-overview" variants={itemVariants} custom={4}>
           <div className="overview-card">
             <h3>Quick Overview</h3>
             <div className="overview-content">
