@@ -3,14 +3,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './GreetingOverlay.css';
 
 const GREETINGS = [
-  'Hello',
-  'Hola',
-  'Bonjour',
-  'Ciao',
-  'Γεια',
-  'こんにちは',
-  '안녕하세요',
-  'مرحبا'
+  'Hello',      // English
+  'Hola',       // Spanish
+  'Bonjour',    // French
+  'Ciao',       // Italian
+  'Γεια',       // Greek
+  'Olá',        // Portuguese
+  'Hallo',      // German
+  'Hej',        // Swedish/Danish
+  'Merhaba',    // Turkish
+  'Selam',      // Amharic/Informal
+  'Shalom',     // Hebrew
+  'नमस्ते',      // Hindi
+  'Здравствуйте', // Russian
+  'こんにちは',     // Japanese
+  '안녕하세요',      // Korean
+  'مرحبا',       // Arabic
+  'Sveiki',     // Latvian
+  'Sawubona'    // Zulu
 ];
 
 export default function GreetingOverlay({ onDone }) {
@@ -19,10 +29,10 @@ export default function GreetingOverlay({ onDone }) {
   const [index, setIndex] = useState(0);
   const [finished, setFinished] = useState(false);
 
-  // Ultra-fast timings to keep total 1–2s
-  const greetings = useMemo(() => GREETINGS.slice(0, 4), []); // show fewer for speed
-  const durationMs = 120; // fade in/out duration
-  const holdMs = 80;      // time fully visible
+  // Ultra-fast timings (~1.5s total for 10 greetings)
+  const greetings = useMemo(() => GREETINGS.slice(0, 10), []);
+  const durationMs = 60; // fade in/out duration per item
+  const holdMs = 30;     // time fully visible per item
 
   const totalPerGreeting = useMemo(() => durationMs * 2 + holdMs, [durationMs, holdMs]);
 
