@@ -53,6 +53,10 @@ function InteractiveParticles() {
   const returnStartTime = useRef(new Array(CONFIG.PARTICLE_COUNT).fill(0));
   const lastPushTime = useRef(new Array(CONFIG.PARTICLE_COUNT).fill(0));
   const [error, setError] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   // Load the model with error handling
   const { scene } = useGLTF(CONFIG.CUSTOM_MODEL_PATH, undefined, 
@@ -197,6 +201,17 @@ function InteractiveParticles() {
     }
   }, [particles]);
 
+  // Check if mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Handle mouse movement
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -208,6 +223,85 @@ function InteractiveParticles() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  // Handle touch events for mobile interaction
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleTouchStart = (event) => {
+      const touch = event.touches[0];
+      const rect = event.target.getBoundingClientRect();
+      const x = (touch.clientX - rect.left) / rect.width;
+      const y = (touch.clientY - rect.top) / rect.height;
+      
+      // Check if touch is within the octocat area (center 40% of screen)
+      const centerX = 0.5;
+      const centerY = 0.5;
+      const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+      
+      if (distance < 0.3) { // Within 30% radius of center
+        setIsInteracting(true);
+        setTouchStart({ x: touch.clientX, y: touch.clientY });
+        event.preventDefault();
+      }
+    };
+
+    const handleTouchMove = (event) => {
+      if (!isInteracting || !touchStart) return;
+      
+      const touch = event.touches[0];
+      const deltaX = touch.clientX - touchStart.x;
+      const deltaY = touch.clientY - touchStart.y;
+      
+      // If movement is significant, prevent scroll
+      if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
+        event.preventDefault();
+        setIsScrolling(false);
+        
+        // Convert touch position to normalized coordinates
+        const rect = event.target.getBoundingClientRect();
+        const x = (touch.clientX - rect.left) / rect.width;
+        const y = (touch.clientY - rect.top) / rect.height;
+        
+        // Convert to WebGL coordinates
+        const webglX = x * 2 - 1;
+        const webglY = -(y * 2 - 1);
+        
+        setMousePosition({ x: webglX, y: webglY });
+      }
+    };
+
+    const handleTouchEnd = (event) => {
+      if (isInteracting) {
+        setIsInteracting(false);
+        setTouchStart(null);
+        setIsScrolling(true);
+      }
+    };
+
+    const handleWheel = (event) => {
+      if (isInteracting) {
+        event.preventDefault();
+      }
+    };
+
+    const canvas = document.querySelector('canvas');
+    if (canvas) {
+      canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+      canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+      canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+      canvas.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => {
+      if (canvas) {
+        canvas.removeEventListener('touchstart', handleTouchStart);
+        canvas.removeEventListener('touchmove', handleTouchMove);
+        canvas.removeEventListener('touchend', handleTouchEnd);
+        canvas.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, [isMobile, isInteracting, touchStart]);
 
   // Function to interpolate between two colors
   const interpolateColor = (color1, color2, factor) => {
@@ -310,9 +404,12 @@ function InteractiveParticles() {
         // Create wave effect
         const wave = Math.sin(state.clock.elapsedTime * CONFIG.WAVE_SPEED + distance * CONFIG.WAVE_FREQUENCY) * CONFIG.WAVE_AMPLITUDE;
         
-        // Apply push force when mouse is close
-        if (distance < CONFIG.MOUSE_INFLUENCE_RADIUS) {
-          const force = (1 - distance / CONFIG.MOUSE_INFLUENCE_RADIUS) * CONFIG.PUSH_STRENGTH;
+        // Apply push force when mouse/touch is close
+        const influenceRadius = isMobile ? CONFIG.MOUSE_INFLUENCE_RADIUS * 1.5 : CONFIG.MOUSE_INFLUENCE_RADIUS;
+        const pushStrength = isMobile ? CONFIG.PUSH_STRENGTH * 1.2 : CONFIG.PUSH_STRENGTH;
+        
+        if (distance < influenceRadius) {
+          const force = (1 - distance / influenceRadius) * pushStrength;
           velocities.current[i] += dx * force;
           velocities.current[i + 1] += dy * force;
           velocities.current[i + 2] += wave * force;
@@ -397,6 +494,25 @@ function InteractiveParticles() {
 }
 
 export default function ParticleLoader() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [showMobileHint, setShowMobileHint] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        // Show hint after 3 seconds
+        const timer = setTimeout(() => setShowMobileHint(true), 3000);
+        return () => clearTimeout(timer);
+      }
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div style={{ 
       width: '100%', 
@@ -409,6 +525,36 @@ export default function ParticleLoader() {
       <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
         <InteractiveParticles />
       </Canvas>
+      
+      {/* Mobile interaction hint */}
+      {isMobile && showMobileHint && (
+        <div style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: 'rgba(0, 184, 217, 0.9)',
+          color: '#E6EEF3',
+          padding: '12px 20px',
+          borderRadius: '25px',
+          fontSize: '14px',
+          fontWeight: '500',
+          zIndex: 1000,
+          animation: 'pulse 2s infinite',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          boxShadow: '0 8px 24px rgba(0, 184, 217, 0.3)'
+        }}>
+          👆 Swipe to interact with the octocat
+        </div>
+      )}
+      
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+          50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+        }
+      `}</style>
     </div>
   );
 } 
