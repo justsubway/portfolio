@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import './GreetingOverlay.css';
 
 const GREETINGS = [
@@ -66,18 +66,7 @@ export default function GreetingOverlay({ onDone }) {
       transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
       <div className="greeting-center">
-        <AnimatePresence mode="popLayout">
-          <motion.span
-            key={greetings[index]}
-            className="greeting-text"
-            initial={{ y: '100%', opacity: 0.6 }}
-            animate={{ y: '0%', opacity: 1 }}
-            exit={{ y: '-100%', opacity: 0.6 }}
-            transition={{ duration: durationMs / 1000, ease: [0.2, 0.8, 0.2, 1] }}
-          >
-            {greetings[index]}
-          </motion.span>
-        </AnimatePresence>
+        <span className="greeting-text">{greetings[index]}</span>
       </div>
     </motion.div>
   );
