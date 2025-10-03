@@ -3,11 +3,6 @@
   "name": "George Arampatzis - Portfolio",
   "icons": [
     {
-      "src": "favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
-    },
-    {
       "src": "memoji.jpg",
       "sizes": "192x192",
       "type": "image/jpeg"
