@@ -14,18 +14,14 @@ const GREETINGS = [
 ];
 
 export default function GreetingOverlay({ onDone }) {
-  const [visible, setVisible] = useState(() => {
-    try {
-      return localStorage.getItem('ga_seen_greeting') !== '1';
-    } catch (_) {
-      return true;
-    }
-  });
+  // Always show on load
+  const [visible, setVisible] = useState(true);
   const [index, setIndex] = useState(0);
   const [finished, setFinished] = useState(false);
 
-  const durationMs = 700; // fade in/out duration
-  const holdMs = 400;     // time fully visible
+  // Faster timings
+  const durationMs = 250; // fade in/out duration
+  const holdMs = 120;     // time fully visible
 
   const totalPerGreeting = useMemo(() => durationMs * 2 + holdMs, [durationMs, holdMs]);
 
@@ -40,7 +36,6 @@ export default function GreetingOverlay({ onDone }) {
         setFinished(true);
         setTimeout(() => {
           setVisible(false);
-          try { localStorage.setItem('ga_seen_greeting', '1'); } catch (_) {}
           if (onDone) onDone();
         }, durationMs); // allow final fade
       }
