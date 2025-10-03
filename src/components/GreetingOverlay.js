@@ -66,14 +66,14 @@ export default function GreetingOverlay({ onDone }) {
       transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
       <div className="greeting-center">
-        <AnimatePresence mode="sync">
+        <AnimatePresence mode="popLayout">
           <motion.span
             key={greetings[index]}
             className="greeting-text"
-            initial={{ opacity: 0, y: 6, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -6, filter: 'blur(6px)' }}
-            transition={{ duration: durationMs / 1000, ease: 'easeInOut' }}
+            initial={{ y: '100%', opacity: 0.6 }}
+            animate={{ y: '0%', opacity: 1 }}
+            exit={{ y: '-100%', opacity: 0.6 }}
+            transition={{ duration: durationMs / 1000, ease: [0.2, 0.8, 0.2, 1] }}
           >
             {greetings[index]}
           </motion.span>
