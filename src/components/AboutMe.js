@@ -167,7 +167,7 @@ const AboutMe = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ amount: 0.3 }}
+          viewport={{ amount: 0.3, once: false }}
         >
 
           {/* Expandable Sections */}

@@ -1,0 +1,30 @@
+.custom-cursor {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	pointer-events: none;
+	z-index: 99999;
+	transform: translate(-100px, -100px);
+	transition: transform 0.04s linear, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.custom-cursor.hide { opacity: 0; }
+.custom-cursor.show { opacity: 1; }
+
+/* Color states */
+.custom-cursor.default { background-color: rgba(230, 238, 243, 0.8); box-shadow: 0 0 12px rgba(230,238,243,0.35); }
+.custom-cursor.link    { background-color: rgba(0, 184, 217, 0.9); box-shadow: 0 0 14px rgba(0,184,217,0.45); }
+.custom-cursor.pink    { background-color: rgba(255, 99, 170, 0.9); box-shadow: 0 0 14px rgba(255,99,170,0.5); }
+.custom-cursor.blue    { background-color: rgba(124, 92, 255, 0.9); box-shadow: 0 0 14px rgba(124,92,255,0.5); }
+.custom-cursor.green   { background-color: rgba(0, 184, 217, 0.9); box-shadow: 0 0 14px rgba(0,184,217,0.5); }
+.custom-cursor.orange  { background-color: rgba(255, 159, 67, 0.9); box-shadow: 0 0 14px rgba(255,159,67,0.5); }
+
+/* Keep custom cursor during text selection - only on desktop */
+@media (min-width: 769px) {
+  * { cursor: none !important; }
+}
+::selection { background: rgba(124, 92, 255, 0.35); color: #E6EEF3; }
+
+

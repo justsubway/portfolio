@@ -83,17 +83,19 @@
   height: 140px;
   border-radius: 9999px;
   object-fit: cover;
-  border: 3px solid rgba(255,255,255,0.1);
+  object-position: center top;
+  border: 2px solid rgba(255,255,255,0.08);
   position: relative;
   z-index: 2;
+  image-rendering: auto;
 }
 .avatar-glow {
-  position: absolute; inset: -8px; border-radius: 9999px;
+  position: absolute; inset: -6px; border-radius: 9999px;
   background: conic-gradient(from 180deg, #7C5CFF, #00B8D9, #FF63AA, #7C5CFF);
-  filter: blur(14px); opacity: 0.6; z-index: 1;
+  filter: blur(10px); opacity: 0.3; z-index: 1;
 }
 .greeting-pill {
-  position: absolute; top: -12px; left: -16px; z-index: 3;
+  position: absolute; top: -28px; left: -28px; z-index: 3;
   background: rgba(255,99,170,0.15); color: #FF63AA;
   border: 1px solid rgba(255,99,170,0.35);
   padding: 6px 10px; border-radius: 9999px;
@@ -101,14 +103,14 @@
 }
 
 /* Floating labels */
-.floating-labels { position: relative; width: 100%; height: 0; }
+.floating-labels { position: absolute; inset: 0; pointer-events: none; }
 .floating-pill {
   position: absolute;
-  top: 0; left: 50%; transform: translate(-50%, -10px);
   padding: 10px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: 1px solid rgba(255,255,255,0.15);
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  pointer-events: auto;
 }
 .pill-pink  { background: rgba(255,99,170,0.15); color: #FF63AA; }
 .pill-blue  { background: rgba(124,92,255,0.15); color: #7C5CFF; }
@@ -218,8 +220,57 @@
 @media (max-width: 768px) {
   .hero { padding: 24px 15px; }
   .hero-content { padding: 0 0.5rem; gap: 1rem; }
-  .mega-title { font-size: clamp(1.6rem, 8vw, 3rem); }
+  .mega-title { font-size: clamp(2.2rem, 10vw, 4rem); }
   .hero-tagline { font-size: 1.05rem; max-width: 320px; }
   .avatar-wrapper { width: 110px; height: 110px; }
-  .avatar-image { width: 110px; height: 110px; }
+  .avatar-image { 
+    width: 110px; 
+    height: 110px; 
+    object-position: center top;
+    image-rendering: auto;
+  }
+  .floating-pill { 
+    font-size: 11px; 
+    padding: 8px 12px; 
+    /* Better mobile positioning */
+    position: absolute !important;
+  }
+  
+  /* Mobile-specific positioning for floating pills */
+  .floating-labels {
+    /* Ensure proper containment on mobile */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Adjust pill positions for mobile screens */
+  .floating-pill:nth-child(1) { /* Hello, I'm George */
+    left: 5% !important;
+    top: 15% !important;
+  }
+  .floating-pill:nth-child(2) { /* CS Student */
+    left: 75% !important;
+    top: 20% !important;
+  }
+  .floating-pill:nth-child(3) { /* Athens, Greece */
+    left: 5% !important;
+    top: 70% !important;
+  }
+  .floating-pill:nth-child(4) { /* @justsubway */
+    left: 75% !important;
+    top: 80% !important;
+  }
+  
+  /* Mobile CTA button styling */
+  .cta-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    margin-top: 7rem;
+    transform: translateY(60px);
+  }
 } 

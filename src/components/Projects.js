@@ -52,25 +52,25 @@ const Projects = () => {
     },
     {
       title: 'Weather App',
-      image: 'https://i.imgur.com/9jHtQDp.png',
+      image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=500&h=300&fit=crop&crop=center',
       link: 'https://github.com/justsubway/weather-app',
       description: 'Weather forecasting app'
     },
     {
       title: 'Hub Greece',
-      image: 'https://i.imgur.com/9jHtQDp.png',
+      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=300&fit=crop&crop=center',
       link: 'https://github.com/justsubway/hub-greece',
       description: 'Greek tech community hub'
     },
     {
       title: 'InNeed',
-      image: 'https://i.imgur.com/9jHtQDp.png',
+      image: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=500&h=300&fit=crop&crop=center',
       link: 'https://github.com/justsubway/inneed',
       description: 'Community help platform'
     },
     {
       title: 'Chat App',
-      image: 'https://i.imgur.com/9jHtQDp.png',
+      image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=500&h=300&fit=crop&crop=center',
       link: 'https://github.com/justsubway/chat-app',
       description: 'Real-time chat application'
     },
@@ -185,7 +185,7 @@ const Projects = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ amount: 0.3 }}
+          viewport={{ amount: 0.3, once: false }}
         >
           <motion.h2 className="projects-title" variants={itemVariants}>
             Featured Projects
