@@ -47,8 +47,13 @@ const Hero = ({ onScrollToProjects }) => {
         whileInView="visible"
         viewport={{ amount: 0.3, once: false }}
       >
+        {/* Hey, I'm George */}
+        <motion.h2 className="hey-text" variants={itemVariants} custom={0}>
+          Hey, I'm George
+        </motion.h2>
+
         {/* Bold, colorful typography */}
-        <motion.h1 className="mega-title" variants={itemVariants} custom={0}>
+        <motion.h1 className="mega-title" variants={itemVariants} custom={1}>
           <span className="word word-purple">Computer</span>
           <span className="word word-teal">Science</span>
           <span className="word word-orange">Student</span>
@@ -56,7 +61,7 @@ const Hero = ({ onScrollToProjects }) => {
           <span className="word word-lime">Developer</span>
         </motion.h1>
 
-        <motion.p className="hero-tagline" variants={itemVariants} custom={1}>
+        <motion.p className="hero-tagline" variants={itemVariants} custom={2}>
           I craft modern experiences with Java, Python, and React — from UI to systems.
         </motion.p>
 
@@ -64,7 +69,7 @@ const Hero = ({ onScrollToProjects }) => {
           className="cta-button"
           onClick={onScrollToProjects}
           variants={itemVariants}
-          custom={2}
+          custom={3}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

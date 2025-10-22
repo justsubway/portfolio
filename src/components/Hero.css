@@ -38,6 +38,17 @@
   box-sizing: border-box;
 }
 
+/* Hey, I'm George text */
+.hey-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  color: #9AA7B2;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
 /* New bold title */
 .mega-title {
   font-family: 'Space Grotesk', sans-serif;
@@ -217,6 +228,7 @@
 @media (max-width: 768px) {
   .hero { padding: 24px 15px; }
   .hero-content { padding: 0 0.5rem; gap: 1rem; }
+  .hey-text { font-size: clamp(1rem, 5vw, 1.5rem); }
   .mega-title { font-size: clamp(1.5rem, 8vw, 3rem); }
   .hero-tagline { font-size: 0.9rem; max-width: 300px; }
   
