@@ -243,7 +243,8 @@ function InteractiveParticles() {
       event.stopPropagation();
       
       // Convert touch position to normalized coordinates
-      const rect = event.target.getBoundingClientRect();
+      const rect = event.target?.getBoundingClientRect();
+      if (!rect) return;
       const x = (touch.clientX - rect.left) / rect.width;
       const y = (touch.clientY - rect.top) / rect.height;
       
@@ -482,7 +483,8 @@ function InteractiveParticles() {
         new THREE.Vector3(box.max.x, box.max.y, box.max.z)
       ];
 
-      const rect = canvasRef.current.getBoundingClientRect();
+      const rect = canvasRef.current?.getBoundingClientRect();
+      if (!rect) return;
       let minSX = Infinity, minSY = Infinity, maxSX = -Infinity, maxSY = -Infinity;
       corners.forEach((v) => {
         const projected = v.clone().project(state.camera);

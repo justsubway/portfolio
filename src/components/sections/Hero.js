@@ -39,11 +39,22 @@ const Hero = React.memo(({ onScrollToProjects }) => {
       cancelAnimationFrame(mouseTimeoutRef.current);
     }
     mouseTimeoutRef.current = requestAnimationFrame(() => {
+      if (!e.currentTarget) return;
       const rect = e.currentTarget.getBoundingClientRect();
+      if (!rect) return;
       const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
       const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
       setMouse({ x, y });
     });
+  }, []);
+
+  // Cleanup animation frame on unmount
+  React.useEffect(() => {
+    return () => {
+      if (mouseTimeoutRef.current) {
+        cancelAnimationFrame(mouseTimeoutRef.current);
+      }
+    };
   }, []);
 
   return (
