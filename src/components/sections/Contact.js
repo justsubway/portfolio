@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaArrowRight } from 'react-icons/fa';
-import ParticleLoader from './ParticleLoader';
+import ParticleLoader from '../animations/ParticleLoader';
 import './Contact.css';
 
 const Contact = () => {
