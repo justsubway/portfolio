@@ -17,6 +17,7 @@ const Navbar = ({ onNavigate }) => {
   const navItems = [
     { id: 'hero', label: 'Home' },
     { id: 'projects', label: 'Projects' },
+    { id: 'certifications', label: 'Certifications' },
     { id: 'about', label: 'About' },
     { id: 'contact', label: 'Contact' }
   ];

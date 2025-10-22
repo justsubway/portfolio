@@ -4,8 +4,10 @@ import LenisProvider from './components/LenisProvider';
 import Hero from './components/Hero';
 import VirtualPC from './components/VirtualPC';
 import Projects from './components/Projects';
+import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
+import Background3D from './components/Background3D';
 import GreetingOverlay from './components/GreetingOverlay';
 import CustomCursor from './components/CustomCursor';
 import './App.css';
@@ -41,11 +43,13 @@ function App() {
   return (
     <LenisProvider>
       <div className="App">
+        <Background3D />
         <CustomCursor />
         <GreetingOverlay onDone={handleOverlayDone} />
         <Navbar onNavigate={handleNavigate} />
         <Hero onScrollToProjects={() => handleNavigate('projects')} />
         <Projects />
+        <Certifications />
         <VirtualPC />
         <Contact />
       </div>

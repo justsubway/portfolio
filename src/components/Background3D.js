@@ -37,63 +37,118 @@ const Background3D = () => {
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Particles setup
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 3000;
-    const posArray = new Float32Array(particlesCount * 3);
+    // Create multiple particle systems for more complexity
+    const createParticleSystem = (count, color, size, spread) => {
+      const geometry = new THREE.BufferGeometry();
+      const posArray = new Float32Array(count * 3);
+      const colorArray = new Float32Array(count * 3);
 
-    for (let i = 0; i < particlesCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 8;
-    }
+      for (let i = 0; i < count; i++) {
+        const i3 = i * 3;
+        posArray[i3] = (Math.random() - 0.5) * spread;
+        posArray[i3 + 1] = (Math.random() - 0.5) * spread;
+        posArray[i3 + 2] = (Math.random() - 0.5) * spread;
 
-    particlesGeometry.setAttribute(
-      'position',
-      new THREE.BufferAttribute(posArray, 3)
-    );
+        // Color variation
+        const colorVariation = 0.3;
+        colorArray[i3] = color.r + (Math.random() - 0.5) * colorVariation;
+        colorArray[i3 + 1] = color.g + (Math.random() - 0.5) * colorVariation;
+        colorArray[i3 + 2] = color.b + (Math.random() - 0.5) * colorVariation;
+      }
 
-    const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.03,
-      color: 0xff0000,
-      transparent: true,
-      opacity: 0.6,
-      blending: THREE.AdditiveBlending,
-    });
+      geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
 
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
-    particlesRef.current = particlesMesh;
+      const material = new THREE.PointsMaterial({
+        size: size,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+        sizeAttenuation: true,
+      });
 
-    // Scroll animation
-    gsap.to(particlesMesh.rotation, {
+      return new THREE.Points(geometry, material);
+    };
+
+    // Create different particle systems
+    const mainParticles = createParticleSystem(2000, new THREE.Color(0x00B8D9), 0.02, 12);
+    const accentParticles = createParticleSystem(1000, new THREE.Color(0x7C5CFF), 0.015, 8);
+    const backgroundParticles = createParticleSystem(500, new THREE.Color(0x4A90E2), 0.01, 20);
+
+    scene.add(mainParticles);
+    scene.add(accentParticles);
+    scene.add(backgroundParticles);
+
+    particlesRef.current = { mainParticles, accentParticles, backgroundParticles };
+
+    // Different rotation speeds for each particle system
+    gsap.to(mainParticles.rotation, {
       x: Math.PI * 2,
       y: Math.PI * 2,
-      duration: 20,
+      duration: 25,
       repeat: -1,
       ease: 'none',
     });
 
-    // Mouse movement effect
+    gsap.to(accentParticles.rotation, {
+      x: -Math.PI * 2,
+      y: Math.PI * 2,
+      duration: 30,
+      repeat: -1,
+      ease: 'none',
+    });
+
+    gsap.to(backgroundParticles.rotation, {
+      x: Math.PI * 2,
+      y: -Math.PI * 2,
+      duration: 40,
+      repeat: -1,
+      ease: 'none',
+    });
+
+    // Enhanced mouse movement effect
     const handleMouseMove = (event) => {
       const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
       const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-      gsap.to(particlesMesh.rotation, {
-        x: mouseY * 0.5,
-        y: mouseX * 0.5,
+      // Different responsiveness for each particle system
+      gsap.to(mainParticles.rotation, {
+        x: mouseY * 0.3,
+        y: mouseX * 0.3,
+        duration: 1.5,
+      });
+
+      gsap.to(accentParticles.rotation, {
+        x: -mouseY * 0.2,
+        y: mouseX * 0.4,
         duration: 2,
+      });
+
+      gsap.to(backgroundParticles.rotation, {
+        x: mouseY * 0.1,
+        y: -mouseX * 0.2,
+        duration: 2.5,
       });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Scroll effect
+    // Enhanced scroll effect
     ScrollTrigger.create({
       trigger: 'body',
       start: 'top top',
       end: 'bottom bottom',
       onUpdate: (self) => {
-        particlesMesh.rotation.x = self.progress * Math.PI;
-        particlesMesh.rotation.y = self.progress * Math.PI;
+        const progress = self.progress;
+        mainParticles.rotation.x = progress * Math.PI * 0.5;
+        mainParticles.rotation.y = progress * Math.PI * 0.5;
+        
+        accentParticles.rotation.x = -progress * Math.PI * 0.3;
+        accentParticles.rotation.y = progress * Math.PI * 0.7;
+        
+        backgroundParticles.rotation.x = progress * Math.PI * 0.2;
+        backgroundParticles.rotation.y = -progress * Math.PI * 0.4;
       },
     });
 
@@ -120,9 +175,19 @@ const Background3D = () => {
       if (containerRef.current) {
         containerRef.current.removeChild(renderer.domElement);
       }
-      scene.remove(particlesMesh);
-      particlesGeometry.dispose();
-      particlesMaterial.dispose();
+      
+      // Clean up all particle systems
+      scene.remove(mainParticles);
+      scene.remove(accentParticles);
+      scene.remove(backgroundParticles);
+      
+      mainParticles.geometry.dispose();
+      mainParticles.material.dispose();
+      accentParticles.geometry.dispose();
+      accentParticles.material.dispose();
+      backgroundParticles.geometry.dispose();
+      backgroundParticles.material.dispose();
+      
       renderer.dispose();
     };
   }, []);
