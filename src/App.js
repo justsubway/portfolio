@@ -8,7 +8,6 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import GreetingOverlay from './components/GreetingOverlay';
-import CustomCursor from './components/CustomCursor';
 import './App.css';
 
 function App() {
@@ -42,7 +41,6 @@ function App() {
   return (
     <LenisProvider>
       <div className="App">
-        <CustomCursor />
         <GreetingOverlay onDone={handleOverlayDone} />
         <Navbar onNavigate={handleNavigate} />
         <Hero onScrollToProjects={() => handleNavigate('projects')} />
