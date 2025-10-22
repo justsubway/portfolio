@@ -92,13 +92,19 @@ const Projects = () => {
 
 
   useEffect(() => {
+    let animationFrame;
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      console.log('Mouse position:', e.clientX, e.clientY);
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(() => {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+    };
   }, []);
 
   useEffect(() => {
@@ -118,7 +124,6 @@ const Projects = () => {
       setPreviousProjectIndex(currentIndex);
       setHoveredProject(project);
       setIsHovering(true);
-      console.log('Hovering project:', project.title, 'isHovering:', true);
     }
   };
 
@@ -185,7 +190,7 @@ const Projects = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ amount: 0.3, once: false }}
+          viewport={{ amount: 0.3, once: true }}
         >
           <motion.h2 className="projects-title" variants={itemVariants}>
             Featured Projects
@@ -296,7 +301,6 @@ const Projects = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              onAnimationStart={() => console.log('Preview animating in')}
             >
               <div className="project-preview-content">
                 <motion.div

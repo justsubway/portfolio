@@ -66,7 +66,7 @@ const Contact = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ amount: 0.3, once: false }}
+        viewport={{ amount: 0.3, once: true }}
       >
         {/* Rest of the component content */}
       </motion.div>

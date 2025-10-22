@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaEnvelope, FaArrowRight, FaLinkedin, FaDownload } from 'react-icons/fa';
 import './Hero.css';
@@ -9,8 +9,9 @@ const overviewData = [
   { title: 'Based In', content: 'Athens, Greece' },
 ];
 
-const Hero = ({ onScrollToProjects }) => {
+const Hero = React.memo(({ onScrollToProjects }) => {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const mouseTimeoutRef = useRef(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -33,19 +34,26 @@ const Hero = ({ onScrollToProjects }) => {
     }),
   };
 
-  return (
-    <div className="hero" id="hero" onMouseMove={(e) => {
+  const handleMouseMove = useCallback((e) => {
+    if (mouseTimeoutRef.current) {
+      cancelAnimationFrame(mouseTimeoutRef.current);
+    }
+    mouseTimeoutRef.current = requestAnimationFrame(() => {
       const rect = e.currentTarget.getBoundingClientRect();
       const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
       const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
       setMouse({ x, y });
-    }}>
+    });
+  }, []);
+
+  return (
+    <div className="hero" id="hero" onMouseMove={handleMouseMove}>
       <motion.div
         className="hero-content"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ amount: 0.3, once: false }}
+        viewport={{ amount: 0.3, once: true }}
       >
         {/* Hey, I'm George */}
         <motion.h2 className="hey-text" variants={itemVariants} custom={0}>
@@ -62,7 +70,7 @@ const Hero = ({ onScrollToProjects }) => {
         </motion.h1>
 
         <motion.p className="hero-tagline" variants={itemVariants} custom={2}>
-          I craft modern experiences with Java, Python, and React — from UI to systems.
+            Want to learn more about me? Scroll below!
         </motion.p>
 
         <motion.button
@@ -78,6 +86,6 @@ const Hero = ({ onScrollToProjects }) => {
       </motion.div>
     </div>
   );
-};
+});
 
 export default Hero;
