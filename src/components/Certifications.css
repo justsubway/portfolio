@@ -1,7 +1,7 @@
 .certifications-section {
   min-height: 100vh;
   padding: 80px 20px;
-  background: #0B1220;
+  background: #000000;
   width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -45,19 +45,20 @@
 }
 
 .certification-card {
-  background: rgba(13, 22, 38, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 12px;
   padding: 2rem;
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .certification-card:hover {
-  border-color: rgba(0, 184, 217, 0.3);
-  box-shadow: 0 12px 40px rgba(0, 184, 217, 0.1);
+  border-color: rgba(0, 255, 136, 0.5);
+  box-shadow: 0 12px 40px rgba(0, 255, 136, 0.2);
+  transform: translateY(-5px);
 }
 
 .certification-image-container {

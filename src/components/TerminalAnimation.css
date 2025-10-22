@@ -1,0 +1,226 @@
+.terminal-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #0a0a0a;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  border: 1px solid #333;
+}
+
+.terminal-header {
+  background: #1a1a1a;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #333;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.terminal-button.close {
+  background: #ff5f57;
+}
+
+.terminal-button.minimize {
+  background: #ffbd2e;
+}
+
+.terminal-button.maximize {
+  background: #28ca42;
+}
+
+.terminal-title {
+  color: #888;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.terminal-body {
+  background: #0a0a0a;
+  padding: 20px;
+  min-height: 500px;
+  position: relative;
+}
+
+.terminal-content {
+  color: #e6e6e6;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+}
+
+.terminal-line {
+  margin-bottom: 4px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.terminal-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.terminal-line.typing {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.terminal-line.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.command-text {
+  color: #00ff88;
+  font-weight: 600;
+}
+
+.output-text {
+  color: #e6e6e6;
+  margin-left: 0;
+}
+
+.cursor {
+  color: #00ff88;
+  animation: blink 1s infinite;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.terminal-cta {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
+}
+
+.cta-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prompt-symbol {
+  color: #00ff88;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.prompt-text {
+  color: #e6e6e6;
+  font-size: 14px;
+}
+
+.terminal-cta-button {
+  background: linear-gradient(135deg, #00ff88, #00cc6a);
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.terminal-cta-button:hover {
+  background: linear-gradient(135deg, #00cc6a, #00aa55);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  transform: translateY(-2px);
+}
+
+.button-text {
+  font-weight: 600;
+}
+
+.button-arrow {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.terminal-cta-button:hover .button-arrow {
+  transform: translateX(4px);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .terminal-container {
+    margin: 0 10px;
+    border-radius: 8px;
+  }
+  
+  .terminal-body {
+    padding: 15px;
+    min-height: 400px;
+  }
+  
+  .terminal-content {
+    font-size: 12px;
+  }
+  
+  .terminal-cta {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .cta-prompt {
+    justify-content: center;
+  }
+  
+  .terminal-cta-button {
+    justify-content: center;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal-container {
+    margin: 0 5px;
+  }
+  
+  .terminal-body {
+    padding: 10px;
+    min-height: 350px;
+  }
+  
+  .terminal-content {
+    font-size: 11px;
+  }
+  
+  .terminal-cta {
+    padding: 12px;
+  }
+}

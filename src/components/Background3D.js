@@ -71,16 +71,18 @@ const Background3D = () => {
       return new THREE.Points(geometry, material);
     };
 
-    // Create different particle systems
-    const mainParticles = createParticleSystem(2000, new THREE.Color(0x00B8D9), 0.02, 12);
-    const accentParticles = createParticleSystem(1000, new THREE.Color(0x7C5CFF), 0.015, 8);
-    const backgroundParticles = createParticleSystem(500, new THREE.Color(0x4A90E2), 0.01, 20);
+    // Create terminal-themed particle systems
+    const mainParticles = createParticleSystem(3000, new THREE.Color(0x00ff88), 0.015, 15);
+    const accentParticles = createParticleSystem(1500, new THREE.Color(0x00B8D9), 0.012, 10);
+    const backgroundParticles = createParticleSystem(800, new THREE.Color(0x7C5CFF), 0.008, 25);
+    const terminalParticles = createParticleSystem(500, new THREE.Color(0xffffff), 0.005, 30);
 
     scene.add(mainParticles);
     scene.add(accentParticles);
     scene.add(backgroundParticles);
+    scene.add(terminalParticles);
 
-    particlesRef.current = { mainParticles, accentParticles, backgroundParticles };
+    particlesRef.current = { mainParticles, accentParticles, backgroundParticles, terminalParticles };
 
     // Different rotation speeds for each particle system
     gsap.to(mainParticles.rotation, {
@@ -103,6 +105,14 @@ const Background3D = () => {
       x: Math.PI * 2,
       y: -Math.PI * 2,
       duration: 40,
+      repeat: -1,
+      ease: 'none',
+    });
+
+    gsap.to(terminalParticles.rotation, {
+      x: -Math.PI * 2,
+      y: Math.PI * 2,
+      duration: 50,
       repeat: -1,
       ease: 'none',
     });
@@ -130,6 +140,12 @@ const Background3D = () => {
         y: -mouseX * 0.2,
         duration: 2.5,
       });
+
+      gsap.to(terminalParticles.rotation, {
+        x: -mouseY * 0.05,
+        y: mouseX * 0.1,
+        duration: 3,
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -149,6 +165,9 @@ const Background3D = () => {
         
         backgroundParticles.rotation.x = progress * Math.PI * 0.2;
         backgroundParticles.rotation.y = -progress * Math.PI * 0.4;
+        
+        terminalParticles.rotation.x = -progress * Math.PI * 0.1;
+        terminalParticles.rotation.y = progress * Math.PI * 0.2;
       },
     });
 
@@ -180,6 +199,7 @@ const Background3D = () => {
       scene.remove(mainParticles);
       scene.remove(accentParticles);
       scene.remove(backgroundParticles);
+      scene.remove(terminalParticles);
       
       mainParticles.geometry.dispose();
       mainParticles.material.dispose();
@@ -187,6 +207,8 @@ const Background3D = () => {
       accentParticles.material.dispose();
       backgroundParticles.geometry.dispose();
       backgroundParticles.material.dispose();
+      terminalParticles.geometry.dispose();
+      terminalParticles.material.dispose();
       
       renderer.dispose();
     };

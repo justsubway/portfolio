@@ -5,14 +5,14 @@ import './Certifications.css';
 const Certifications = () => {
   const certifications = [
     {
-      title: 'Alva Labs Logic Test',
+      title: 'Responsive Web Design',
       image: '/certification1.png',
-      description: 'Advanced logical reasoning and problem-solving certification'
+      description: 'FreeCodeCamp certification for building responsive web applications'
     },
     {
-      title: 'Alva Labs Personality Test',
+      title: 'JavaScript Algorithms and Data Structures',
       image: '/certification2.png',
-      description: 'Professional personality assessment and behavioral analysis certification'
+      description: 'FreeCodeCamp certification for JavaScript programming fundamentals'
     }
   ];
 
