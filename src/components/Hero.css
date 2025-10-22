@@ -1,9 +1,7 @@
 .hero {
   width: 100%;
   min-height: 100vh;
-  background: radial-gradient(1200px 800px at 50% 10%, rgba(0, 184, 217, 0.09), transparent 60%),
-              radial-gradient(900px 600px at 60% 70%, rgba(124, 92, 255, 0.08), transparent 60%),
-              #0B1220;
+  background: #000000;
   position: relative;
   display: flex;
   align-items: center;
@@ -21,7 +19,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, rgba(0, 184, 217, 0.06) 0%, rgba(124, 92, 255, 0.04) 70%, transparent 100%);
+  background: #000000;
   pointer-events: none;
   z-index: -1;
 }
@@ -44,13 +42,13 @@
 .mega-title {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
-  font-size: clamp(2.4rem, 8vw, 7rem);
+  font-size: clamp(1.8rem, 6vw, 4.5rem);
   color: #E6EEF3;
   margin: 0.5rem 0 0.25rem 0;
   line-height: 0.95;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 0.7rem;
+  gap: 0.3rem 0.5rem;
   justify-content: center;
 }
 
@@ -69,10 +67,10 @@
 
 /* Tagline */
 .hero-tagline {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: #9AA7B2;
   margin: 0;
-  max-width: 700px;
+  max-width: 600px;
 }
 
 /* Avatar */
@@ -106,10 +104,10 @@
 .floating-labels { position: absolute; inset: 0; pointer-events: none; }
 .floating-pill {
   position: absolute;
-  padding: 10px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600;
+  padding: 8px 12px; border-radius: 9999px; font-size: 10px; font-weight: 600;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
   pointer-events: auto;
 }
 .pill-pink  { background: rgba(255,99,170,0.15); color: #FF63AA; }
@@ -122,15 +120,15 @@
   background: #00B8D9;
   border: 1px solid #00B8D9;
   color: #FFFFFF;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 30px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Space Grotesk', sans-serif;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin-top: 0.5rem;
 }
 
@@ -220,18 +218,11 @@
 @media (max-width: 768px) {
   .hero { padding: 24px 15px; }
   .hero-content { padding: 0 0.5rem; gap: 1rem; }
-  .mega-title { font-size: clamp(2.2rem, 10vw, 4rem); }
-  .hero-tagline { font-size: 1.05rem; max-width: 320px; }
-  .avatar-wrapper { width: 110px; height: 110px; }
-  .avatar-image { 
-    width: 110px; 
-    height: 110px; 
-    object-position: center top;
-    image-rendering: auto;
-  }
+  .mega-title { font-size: clamp(1.5rem, 8vw, 3rem); }
+  .hero-tagline { font-size: 0.9rem; max-width: 300px; }
   .floating-pill { 
-    font-size: 11px; 
-    padding: 8px 12px; 
+    font-size: 9px; 
+    padding: 6px 10px; 
     /* Better mobile positioning */
     position: absolute !important;
   }
@@ -268,9 +259,9 @@
   
   /* Mobile CTA button styling */
   .cta-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    margin-top: 7rem;
-    transform: translateY(60px);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    margin-top: 5rem;
+    transform: translateY(40px);
   }
 } 

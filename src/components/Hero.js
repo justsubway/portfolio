@@ -47,20 +47,8 @@ const Hero = ({ onScrollToProjects }) => {
         whileInView="visible"
         viewport={{ amount: 0.3, once: false }}
       >
-        {/* Profile intro with avatar */}
-        <motion.div className="hero-profile" variants={itemVariants} custom={0}>
-          <div className="avatar-wrapper">
-            <img
-              src={process.env.PUBLIC_URL + "/memoji.jpg"}
-              alt="George Arampatzis"
-              className="avatar-image"
-            />
-            <div className="avatar-glow" />
-          </div>
-        </motion.div>
-
         {/* Bold, colorful typography */}
-        <motion.h1 className="mega-title" variants={itemVariants} custom={1}>
+        <motion.h1 className="mega-title" variants={itemVariants} custom={0}>
           <span className="word word-purple">Computer</span>
           <span className="word word-teal">Science</span>
           <span className="word word-orange">Student</span>
@@ -68,7 +56,7 @@ const Hero = ({ onScrollToProjects }) => {
           <span className="word word-lime">Developer</span>
         </motion.h1>
 
-        <motion.p className="hero-tagline" variants={itemVariants} custom={2}>
+        <motion.p className="hero-tagline" variants={itemVariants} custom={1}>
           I craft modern experiences with Java, Python, and React — from UI to systems.
         </motion.p>
 
@@ -102,7 +90,7 @@ const Hero = ({ onScrollToProjects }) => {
           className="cta-button"
           onClick={onScrollToProjects}
           variants={itemVariants}
-          custom={3}
+          custom={2}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
