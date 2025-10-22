@@ -7,12 +7,12 @@ const Certifications = () => {
     {
       title: 'Responsive Web Design',
       image: '/certification1.png',
-      description: 'FreeCodeCamp certification for building responsive web applications'
+      description: 'FreeCodeCamp certification in responsive web design principles and modern CSS techniques'
     },
     {
       title: 'JavaScript Algorithms and Data Structures',
       image: '/certification2.png',
-      description: 'FreeCodeCamp certification for JavaScript programming fundamentals'
+      description: 'FreeCodeCamp certification in JavaScript fundamentals, algorithms, and data structures'
     }
   ];
 

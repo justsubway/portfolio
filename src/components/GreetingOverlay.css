@@ -1,7 +1,7 @@
 .greeting-overlay {
 	position: fixed;
 	inset: 0;
-	background: #0B1220;
+	background: #000000;
 	z-index: 9999;
 	display: flex;
 	align-items: center;
