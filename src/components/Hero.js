@@ -60,34 +60,6 @@ const Hero = ({ onScrollToProjects }) => {
           I craft modern experiences with Java, Python, and React — from UI to systems.
         </motion.p>
 
-        {/* Floating labels / tags with light parallax */}
-        <div className="floating-labels">
-          {[
-            { text: 'Hello, I\'m George',        cls: 'pill-pink',  x: '8%',  y: '15%',  mx: 12, my: 8 },
-            { text: 'CS Student',                cls: 'pill-blue',  x: '85%',  y: '20%',  mx: -15, my: 6 },
-            { text: 'Athens, Greece',            cls: 'pill-green', x: '5%',  y: '85%',  mx: 10, my: -6 },
-            { text: '@justsubway',               cls: 'pill-orange',x: '88%',  y: '80%',  mx: -12, my: -8 },
-            { text: 'Developer',                 cls: 'pill-purple',x: '12%',  y: '45%',  mx: 8, my: -5 },
-            { text: 'React & Java',              cls: 'pill-cyan',  x: '82%',  y: '50%',  mx: -10, my: 7 },
-          ].map((pill, i) => (
-            <motion.span
-              key={pill.text}
-              className={`floating-pill ${pill.cls}`}
-              style={{
-                left: pill.x,
-                top: pill.y,
-                transform: `translate(${Math.round(mouse.x * pill.mx)}px, ${Math.round(mouse.y * pill.my)}px)`
-              }}
-              data-cursor={pill.cls.replace('pill-','')}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + i * 0.08, duration: 0.4 }}
-            >
-              {pill.text}
-            </motion.span>
-          ))}
-        </div>
-
         <motion.button
           className="cta-button"
           onClick={onScrollToProjects}
