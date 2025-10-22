@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import TerminalAnimation from './TerminalAnimation';
+import TerminalContent from './TerminalContent';
 import './Hero.css';
 
 const Hero = ({ onScrollToProjects }) => {
@@ -12,7 +12,7 @@ const Hero = ({ onScrollToProjects }) => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <TerminalAnimation onScrollToProjects={onScrollToProjects} />
+        <TerminalContent onScrollToProjects={onScrollToProjects} />
       </motion.div>
     </div>
   );
