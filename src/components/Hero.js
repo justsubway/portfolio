@@ -63,10 +63,12 @@ const Hero = ({ onScrollToProjects }) => {
         {/* Floating labels / tags with light parallax */}
         <div className="floating-labels">
           {[
-            { text: 'Hello, I\'m George',        cls: 'pill-pink',  x: '15%',  y: '20%',  mx: 8, my: 6 },
-            { text: 'CS Student',                cls: 'pill-blue',  x: '80%',  y: '25%',  mx: -10, my: 5 },
-            { text: 'Athens, Greece',            cls: 'pill-green', x: '10%',  y: '88%',  mx: 6, my: -4 },
-            { text: '@justsubway',               cls: 'pill-orange',x: '82%',  y: '75%',  mx: -8, my: -5 },
+            { text: 'Hello, I\'m George',        cls: 'pill-pink',  x: '8%',  y: '15%',  mx: 12, my: 8 },
+            { text: 'CS Student',                cls: 'pill-blue',  x: '85%',  y: '20%',  mx: -15, my: 6 },
+            { text: 'Athens, Greece',            cls: 'pill-green', x: '5%',  y: '85%',  mx: 10, my: -6 },
+            { text: '@justsubway',               cls: 'pill-orange',x: '88%',  y: '80%',  mx: -12, my: -8 },
+            { text: 'Developer',                 cls: 'pill-purple',x: '12%',  y: '45%',  mx: 8, my: -5 },
+            { text: 'React & Java',              cls: 'pill-cyan',  x: '82%',  y: '50%',  mx: -10, my: 7 },
           ].map((pill, i) => (
             <motion.span
               key={pill.text}

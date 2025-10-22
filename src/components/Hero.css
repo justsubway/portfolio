@@ -104,38 +104,59 @@
 .floating-labels { position: absolute; inset: 0; pointer-events: none; }
 .floating-pill {
   position: absolute;
-  padding: 8px 12px; border-radius: 9999px; font-size: 10px; font-weight: 600;
+  padding: 12px 18px; border-radius: 9999px; font-size: 13px; font-weight: 600;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
   pointer-events: auto;
 }
-.pill-pink  { background: rgba(255,99,170,0.15); color: #FF63AA; }
-.pill-blue  { background: rgba(124,92,255,0.15); color: #7C5CFF; }
-.pill-green { background: rgba(0,184,217,0.15); color: #00B8D9; }
-.pill-orange{ background: rgba(255,159,67,0.15); color: #FF9F43; }
+.pill-pink  { background: rgba(255,99,170,0.2); color: #FF63AA; }
+.pill-blue  { background: rgba(124,92,255,0.2); color: #7C5CFF; }
+.pill-green { background: rgba(0,184,217,0.2); color: #00B8D9; }
+.pill-orange{ background: rgba(255,159,67,0.2); color: #FF9F43; }
+.pill-purple{ background: rgba(124,92,255,0.2); color: #7C5CFF; }
+.pill-cyan  { background: rgba(0,184,217,0.2); color: #00B8D9; }
 
 /* CTA and overview keep existing styles */
 .cta-button {
-  background: #00B8D9;
-  border: 1px solid #00B8D9;
+  background: linear-gradient(135deg, #7C5CFF 0%, #00B8D9 50%, #FF63AA 100%);
+  border: 2px solid transparent;
   color: #FFFFFF;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.9rem;
-  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 0.5rem;
+  gap: 8px;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(124, 92, 255, 0.3);
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.cta-button:hover::before {
+  left: 100%;
 }
 
 .cta-button:hover {
-  background: #00A2C0;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 184, 217, 0.3);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(124, 92, 255, 0.4);
+  background: linear-gradient(135deg, #8B6CFF 0%, #00C8E9 50%, #FF73BA 100%);
 }
 
 /* Remove old quick overview space if present */
@@ -221,8 +242,8 @@
   .mega-title { font-size: clamp(1.5rem, 8vw, 3rem); }
   .hero-tagline { font-size: 0.9rem; max-width: 300px; }
   .floating-pill { 
-    font-size: 9px; 
-    padding: 6px 10px; 
+    font-size: 11px; 
+    padding: 10px 14px; 
     /* Better mobile positioning */
     position: absolute !important;
   }
@@ -241,27 +262,35 @@
   
   /* Adjust pill positions for mobile screens */
   .floating-pill:nth-child(1) { /* Hello, I'm George */
-    left: 5% !important;
-    top: 15% !important;
+    left: 3% !important;
+    top: 12% !important;
   }
   .floating-pill:nth-child(2) { /* CS Student */
-    left: 75% !important;
-    top: 20% !important;
+    left: 80% !important;
+    top: 18% !important;
   }
   .floating-pill:nth-child(3) { /* Athens, Greece */
-    left: 5% !important;
-    top: 70% !important;
+    left: 3% !important;
+    top: 75% !important;
   }
   .floating-pill:nth-child(4) { /* @justsubway */
+    left: 80% !important;
+    top: 82% !important;
+  }
+  .floating-pill:nth-child(5) { /* Developer */
+    left: 8% !important;
+    top: 40% !important;
+  }
+  .floating-pill:nth-child(6) { /* React & Java */
     left: 75% !important;
-    top: 80% !important;
+    top: 45% !important;
   }
   
   /* Mobile CTA button styling */
   .cta-button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.75rem;
-    margin-top: 5rem;
-    transform: translateY(40px);
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    margin-top: 4rem;
+    transform: translateY(30px);
   }
 } 
