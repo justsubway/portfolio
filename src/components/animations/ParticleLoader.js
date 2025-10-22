@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 const CONFIG = {
   // Particle system
-  PARTICLE_COUNT: 3000, // Total number of particles (reduced for performance)
+  PARTICLE_COUNT: 7000, // Total number of particles
   PARTICLE_DENSITY: 1, // Controls how densely particles are distributed (0.1 to 2.0)
   MODEL_SCALE: 2,
   MODEL_TYPE: 'custom', // 'sphere', 'torus', or 'custom'
@@ -62,6 +62,7 @@ function InteractiveParticles() {
   // Load the model with error handling
   const { scene } = useGLTF(CONFIG.CUSTOM_MODEL_PATH, undefined, 
     (error) => {
+      console.error('Error loading model:', error);
       setError(error.message);
     }
   );
@@ -69,18 +70,27 @@ function InteractiveParticles() {
   // Apply initial rotation to make the model stand upright
   useEffect(() => {
     if (scene) {
+      console.log('Model loaded, applying rotation');
       // Reset all rotations first
       scene.rotation.set(0, 0, 0);
       
       // Apply rotations in sequence
       scene.rotateX(-Math.PI / 2);
       scene.rotateY(Math.PI);
+      
+      // Log the final rotation
+      console.log('Final rotation:', {
+        x: scene.rotation.x,
+        y: scene.rotation.y,
+        z: scene.rotation.z
+      });
     }
   }, [scene]);
 
   // Create particles from the model
   const particles = useMemo(() => {
     if (!scene) {
+      console.log('No scene available yet');
       return new Float32Array();
     }
 
@@ -104,6 +114,10 @@ function InteractiveParticles() {
       const center = new THREE.Vector3();
       boundingBox.getCenter(center);
 
+      console.log('Model dimensions:', {
+        size: size,
+        center: center
+      });
 
       // Find the maximum dimension for scaling
       const maxDim = Math.max(size.x, size.y, size.z);
@@ -152,6 +166,7 @@ function InteractiveParticles() {
         }
       });
 
+      console.log('Total vertices collected:', temp.length / 3);
       
       // Apply particle density
       const targetCount = Math.floor(CONFIG.PARTICLE_COUNT * CONFIG.PARTICLE_DENSITY);
@@ -198,23 +213,16 @@ function InteractiveParticles() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Handle mouse movement with throttling
+  // Handle mouse movement
   useEffect(() => {
-    let animationFrame;
     const handleMouseMove = (event) => {
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-      animationFrame = requestAnimationFrame(() => {
-        const x = (event.clientX / window.innerWidth) * 2 - 1;
-        const y = -(event.clientY / window.innerHeight) * 2 + 1;
-        setMousePosition({ x, y });
-      });
+      const x = (event.clientX / window.innerWidth) * 2 - 1;
+      const y = -(event.clientY / window.innerHeight) * 2 + 1;
+      setMousePosition({ x, y });
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   // Handle touch events for mobile interaction (inside canvas)
@@ -243,8 +251,7 @@ function InteractiveParticles() {
       event.stopPropagation();
       
       // Convert touch position to normalized coordinates
-      const rect = event.target?.getBoundingClientRect();
-      if (!rect) return;
+      const rect = event.target.getBoundingClientRect();
       const x = (touch.clientX - rect.left) / rect.width;
       const y = (touch.clientY - rect.top) / rect.height;
       
@@ -483,8 +490,7 @@ function InteractiveParticles() {
         new THREE.Vector3(box.max.x, box.max.y, box.max.z)
       ];
 
-      const rect = canvasRef.current?.getBoundingClientRect();
-      if (!rect) return;
+      const rect = canvasRef.current.getBoundingClientRect();
       let minSX = Infinity, minSY = Infinity, maxSX = -Infinity, maxSY = -Infinity;
       corners.forEach((v) => {
         const projected = v.clone().project(state.camera);

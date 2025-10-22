@@ -29,10 +29,10 @@ export default function GreetingOverlay({ onDone }) {
   const [index, setIndex] = useState(0);
   const [finished, setFinished] = useState(false);
 
-  // Optimized timings (~2s total for 8 greetings)
-  const greetings = useMemo(() => GREETINGS.slice(0, 8), []);
-  const durationMs = 100; // fade in/out duration per item
-  const holdMs = 150;     // time fully visible per item
+  // Ultra-fast timings (~1.5s total for 10 greetings)
+  const greetings = useMemo(() => GREETINGS.slice(0, 10), []);
+  const durationMs = 60; // fade in/out duration per item
+  const holdMs = 30;     // time fully visible per item
 
   const totalPerGreeting = useMemo(() => durationMs * 2 + holdMs, [durationMs, holdMs]);
 

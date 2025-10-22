@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaEnvelope, FaArrowRight, FaLinkedin, FaDownload } from 'react-icons/fa';
 import './Hero.css';
@@ -9,9 +9,8 @@ const overviewData = [
   { title: 'Based In', content: 'Athens, Greece' },
 ];
 
-const Hero = React.memo(({ onScrollToProjects }) => {
+const Hero = ({ onScrollToProjects }) => {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const mouseTimeoutRef = useRef(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -34,37 +33,19 @@ const Hero = React.memo(({ onScrollToProjects }) => {
     }),
   };
 
-  const handleMouseMove = useCallback((e) => {
-    if (mouseTimeoutRef.current) {
-      cancelAnimationFrame(mouseTimeoutRef.current);
-    }
-    mouseTimeoutRef.current = requestAnimationFrame(() => {
-      if (!e.currentTarget) return;
+  return (
+    <div className="hero" id="hero" onMouseMove={(e) => {
       const rect = e.currentTarget.getBoundingClientRect();
-      if (!rect) return;
       const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
       const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
       setMouse({ x, y });
-    });
-  }, []);
-
-  // Cleanup animation frame on unmount
-  React.useEffect(() => {
-    return () => {
-      if (mouseTimeoutRef.current) {
-        cancelAnimationFrame(mouseTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  return (
-    <div className="hero" id="hero" onMouseMove={handleMouseMove}>
+    }}>
       <motion.div
         className="hero-content"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ amount: 0.3, once: true }}
+        viewport={{ amount: 0.3, once: false }}
       >
         {/* Hey, I'm George */}
         <motion.h2 className="hey-text" variants={itemVariants} custom={0}>
@@ -73,11 +54,11 @@ const Hero = React.memo(({ onScrollToProjects }) => {
 
         {/* Bold, colorful typography */}
         <motion.h1 className="mega-title" variants={itemVariants} custom={1}>
-          <span className="word word-purple">Computer</span>
-          <span className="word word-teal">Science</span>
-          <span className="word word-orange">Student</span>
-          <span className="word word-pink">&</span>
-          <span className="word word-lime">Developer</span>
+          <span className="word word-purple">CS</span>
+          <span className="word word-teal">Student</span>
+          <span className="word word-orange">and</span>
+          <span className="word word-pink">future</span>
+          <span className="word word-lime"> Web Developer</span>
         </motion.h1>
 
         <motion.p className="hero-tagline" variants={itemVariants} custom={2}>
@@ -97,6 +78,6 @@ const Hero = React.memo(({ onScrollToProjects }) => {
       </motion.div>
     </div>
   );
-});
+};
 
 export default Hero;
