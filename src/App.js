@@ -1,15 +1,13 @@
 import React, { useState, useCallback } from 'react';
-import LenisProvider from './components/LenisProvider';
-// import Intro from './components/Intro';
-import Hero from './components/Hero';
-import VirtualPC from './components/VirtualPC';
-import Projects from './components/Projects';
-import Certifications from './components/Certifications';
-import Contact from './components/Contact';
-import Navbar from './components/Navbar';
-import Background3D from './components/Background3D';
-import GreetingOverlay from './components/GreetingOverlay';
-import CustomCursor from './components/CustomCursor';
+import LenisProvider from './components/layout/LenisProvider';
+// import Intro from './components/legacy/Intro';
+import Hero from './components/sections/Hero';
+import VirtualPC from './components/ui/VirtualPC';
+import Projects from './components/sections/Projects';
+import Certifications from './components/sections/Certifications';
+import Contact from './components/sections/Contact';
+import Navbar from './components/ui/Navbar';
+import GreetingOverlay from './components/animations/GreetingOverlay';
 import './App.css';
 
 function App() {
@@ -43,8 +41,6 @@ function App() {
   return (
     <LenisProvider>
       <div className="App">
-        <Background3D />
-        <CustomCursor />
         <GreetingOverlay onDone={handleOverlayDone} />
         <Navbar onNavigate={handleNavigate} />
         <Hero onScrollToProjects={() => handleNavigate('projects')} />
