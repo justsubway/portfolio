@@ -7,7 +7,6 @@ import Projects from './components/sections/Projects';
 import Certifications from './components/sections/Certifications';
 import Contact from './components/sections/Contact';
 import Navbar from './components/ui/Navbar';
-import Background3D from './components/animations/Background3D';
 import GreetingOverlay from './components/animations/GreetingOverlay';
 import './App.css';
 
@@ -42,7 +41,6 @@ function App() {
   return (
     <LenisProvider>
       <div className="App">
-        <Background3D />
         <GreetingOverlay onDone={handleOverlayDone} />
         <Navbar onNavigate={handleNavigate} />
         <Hero onScrollToProjects={() => handleNavigate('projects')} />
