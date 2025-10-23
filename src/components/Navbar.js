@@ -4,6 +4,15 @@ import './Navbar.css';
 const Navbar = ({ onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showCursor, setShowCursor] = useState(true);
+
+  // Terminal cursor blinking animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 530);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +35,10 @@ const Navbar = ({ onNavigate }) => {
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <div className="navbar-logo" onClick={() => onNavigate('hero')}>
-          <span className="logo-text">GEO</span>
+          <span className="terminal-prompt">
+            <span className="prompt-symbol">&gt;</span>
+            <span className={`terminal-cursor ${showCursor ? 'visible' : 'hidden'}`}>_</span>
+          </span>
         </div>
 
         <button 

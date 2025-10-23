@@ -688,6 +688,21 @@
     max-width: 200px;
     justify-content: center;
   }
+
+  .expandable-header {
+    padding: 1.2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .header-content h3 {
+    font-size: 1.05rem;
+  }
+
+  .header-content p {
+    font-size: 0.82rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -714,6 +729,17 @@
 
   .expandable-header {
     padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .header-content h3 {
+    font-size: 1rem;
+  }
+
+  .header-content p {
+    font-size: 0.8rem;
   }
 
   .content-text,

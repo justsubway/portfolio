@@ -73,47 +73,21 @@
   max-width: 700px;
 }
 
-/* Avatar */
-.hero-profile { position: relative; }
-.avatar-wrapper { position: relative; width: 140px; height: 140px; }
-.avatar-image {
-  width: 140px;
-  height: 140px;
-  border-radius: 9999px;
-  object-fit: cover;
-  object-position: center top;
-  border: 2px solid rgba(255,255,255,0.08);
-  position: relative;
-  z-index: 2;
-  image-rendering: auto;
+/* Greeting text */
+.hero-greeting { 
+  position: relative; 
+  margin-bottom: 1rem;
 }
-.avatar-glow {
-  position: absolute; inset: -6px; border-radius: 9999px;
-  background: conic-gradient(from 180deg, #7C5CFF, #00B8D9, #FF63AA, #7C5CFF);
-  filter: blur(10px); opacity: 0.3; z-index: 1;
-}
-.greeting-pill {
-  position: absolute; top: -28px; left: -28px; z-index: 3;
-  background: rgba(255,99,170,0.15); color: #FF63AA;
-  border: 1px solid rgba(255,99,170,0.35);
-  padding: 6px 10px; border-radius: 9999px;
-  font-size: 12px; font-weight: 600;
+.greeting-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  color: #9AA7B2;
+  margin: 0;
+  text-align: center;
+  opacity: 0.7;
 }
 
-/* Floating labels */
-.floating-labels { position: absolute; inset: 0; pointer-events: none; }
-.floating-pill {
-  position: absolute;
-  padding: 10px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-  pointer-events: auto;
-}
-.pill-pink  { background: rgba(255,99,170,0.15); color: #FF63AA; }
-.pill-blue  { background: rgba(124,92,255,0.15); color: #7C5CFF; }
-.pill-green { background: rgba(0,184,217,0.15); color: #00B8D9; }
-.pill-orange{ background: rgba(255,159,67,0.15); color: #FF9F43; }
 
 /* CTA and overview keep existing styles */
 .cta-button {
@@ -137,6 +111,7 @@
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 184, 217, 0.3);
 }
+
 
 /* Remove old quick overview space if present */
 .quick-overview { display: none; }
@@ -220,48 +195,8 @@
   .hero-content { padding: 0 0.5rem; gap: 1rem; }
   .mega-title { font-size: clamp(2.2rem, 10vw, 4rem); }
   .hero-tagline { font-size: 1.05rem; max-width: 320px; }
-  .avatar-wrapper { width: 110px; height: 110px; }
-  .avatar-image { 
-    width: 110px; 
-    height: 110px; 
-    object-position: center top;
-    image-rendering: auto;
-  }
-  .floating-pill { 
-    font-size: 11px; 
-    padding: 8px 12px; 
-    /* Better mobile positioning */
-    position: absolute !important;
-  }
-  
-  /* Mobile-specific positioning for floating pills */
-  .floating-labels {
-    /* Ensure proper containment on mobile */
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Adjust pill positions for mobile screens */
-  .floating-pill:nth-child(1) { /* Hello, I'm George */
-    left: 5% !important;
-    top: 15% !important;
-  }
-  .floating-pill:nth-child(2) { /* CS Student */
-    left: 75% !important;
-    top: 20% !important;
-  }
-  .floating-pill:nth-child(3) { /* Athens, Greece */
-    left: 5% !important;
-    top: 70% !important;
-  }
-  .floating-pill:nth-child(4) { /* @justsubway */
-    left: 75% !important;
-    top: 80% !important;
+  .greeting-text {
+    font-size: clamp(0.7rem, 2.5vw, 1rem);
   }
   
   /* Mobile CTA button styling */
@@ -271,4 +206,5 @@
     margin-top: 7rem;
     transform: translateY(60px);
   }
+
 }
