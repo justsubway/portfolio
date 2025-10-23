@@ -1,70 +1,181 @@
-# Getting Started with Create React App
+# George Arampatzis - Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
 
-## Available Scripts
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-georgearampatzis.gr-00B8D9?style=for-the-badge&logo=vercel&logoColor=white)](https://georgearampatzis.gr)
+[![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.17-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.18.1-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-In the project directory, you can run:
+</div>
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+A modern, responsive portfolio website showcasing my skills, projects, and professional journey. Built with React and featuring smooth animations, interactive elements, and a clean, professional design.
 
-### `npm test`
+## ✨ Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **🎨 Modern Design**: Clean, professional interface with smooth animations
+- **📱 Fully Responsive**: Optimized for all devices and screen sizes
+- **⚡ Smooth Scrolling**: Enhanced user experience with Lenis smooth scrolling
+- **🎭 Interactive Elements**: Engaging animations and micro-interactions
+- **🖥️ Virtual PC Component**: Interactive desktop simulation
+- **📧 Contact Integration**: Direct email contact functionality
+- **🎯 Project Showcase**: Detailed project presentations with live demos
+- **📜 Certifications Display**: Professional certifications and achievements
 
-### `npm run build`
+## 🛠️ Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **Frontend**
+- **React 18.2.0** - Modern React with hooks and functional components
+- **Tailwind CSS** - Utility-first CSS framework for rapid styling
+- **Framer Motion** - Advanced animations and transitions
+- **GSAP** - High-performance animations and timeline control
+- **React Icons** - Comprehensive icon library
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **3D & Graphics**
+- **Three.js** - 3D graphics and WebGL rendering
+- **@react-three/fiber** - React renderer for Three.js
+- **@react-three/drei** - Useful helpers for react-three-fiber
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **Development Tools**
+- **Create React App** - Development environment and build tools
+- **PostCSS** - CSS processing and optimization
+- **ESLint** - Code linting and quality assurance
 
-### `npm run eject`
+## 🎯 Key Components
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **Sections**
+- **Hero** - Eye-catching introduction with call-to-action
+- **About** - Personal story and professional background
+- **Projects** - Featured projects with detailed descriptions
+- **Certifications** - Professional achievements and credentials
+- **Contact** - Multiple ways to get in touch
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **Interactive Elements**
+- **Virtual PC** - Interactive desktop simulation
+- **Particle Loader** - Animated loading sequences
+- **Greeting Overlay** - Welcome animation on page load
+- **Smooth Navigation** - Seamless section transitions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🚀 Getting Started
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### **Prerequisites**
+- Node.js (v14 or higher)
+- npm or yarn package manager
 
-## Learn More
+### **Installation**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/justsubway/portfolio.git
+   cd portfolio
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-### Code Splitting
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-### Analyzing the Bundle Size
+### **Available Scripts**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `npm start` - Runs the app in development mode
+- `npm run build` - Builds the app for production
+- `npm test` - Launches the test runner
+- `npm run deploy` - Deploys to GitHub Pages
 
-### Making a Progressive Web App
+## 📁 Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+src/
+├── components/
+│   ├── animations/          # Animation components
+│   │   ├── GreetingOverlay.js
+│   │   └── ParticleLoader.js
+│   ├── layout/              # Layout components
+│   │   └── LenisProvider.js
+│   ├── sections/            # Page sections
+│   │   ├── Hero.js
+│   │   ├── About.js
+│   │   ├── Projects.js
+│   │   ├── Certifications.js
+│   │   └── Contact.js
+│   └── ui/                  # UI components
+│       ├── Navbar.js
+│       └── VirtualPC.js
+├── hooks/                   # Custom React hooks
+│   └── useLenisScroll.js
+├── App.js                   # Main application component
+└── index.js                 # Application entry point
+```
 
-### Advanced Configuration
+## 🎨 Design Philosophy
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The portfolio follows a **minimalist yet engaging** design approach:
 
-### Deployment
+- **Clean Typography**: Easy-to-read fonts with proper hierarchy
+- **Consistent Spacing**: Harmonious use of whitespace
+- **Subtle Animations**: Smooth transitions that enhance UX
+- **Professional Color Palette**: Carefully selected colors for accessibility
+- **Mobile-First**: Responsive design starting from mobile devices
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🚀 Deployment
 
-### `npm run build` fails to minify
+The portfolio is automatically deployed to GitHub Pages:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Live URL**: [https://georgearampatzis.gr](https://georgearampatzis.gr)
+- **Deployment**: Automatic via GitHub Actions
+- **Custom Domain**: Configured with CNAME file
+
+### **Manual Deployment**
+```bash
+npm run deploy
+```
+
+## 📱 Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 🤝 Contributing
+
+While this is a personal portfolio, suggestions and improvements are welcome:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 📞 Contact
+
+**George Arampatzis**
+- **Email**: [geoara07@gmail.com](mailto:geoara07@gmail.com)
+- **Portfolio**: [georgearampatzis.gr](https://georgearampatzis.gr)
+- **GitHub**: [@justsubway](https://github.com/justsubway)
+
+---
+
+<div align="center">
+
+**Built with ❤️ by George Arampatzis**
+
+*Last updated: January 2024*
+
+</div>
