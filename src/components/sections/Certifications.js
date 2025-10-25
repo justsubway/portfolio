@@ -13,6 +13,11 @@ const Certifications = () => {
       title: 'JavaScript Algorithms and Data Structures',
       image: '/certification2.png',
       description: 'FreeCodeCamp certification in JavaScript programming and data structure implementation'
+    },
+    {
+      title: 'Scientific Computing with Python',
+      image: '/certification3.png',
+      description: 'FreeCodeCamp certification in Python programming for scientific computing and data analysis'
     }
   ];
 
