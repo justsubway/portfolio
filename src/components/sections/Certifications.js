@@ -5,6 +5,11 @@ import './Certifications.css';
 const Certifications = () => {
   const certifications = [
     {
+      title: 'CS50P: Introduction to Programming with Python',
+      image: '/CS50P.png',
+      description: 'Harvard University - CS50P: Professional Certificate in Introduction to Programming with Python',
+    },
+    {
       title: 'Responsive Web Design',
       image: '/certification1.png',
       description: 'FreeCodeCamp certification in responsive web development and modern CSS techniques'
@@ -18,7 +23,7 @@ const Certifications = () => {
       title: 'Scientific Computing with Python',
       image: '/certification3.png',
       description: 'FreeCodeCamp certification in Python programming for scientific computing and data analysis'
-    }
+    },
   ];
 
   const containerVariants = {
