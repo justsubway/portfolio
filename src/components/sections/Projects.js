@@ -22,7 +22,7 @@ const Projects = () => {
     },
     {
       title: 'Georythm',
-      image: 'https://camo.githubusercontent.com/18ea1ccb9cb4eab34da9099fbaeff0139b7f4f094ac12bcff78f94afd1f169c9/68747470733a2f2f692e696d6775722e636f6d2f54577361494e4a2e706e67',
+      image: 'https://camo.githubusercontent.com/94e134f32f7fb50d72a4bd7eeedabcf18cf68b317b3939542d3e7b4b6bf260c3/68747470733a2f2f692e696d6775722e636f6d2f54577361494e4a2e706e67',
       link: 'https://github.com/justsubway/georythm',
       description: 'Music visualization app'
     },
@@ -40,7 +40,7 @@ const Projects = () => {
     },
     {
       title: 'Thewria.com',
-      image: 'https://camo.githubusercontent.com/d80e3286e94d36874f8d51a97dd1208d152b8184154b8e4b1cdec3867c526603/68747470733a2f2f692e696d6775722e636f6d2f6f3178644b51522e706e67',
+      image: 'https://camo.githubusercontent.com/5650040547aed5aca9f58c07ffe66a87c8d9301f8c4c7def1c62852991f44f3f/68747470733a2f2f692e696d6775722e636f6d2f6f3178644b51522e706e67',
       link: 'https://github.com/justsubway/thewria',
       description: 'Educational platform'
     },
